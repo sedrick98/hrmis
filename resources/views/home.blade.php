@@ -2,6 +2,7 @@
 @section('after-styles')
 <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.2/Chart.min.js"></script>
 @endsection
 @section('content')
@@ -121,99 +122,74 @@
                 </div> --}}
         </div>
         
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    {{-- <div class="container mt-5">
-                        <h2 class="mb-4">Datatables Example</h2>
-                        <table class="table table-bordered yajra-datatable">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Username</th>
-                                    <th>Phone</th>
-                                    <th>DOB</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Sukarno</td>
-                                    <td>me@me.com</td>
-                                    <td>s1234</td>
-                                    <td>12312312</td>
-                                    <td>123123231</td>
-                                    <td>asdasdasdsa</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> --}}
-                    {{-- <div>
-                        <h4 class="card-title mb-0">Traffic</h4>
-                        <div class="small text-muted">September 2019</div>
-                    </div>
-                    <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                        <div class="btn-group btn-group-toggle mx-3" data-toggle="buttons">
-                            <label class="btn btn-outline-secondary">
-                                <input id="option1" type="radio" name="options" autocomplete="off"> Day
-                            </label>
-                            <label class="btn btn-outline-secondary active">
-                                <input id="option2" type="radio" name="options" autocomplete="off" checked=""> Month
-                            </label>
-                            <label class="btn btn-outline-secondary">
-                                <input id="option3" type="radio" name="options" autocomplete="off"> Year
-                            </label>
-                        </div>
-                        <button class="btn btn-primary" type="button">
-                            <svg class="c-icon">
-                                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cloud-download"></use>
-                            </svg>
-                        </button>
-                    </div> --}}
-                </div>
-                {{-- <div class="c-chart-wrapper" style="height:300px;margin-top:40px;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                    <canvas class="chart chartjs-render-monitor" id="main-chart" height="300" width="938" style="display: block; width: 938px; height: 300px;"></canvas>
-                </div> --}}
-                <canvas id="myChart" width="400" height="400"></canvas>
-            </div>
-            {{-- <div class="card-footer">
-                <div class="row text-center">
-                    <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                        <div class="text-muted">Visits</div><strong>29.703 Users (40%)</strong>
-                        <div class="progress progress-xs mt-2">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                        <div class="text-muted">Unique</div><strong>24.093 Users (20%)</strong>
-                        <div class="progress progress-xs mt-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                        <div class="text-muted">Pageviews</div><strong>78.706 Views (60%)</strong>
-                        <div class="progress progress-xs mt-2">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                        <div class="text-muted">New Users</div><strong>22.123 Users (80%)</strong>
-                        <div class="progress progress-xs mt-2">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                        <div class="text-muted">Bounce Rate</div><strong>40.15%</strong>
-                        <div class="progress progress-xs mt-2">
-                            <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-        </div>
+       
+       <div class="card">
+<div class="card-body">
+<div class="d-flex justify-content-between">
+<div>
+<h4 class="card-title mb-0">Traffic</h4>
+<div class="small text-muted">September 2019</div>
+</div>
+<div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+<div class="btn-group btn-group-toggle mx-3" data-toggle="buttons">
+<label class="btn btn-outline-secondary">
+<input id="option1" type="radio" name="options" autocomplete="off"> Day
+</label>
+<label class="btn btn-outline-secondary active">
+<input id="option2" type="radio" name="options" autocomplete="off" checked=""> Month
+</label>
+<label class="btn btn-outline-secondary">
+<input id="option3" type="radio" name="options" autocomplete="off"> Year
+</label>
+</div>
+<button class="btn btn-primary" type="button">
+<svg class="c-icon">
+<use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cloud-download"></use>
+</svg>
+</button>
+</div>
+</div>
+<div class="c-chart-wrapper" style="height:300px;margin-top:40px;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+<canvas class="chart chartjs-render-monitor" id="main-chart" height="300" width="692" style="display: block; width: 692px; height: 300px;"></canvas>
+<div id="main-chart-tooltip" class="c-chartjs-tooltip center" style="opacity: 0; left: 547.449px; top: 302.554px;"><div class="c-tooltip-header"><div class="c-tooltip-header-item">M</div></div><div class="c-tooltip-body"><div class="c-tooltip-body-item"><span class="c-tooltip-body-item-color" style="background-color: rgba(3, 9, 15, 0.1);"></span><span class="c-tooltip-body-item-label">My First dataset</span><span class="c-tooltip-body-item-value">50</span></div><div class="c-tooltip-body-item"><span class="c-tooltip-body-item-color" style="background-color: transparent;"></span><span class="c-tooltip-body-item-label">My Second dataset</span><span class="c-tooltip-body-item-value">96</span></div><div class="c-tooltip-body-item"><span class="c-tooltip-body-item-color" style="background-color: transparent;"></span><span class="c-tooltip-body-item-label">My Third dataset</span><span class="c-tooltip-body-item-value">65</span></div></div></div></div>
+</div>
+<div class="card-footer">
+<div class="row text-center">
+<div class="col-sm-12 col-md mb-sm-2 mb-0">
+<div class="text-muted">Visits</div><strong>29.703 Users (40%)</strong>
+<div class="progress progress-xs mt-2">
+<div class="progress-bar bg-success" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+</div>
+<div class="col-sm-12 col-md mb-sm-2 mb-0">
+<div class="text-muted">Unique</div><strong>24.093 Users (20%)</strong>
+<div class="progress progress-xs mt-2">
+<div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+</div>
+<div class="col-sm-12 col-md mb-sm-2 mb-0">
+<div class="text-muted">Pageviews</div><strong>78.706 Views (60%)</strong>
+<div class="progress progress-xs mt-2">
+<div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+</div>
+<div class="col-sm-12 col-md mb-sm-2 mb-0">
+<div class="text-muted">New Users</div><strong>22.123 Users (80%)</strong>
+<div class="progress progress-xs mt-2">
+<div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+</div>
+<div class="col-sm-12 col-md mb-sm-2 mb-0">
+<div class="text-muted">Bounce Rate</div><strong>40.15%</strong>
+<div class="progress progress-xs mt-2">
+<div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
         
         {{-- <div class="row">
             <div class="col-sm-6 col-lg-4">
