@@ -7,6 +7,21 @@
 @section('content')
 <div class="container-fluid">
     <div class="fade-in">
+
+    
+    <div class="card">
+<div class="card-header"> Jumbotron<small>fluid</small></div>
+<div class="card-body">
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1 class="display-3">DOST XI HEADLINES HERE</h1>
+<p class="lead">This is a jumbotron created by Sedrick.</p>
+</div>
+</div>
+</div>
+</div>
+
+
         <div class="row">
                 <div class="col-sm-6 col-lg-3">
                     <div class="card text-white bg-danger">
