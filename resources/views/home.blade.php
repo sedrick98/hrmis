@@ -9,7 +9,7 @@
     <div class="fade-in">
 
     
-    <div class="card">
+<div class="card">
 <div class="card-header"> Jumbotron<small>fluid</small></div>
 <div class="card-body">
 <div class="jumbotron jumbotron-fluid">
