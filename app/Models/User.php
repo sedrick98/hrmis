@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,14 +9,13 @@ use App\Traits\RoleRelationship;
 class User extends Authenticatable
 {
     use Notifiable, RoleRelationship;
-    protected $connection = 'mysql_user';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'middle_name', 'username', 'email', 'password',
     ];
 
     /**
@@ -79,7 +78,9 @@ class User extends Authenticatable
         }
         return false;
     }
-    // public function role() {
-    //     return $this->hasMany('App\Role', 'id', 'id');
-    // }
+
+    public function roles() {
+        return $this->hasMany(UserRole::class);
+    }
+
 }

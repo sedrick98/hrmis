@@ -1,14 +1,19 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\PermissionRelationship;
 
 class Role extends Model
 {
-    use PermissionRelationship;
-    protected $connection = 'mysql_user';
+    protected $fillable = [
+        'name',
+    ];
 
-    protected $table = 'roles';
+    public $timestamps = false;
+
+    public function permissions()
+    {
+        return $this->hasMany(RolePermission::class);
+    }
 }
