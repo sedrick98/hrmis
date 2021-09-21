@@ -10,76 +10,72 @@
 
 <body>
 
+    @include('includes/sidebar')
 
-    <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
-        <div class="c-sidebar-brand d-lg-down-none">
-            <svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-                <use xlink:href="assets/brand/coreui.svg#full"></use>
-            </svg>
-            <svg class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">
-                <use xlink:href="assets/brand/coreui.svg#signet"></use>
-            </svg>
+    <div style="margin-right:24px; width:45%; float:right">
+
+        <div class="card">
+            <div class="card-header"><strong>USER NAME AND PASSWORD</strong></div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="company">Username</label>
+                    <input class="form-control" id="firstname" type="text" placeholder="first name">
+                </div>
+                <div class="form-group">
+                    <label for="vat">Password</label>
+                    <input class="form-control" id="middlename" type="text" placeholder="middle name">
+                </div>
+                <div class="form-group">
+                    <label for="street">Confirm Password</label>
+                    <input class="form-control" id="lastname" type="text" placeholder="last name">
+                </div>
+            </div>
         </div>
-        <ul class="c-sidebar-nav ps ps--active-y">
-            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link c-active" href="{{ route('admin-dashboard') }}">
-                    <h4>HRMIS - DASHBOARD</h4>
-                </a></li>
-            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin-users') }}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-                    </svg>
-                    <h4>USERS</h4>
-                </a></li>
-            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin-roles') }}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
-                    </svg>
-                    <h4>ROLES</h4>
-                </a></li>
-            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin-roles') }}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
-                    </svg>
-                    <h4>LOGOUT</h4>
-                </a></li>
-        </ul>
+
     </div>
 
 
-    <div style="padding-left:30px">
+
+
+    <div style="padding-left:30px; width:50%">
 
         <div class="card">
             <div class="card-header"><strong>ADD USER</strong></div>
             <div class="card-body">
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input class="form-control" id="company" type="text" placeholder="Enter your username">
+                    <label for="company">First Name</label>
+                    <input class="form-control" id="firstname" type="text" placeholder="first name">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input class="form-control" id="vat" type="text" placeholder="email@sample.com">
+                    <label for="vat">Middle Name</label>
+                    <input class="form-control" id="middlename" type="text" placeholder="middle name">
                 </div>
                 <div class="form-group">
-                    <label for="firstname">First Name</label>
-                    <input class="form-control" id="street" type="text" placeholder="first name">
+                    <label for="street">Last Name</label>
+                    <input class="form-control" id="lastname" type="text" placeholder="last name">
                 </div>
-
                 <div class="form-group">
-                    <label for="lastname">Last Name</label>
-                    <input class="form-control" id="country" type="text" placeholder="last name">
+                    <label for="street">Email</label>
+                    <input class="form-control" id="email" type="text" placeholder="Email">
                 </div>
-
-                <div class="form-group">
-                    <label for="middlename">Middle Name</label>
-                    <input class="form-control" id="country" type="text" placeholder="middle name">
-                </div>
-
             </div>
         </div>
 
-
-
     </div>
+
+
+    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="width:30%; float:right; margin-top:-80px; margin-right:10%">
+        <button class="btn btn-block btn-success" type="button">
+            <h5>SUBMIT</h5>
+        </button>
+    </div>
+
+    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"style="width:30%; float:right; margin-top:-20px; margin-right:10%">
+        <button class="btn btn-block btn-danger active" type="button" aria-pressed="true">
+            <h5>RESET</h5>
+        </button>
+    </div>
+
 
 
 </body>

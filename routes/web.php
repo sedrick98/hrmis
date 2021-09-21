@@ -28,3 +28,15 @@ Route::get('admin/roles', [AdminController::class, 'roles'])->name('admin-roles'
 // POST
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('/register', [UserController::class, 'register'])->name('register');
+
+Route::get('/users', function(){
+    return view('admin/users');
+});
+
+Route::get('/allusers', function(){
+    return view('admin/userview');
+});
+
+Route::get('/dashboard', function(){
+    return view('admin/dashboard');
+});
