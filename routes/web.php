@@ -40,3 +40,11 @@ Route::get('/allusers', function(){
 Route::get('/dashboard', function(){
     return view('admin/dashboard');
 });
+
+Route::get('/roles', function(){
+    return view('admin/roles');
+});
+
+Route::get('/permissions', function(){
+    return view('admin/permissions');
+});

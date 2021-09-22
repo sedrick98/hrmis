@@ -17,7 +17,7 @@
     <div style="padding-left:20px; width: 40%; float:right; margin-right:40px">
         <div class="card">
             <div class="card-header">
-                <h3>ROLE LIST</h3>
+                <h3>PERMISSION LIST</h3>
             </div>
             <div class="card-body">
 
@@ -26,7 +26,7 @@
                     <table class="table table-responsive-sm table-striped">
                         <thead>
                             <tr>
-                                <th>Role</th>
+                                <th>Permission</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,16 +56,16 @@
 
 
     <div class="card" style="float: left; margin-left:5%; width:50%">
-        <div class="card-header"><strong>ADD NEW ROLE</strong></div>
+        <div class="card-header"><strong>ADD NEW PERMISSION</strong></div>
         <div class="card-body">
             <form action="" method="post">
                 <div class="form-group">
-                    <label for="nf-email">Role Name</label>
+                    <label for="nf-email">Permission Name</label>
                     <input class="form-control" id="rolename" name="nf-role" placeholder="enter type of user">
                 </div>
                 <div class="form-group">
                     <label for="nf-password">Description</label>
-                    <textarea class="form-control" id="textarea-input" name="textarea-input" rows="9" placeholder="Role description" style="margin-top: 0px; margin-bottom: 0px; height: 88px;"></textarea>
+                    <textarea class="form-control" id="textarea-input" name="textarea-input" rows="9" placeholder="Permission description" style="margin-top: 0px; margin-bottom: 0px; height: 88px;"></textarea>
                 </div>
             </form>
         </div>
@@ -76,11 +76,11 @@
     </div>
 
     <div class="card" style="float: left; margin-left:5%; width:50%">
-        <div class="card-header"><strong>UPDATE ROLE</strong></div>
+        <div class="card-header"><strong>UPDATE PERMISSION</strong></div>
         <div class="card-body">
             <form action="" method="post">
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="select1">Select Role</label>
+                    <label class="col-md-3 col-form-label" for="select1">Select Permission</label>
                     <div class="col-md-9">
                         <select class="form-control" id="select1" name="select1">
                             <option value="0">Please select</option>
@@ -91,9 +91,9 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="text-input">Role Name</label>
+                    <label class="col-md-3 col-form-label" for="text-input">Permission Name</label>
                     <div class="col-md-9">
-                        <input class="form-control" id="text-input" type="text" name="text-input" placeholder="Enter new role name">
+                        <input class="form-control" id="text-input" type="text" name="text-input" placeholder="Enter new permission name">
                     </div>
                 </div>
 
@@ -104,6 +104,7 @@
             <button class="btn btn-sm btn-danger" type="reset"> Delete</button>
         </div>
     </div>
+
 
 
 
