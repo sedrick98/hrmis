@@ -26,7 +26,7 @@
                     <table class="table table-responsive-sm table-striped">
                         <thead>
                             <tr>
-                                <th>Role</th>
+                                <th>Roles</th>
                             </tr>
                         </thead>
                         <tbody>
