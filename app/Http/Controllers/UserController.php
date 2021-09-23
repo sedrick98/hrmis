@@ -10,8 +10,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function login(Request $request)
-    {
+    public function login(Request $request) {
         // GET
         if ($request->isMethod('get')) {
             return view('auth.login');
@@ -28,15 +27,15 @@ class UserController extends Controller
                 $request->session()->regenerate();
                 return redirect()->intended('admin-dashboard');
             }
-
+    
             return back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',
             ]);
+    
         }
     }
 
-    public function register(Request $request)
-    {
+    public function register(Request $request) {
         // GET
         if ($request->isMethod('get')) {
             return view('auth.register');
@@ -45,6 +44,7 @@ class UserController extends Controller
         // POST
         if ($request->isMethod('post')) {
             $form_data = $request->all();
+
             $user = User::create([
                 'username' => $form_data['username'],
                 'first_name' => $form_data['first_name'],
@@ -54,7 +54,8 @@ class UserController extends Controller
                 'password' => Hash::make($form_data['password']),
             ]);
 
-            return redirect()->route('login', []);
+            return redirect()->route('admin-users', [])
+                    ->with('success_registration', 'New User Created');
         }
     }
 }

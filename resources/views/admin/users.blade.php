@@ -12,71 +12,116 @@
 
     @include('includes/sidebar')
 
-    <div style="margin-right:24px; width:45%; float:right">
+    @if (session('success_registration'))
+        <h3 style="margin-left: 30px; color: green;">{{ session('success_registration') }}</h3>
+    @endif    
 
+    <div style="padding-left:20px; width: 70%; float:left">
         <div class="card">
-            <div class="card-header"><strong>USER NAME AND PASSWORD</strong></div>
+            <div class="card-header">
+                <h3>USERS LIST</h3>
+            </div>
             <div class="card-body">
-                <div class="form-group">
-                    <label for="company">Username</label>
-                    <input class="form-control" id="firstname" type="text" placeholder="first name">
+
+                <div class="card" style="">
+
+                    <table class="table table-responsive-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>First Name</th>
+                                <th>Middle Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $user->username }}</td>
+                                    <td>{{ $user->first_name }}</td>
+                                    <td>{{ $user->middle_name }}</td>
+                                    <td>{{ $user->last_name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td><span class="badge badge-success">Something</span></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-group">
-                    <label for="vat">Password</label>
-                    <input class="form-control" id="middlename" type="text" placeholder="middle name">
-                </div>
-                <div class="form-group">
-                    <label for="street">Confirm Password</label>
-                    <input class="form-control" id="lastname" type="text" placeholder="last name">
+
+                <p class="lead"><a class="btn btn-primary btn-lg" href="{{ route('admin-add-user') }}" role="button">Add New User</a></p>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="padding-left:20px; width: 27%; float:right; margin-right:30px">
+        <div class="card">
+            <div class="card-header">
+                <h3>ROLES</h3>
+            </div>
+            <div class="card-body" style="height:250px">
+
+                <div class="card" >
+
+                    <table class="table table-responsive-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>ROLE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($roles as $role)
+                                <tr>
+                                    <td>{{ strtoupper($role->name) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
     </div>
 
 
-
-
-    <div style="padding-left:30px; width:50%">
-
+    <!-- <div style="padding-left:20px; width: 27%; float:right; margin-right:30px">
         <div class="card">
-            <div class="card-header"><strong>ADD USER</strong></div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="company">First Name</label>
-                    <input class="form-control" id="firstname" type="text" placeholder="first name">
-                </div>
-                <div class="form-group">
-                    <label for="vat">Middle Name</label>
-                    <input class="form-control" id="middlename" type="text" placeholder="middle name">
-                </div>
-                <div class="form-group">
-                    <label for="street">Last Name</label>
-                    <input class="form-control" id="lastname" type="text" placeholder="last name">
-                </div>
-                <div class="form-group">
-                    <label for="street">Email</label>
-                    <input class="form-control" id="email" type="text" placeholder="Email">
+            <div class="card-header">
+                <h3>PERMISSION</h3>
+            </div>
+            <div class="card-body" style="height:250px">
+
+                <div class="card" >
+
+                    <table class="table table-responsive-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Permissions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Admin</td>
+                            </tr>
+                            <tr>
+                                <td>Write</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-
-    </div>
-
-
-    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="width:30%; float:right; margin-top:-80px; margin-right:10%">
-        <button class="btn btn-block btn-success" type="button">
-            <h5>SUBMIT</h5>
-        </button>
-    </div>
-
-    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"style="width:30%; float:right; margin-top:-20px; margin-right:10%">
-        <button class="btn btn-block btn-danger active" type="button" aria-pressed="true">
-            <h5>RESET</h5>
-        </button>
-    </div>
-
-
+    </div> -->
 
 </body>
 

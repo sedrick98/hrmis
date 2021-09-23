@@ -12,12 +12,11 @@
 
 
     @include('includes/sidebar')
-
-
+    
     <div style="padding-left:20px; width: 40%; float:right; margin-right:40px">
         <div class="card">
             <div class="card-header">
-                <h3>ROLE LIST</h3>
+                <h3>Roles @if (session('success_role_added')) <span style="margin-left: 70px; color: green;"> {{ session('success_role_added') }}</span>@endif</h3>
             </div>
             <div class="card-body">
 
@@ -26,54 +25,43 @@
                     <table class="table table-responsive-sm table-striped">
                         <thead>
                             <tr>
-                                <th>Roles</th>
+                                <th>Role</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Admin</td>
-                            </tr>
-                            <tr>
-                                <td>Write</td>
-                            </tr>
-                            <tr>
-                                <td>View</td>
-                            </tr>
+                            @foreach ($roles as $role)
+                                <tr>
+                                    <td>{{ strtoupper($role->name) }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <div class="card" style="float: left; margin-left:5%; width:50%">
-        <div class="card-header"><strong>ADD NEW ROLE</strong></div>
-        <div class="card-body">
-            <form action="" method="post">
+    
+    <form action="{{ route('admin-add-role') }}" method="post">
+        @csrf
+        <div class="card" style="float: left; margin-left:5%; width:50%">
+            <div class="card-header"><strong>ADD NEW ROLE</strong></div>
+            <div class="card-body">
                 <div class="form-group">
                     <label for="nf-email">Role Name</label>
-                    <input class="form-control" id="rolename" name="nf-role" placeholder="enter type of user">
+                    <input class="form-control" id="name" name="name" placeholder="enter type of user">
                 </div>
-                <div class="form-group">
-                    <label for="nf-password">Description</label>
-                    <textarea class="form-control" id="textarea-input" name="textarea-input" rows="9" placeholder="Role description" style="margin-top: 0px; margin-bottom: 0px; height: 88px;"></textarea>
-                </div>
-            </form>
+                <select multiple class="form-control" name="permissions[]">
+                    @foreach ($permissions as $permission)
+                        <option value="{{ $permission->id }}">{{ strtoupper($permission->name) }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
+                <button class="btn btn-sm btn-danger" type="reset"> Cancel</button>
+            </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
-            <button class="btn btn-sm btn-danger" type="reset"> Cancel</button>
-        </div>
-    </div>
+    </form>
 
     <div class="card" style="float: left; margin-left:5%; width:50%">
         <div class="card-header"><strong>UPDATE ROLE</strong></div>

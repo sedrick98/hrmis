@@ -3,7 +3,7 @@
     </div>
     <ul class="c-sidebar-nav ps">
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{url('dashboard')}}">
+            <a class="c-sidebar-nav-link" href="{{ route('admin-dashboard') }}">
                 <i class="c-sidebar-nav-icon cib-when-i-work"></i>Dashboard
             </a>
         </li>
@@ -11,30 +11,30 @@
             <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon cil-beach-access"></i>Leave Requests</a>
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/breadcrumb.html"><span class="c-sidebar-nav-icon"></span>All</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/cards.html"><span class="c-sidebar-nav-icon"></span>Pending</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/cards.html"><span class="c-sidebar-nav-icon"></span>Approved</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/cards.html"><span class="c-sidebar-nav-icon"></span>Rejected</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>All</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>Pending</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>Approved</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>Rejected</a></li>
             </ul>
         </li>
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
             <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon cil-file"></i>IPCR</a>
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/breadcrumb.html"><span class="c-sidebar-nav-icon"></span>All</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/cards.html"><span class="c-sidebar-nav-icon"></span>Create</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/cards.html"><span class="c-sidebar-nav-icon"></span>Archived</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>All</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>Create</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>Archived</a></li>
             </ul>
         </li>
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
             <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon cil-people"></i>Accounts</a>
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/breadcrumb.html"><span class="c-sidebar-nav-icon"></span>All Users</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/cards.html"><span class="c-sidebar-nav-icon"></span>Add New User</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/cards.html"><span class="c-sidebar-nav-icon"></span>Roles</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/cards.html"><span class="c-sidebar-nav-icon"></span>Permissions</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/cards.html"><span class="c-sidebar-nav-icon"></span>Activity Log</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin-users') }}"><span class="c-sidebar-nav-icon"></span>All Users</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin-add-user') }}"><span class="c-sidebar-nav-icon"></span>Add New User</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin-roles') }}"><span class="c-sidebar-nav-icon"></span>Roles</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin-permissions') }}"><span class="c-sidebar-nav-icon"></span>Permissions</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>Activity Log</a></li>
             </ul>
         </li>
     </ul>
