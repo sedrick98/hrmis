@@ -26,12 +26,18 @@
                         <thead>
                             <tr>
                                 <th>Role</th>
+                                <th>Permissions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($roles as $role)
                                 <tr>
-                                    <td>{{ strtoupper($role->name) }}</td>
+                                    <td>{{ strtoupper($role['name']) }}</td>
+                                    <td>
+                                    @foreach ($role['permissions'] as $permission) 
+                                        <span class="badge badge-success">{{ $permission }}</span>
+                                    @endforeach
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

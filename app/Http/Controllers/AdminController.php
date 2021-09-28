@@ -15,9 +15,24 @@ class AdminController extends Controller
     }
 
     public function users() {
+        $roles = array();
+
+        foreach (Role::all() as $record) {
+            $permissions = array();
+            foreach ($record->permissions as $permission) {
+                array_push($permissions, Permission::find($permission->permission_id)->name);
+            }
+
+            array_push($roles, [
+                'id' => $record->id,
+                'name' => $record->name,
+                'permissions' => $permissions
+            ]);
+        }
+
         return view('admin.users', [
                 'users' => User::all(),
-                'roles' => Role::all()
+                'roles' => $roles
             ],
         );
     }
@@ -27,8 +42,23 @@ class AdminController extends Controller
     }
 
     public function roles() {
+        $roles = array();
+
+        foreach (Role::all() as $record) {
+            $permissions = array();
+            foreach ($record->permissions as $permission) {
+                array_push($permissions, Permission::find($permission->permission_id)->name);
+            }
+
+            array_push($roles, [
+                'id' => $record->id,
+                'name' => $record->name,
+                'permissions' => $permissions
+            ]);
+        }
+
         return view('admin.roles', [
-            'roles' => Role::all(),
+            'roles' => $roles,
             'permissions' => Permission::all()
         ]);
     }
