@@ -27,6 +27,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function role() {
+        return $this->hasOne(RoleUser::class);
+    }
+
+    public function role_name($id) {
+        error_log('id checking: '. $id);
+        $user = Role::find($id);
+
+        if ($user) {
+            return Role::find($id)->name;
+        }
+
+        return '';
+    }
+
     public function division() {
         return $this->hasOne('App\divisions', 'id', 'division_id');
     }

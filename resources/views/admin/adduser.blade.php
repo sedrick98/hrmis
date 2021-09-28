@@ -14,72 +14,120 @@
 
     @if (session('success_registration'))
         <h3 style="margin-left: 30px; color: green;">{{ session('success_registration') }}</h3>
-    @endif
+    @endif    
 
-    <form action="{{ route('register') }}" method="POST">
-        @csrf
-
-        <div style="margin-right:24px; width:45%; float:right">
-
-            <div class="card">
-                <div class="card-header"><strong>USER NAME AND PASSWORD</strong></div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="company">Username</label>
-                        <input class="form-control" name="username" id="username" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="vat">Password</label>
-                        <input class="form-control" name="password" id="password" type="password">
-                    </div>
-                    <div class="form-group">
-                        <label for="street">Confirm Password</label>
-                        <input class="form-control" name="confirm_password" id="confirm_password" type="password">
-                    </div>
-                </div>
+    <div style="padding-left:20px; width: 70%; float:left">
+        <div class="card">
+            <div class="card-header">
+                <h3>USERS LIST</h3>
             </div>
+            <div class="card-body">
 
-        </div>
+                <div class="card" style="">
 
-        <div style="padding-left:30px; width:50%">
-
-            <div class="card">
-                <div class="card-header"><strong>BASIC INFORMATION</strong></div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="company">First Name</label>
-                        <input class="form-control" name="first_name" id="first_name" type="text" >
-                    </div>
-                    <div class="form-group">
-                        <label for="vat">Middle Name</label>
-                        <input class="form-control" name="middle_name" id="middle_name" type="text" >
-                    </div>
-                    <div class="form-group">
-                        <label for="street">Last Name</label>
-                        <input class="form-control" name="last_name" id="last_name" type="text" >
-                    </div>
-                    <div class="form-group">
-                        <label for="street">Email</label>
-                        <input class="form-control" name="email" id="email" type="text" >
-                    </div>
+                    <table class="table table-responsive-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>First Name</th>
+                                <th>Middle Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $user->username }}</td>
+                                    <td>{{ $user->first_name }}</td>
+                                    <td>{{ $user->middle_name }}</td>
+                                    <td>{{ $user->last_name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td><span class="badge badge-success">{{ strtoupper($user->role_name($user->role->id)) }}</span></td>
+                                    <!-- array_search($user->role->id, array_column($roles, 'id')) -->
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
+
+                <p class="lead"><a class="btn btn-primary btn-lg" href="{{ route('admin-add-user') }}" role="button">Add New User</a></p>
             </div>
         </div>
+    </div>
 
-        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="width:30%; float:right; margin-top:-80px; margin-right:10%">
-            <button class="btn btn-block btn-success" type="submit">
-                <h5>SUBMIT</h5>
-            </button>
+
+    <div style="padding-left:20px; width: 27%; float:right; margin-right:30px">
+        <div class="card">
+            <div class="card-header">
+                <h3>ROLES</h3>
+            </div>
+            <div class="card-body" style="height:250px">
+
+                <div class="card" >
+
+                    <table class="table table-responsive-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>ROLE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($roles as $role)
+                                <tr>
+                                    <td>{{ strtoupper($role['name']) }}</td>
+                                    <td>
+                                    @foreach ($role['permissions'] as $permission) 
+                                        <span class="badge badge-success">{{ $permission }}</span>
+                                    @endforeach
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"style="width:30%; float:right; margin-top:-20px; margin-right:10%">
-            <button class="btn btn-block btn-danger active" type="reset" aria-pressed="true">
-                <h5>RESET</h5>
-            </button>
+
+    <!-- <div style="padding-left:20px; width: 27%; float:right; margin-right:30px">
+        <div class="card">
+            <div class="card-header">
+                <h3>PERMISSION</h3>
+            </div>
+            <div class="card-body" style="height:250px">
+
+                <div class="card" >
+
+                    <table class="table table-responsive-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Permissions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Admin</td>
+                            </tr>
+                            <tr>
+                                <td>Write</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-
-    </form>
-
+    </div> -->
 
 </body>
 

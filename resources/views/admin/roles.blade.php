@@ -27,16 +27,26 @@
                             <tr>
                                 <th>Role</th>
                                 <th>Permissions</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($roles as $role)
                                 <tr>
-                                    <td>{{ strtoupper($role['name']) }}</td>
+                                    <td>{{ strtoupper($role->name) }}</td>
                                     <td>
-                                    @foreach ($role['permissions'] as $permission) 
-                                        <span class="badge badge-success">{{ $permission }}</span>
+                                    @foreach ($role->permissions as $permission) 
+                                        <span class="badge badge-success">{{ $role->getPermissionRecord($permission->permission_id)->name }}</span>
                                     @endforeach
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary"
+                                        data-roleid="{{ strtoupper($role->id) }}"
+                                        data-name="{{ strtoupper($role['name']) }}"
+                                        data-permissions='[@foreach ($role->permissions as $permission){{ $permission->permission_id }},@endforeach]'
+                                        type="edit" onclick="updateRole(this)"
+                                        data-toggle="modal" data-target="#exampleModal"
+                                        >Edit</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -69,40 +79,87 @@
         </div>
     </form>
 
-    <div class="card" style="float: left; margin-left:5%; width:50%">
+    <!-- <div class="card" style="float: left; margin-left:5%; width:50%">
         <div class="card-header"><strong>UPDATE ROLE</strong></div>
         <div class="card-body">
-            <form action="" method="post">
+            <form action="{{ route('admin-update-role') }}" method="post">
+                @csrf
+                <input type="hidden" name="role_id" id="updateRoleID" value="">
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="select1">Select Role</label>
+                    <label class="col-md-3 col-form-label" for="select1">Role Selected</label>
                     <div class="col-md-9">
-                        <select class="form-control" id="select1" name="select1">
-                            <option value="0">Please select</option>
-                            <option value="1">Option #1</option>
-                            <option value="2">Option #2</option>
-                            <option value="3">Option #3</option>
-                        </select>
+                    <input class="form-control" id="updateRoleName" name="name" value="SOMETHING">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="text-input">Role Name</label>
                     <div class="col-md-9">
-                        <input class="form-control" id="text-input" type="text" name="text-input" placeholder="Enter new role name">
+                    <select multiple class="form-control" name="permissions[]" id="updateSelectedPermissions">
+                        @foreach ($permissions as $permission)
+                            <option value="{{ $permission->id }}">{{ strtoupper($permission->name) }}</option>
+                        @endforeach
+                    </select>
                     </div>
                 </div>
 
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-sm btn-primary" type="submit"> Update</button>
+            </div>
+        </form>
+    </div> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form action="{{ route('admin-update-role') }}" method="post">
+                @csrf
+                <input type="hidden" name="role_id" id="updateRoleID" value="">
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="select1">Role Selected</label>
+                    <div class="col-md-9">
+                    <input class="form-control" id="updateRoleName" name="name" value="SOMETHING">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="text-input">Role Name</label>
+                    <div class="col-md-9">
+                    <select multiple class="form-control" name="permissions[]" id="updateSelectedPermissions">
+                        @foreach ($permissions as $permission)
+                            <option value="{{ $permission->id }}">{{ strtoupper($permission->name) }}</option>
+                        @endforeach
+                    </select>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-primary" type="submit"> Update</button>
+            </div>
+            </div>
             </form>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-sm btn-primary" type="submit"> Update</button>
-            <button class="btn btn-sm btn-danger" type="reset"> Delete</button>
-        </div>
     </div>
-
-
-
 
 </body>
 
 
+@endsection
+
+@section('after-scripts')
+<script>
+    const updateRole = (role) => {
+        $('#updateRoleID').val(role.dataset.roleid);
+        $('#updateRoleName').val(role.dataset.name);
+        $('#updateSelectedPermissions').val(eval(role.dataset.permissions));
+    }
+</script>
 @endsection

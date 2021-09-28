@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Models\RoleUser;
 
 class UserController extends Controller
 {
@@ -43,6 +44,8 @@ class UserController extends Controller
 
         // POST
         if ($request->isMethod('post')) {
+            $role_selected = $request['role'];
+
             $form_data = $request->all();
 
             $user = User::create([
@@ -52,6 +55,11 @@ class UserController extends Controller
                 'last_name' => $form_data['last_name'],
                 'email' => $form_data['email'],
                 'password' => Hash::make($form_data['password']),
+            ]);
+
+            $role = RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => $role_selected
             ]);
 
             return redirect()->route('admin-users', [])

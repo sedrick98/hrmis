@@ -13,11 +13,10 @@
 
     @include('includes/sidebar')
 
-
     <div style="padding-left:20px; width: 40%; float:right; margin-right:40px">
         <div class="card">
             <div class="card-header">
-                <h3>PERMISSION LIST</h3>
+                <h3>PERMISSION LIST @if (session('update_success')) <span style="margin-left: 70px; color: green;"> {{ session('update_success') }}</span>@endif</h3>
             </div>
             <div class="card-body">
 
@@ -27,55 +26,49 @@
                         <thead>
                             <tr>
                                 <th>Permission</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach ($permissions as $permission)
                             <tr>
-                                <td>Admin</td>
+                                <td>{{ strtoupper($permission->name) }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary"
+                                        data-name="{{ strtoupper($permission['name']) }}"
+                                        data-id="{{ $permission->id }}"
+                                        type="edit" onclick="updatePermission(this)"
+                                        data-toggle="modal" data-target="#exampleModal"
+                                        >Edit
+                                    </button>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>Write</td>
-                            </tr>
-                            <tr>
-                                <td>View</td>
-                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
 
+    <form action="{{ route('admin-add-permission') }}" method="post">
     <div class="card" style="float: left; margin-left:5%; width:50%">
-        <div class="card-header"><strong>ADD NEW PERMISSION</strong></div>
+        <div class="card-header"><strong>ADD NEW PERMISSION @if (session('create_success')) <span style="margin-left: 70px; color: green;"> {{ session('create_success') }}</span>@endif</strong></div>
         <div class="card-body">
-            <form action="" method="post">
-                <div class="form-group">
-                    <label for="nf-email">Permission Name</label>
-                    <input class="form-control" id="rolename" name="nf-role" placeholder="enter type of user">
-                </div>
-                <div class="form-group">
-                    <label for="nf-password">Description</label>
-                    <textarea class="form-control" id="textarea-input" name="textarea-input" rows="9" placeholder="Permission description" style="margin-top: 0px; margin-bottom: 0px; height: 88px;"></textarea>
-                </div>
-            </form>
+            @csrf
+            <div class="form-group">
+                <label for="nf-email">Permission Name</label>
+                <input class="form-control" id="rolename" name="name">
+            </div>
         </div>
         <div class="card-footer">
             <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
-            <button class="btn btn-sm btn-danger" type="reset"> Cancel</button>
         </div>
     </div>
+    </form>
 
-    <div class="card" style="float: left; margin-left:5%; width:50%">
+    <!-- <div class="card" style="float: left; margin-left:5%; width:50%">
         <div class="card-header"><strong>UPDATE PERMISSION</strong></div>
         <div class="card-body">
             <form action="" method="post">
@@ -103,13 +96,49 @@
             <button class="btn btn-sm btn-primary" type="submit"> Update</button>
             <button class="btn btn-sm btn-danger" type="reset"> Delete</button>
         </div>
+    </div> -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Permission</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form action="{{ route('admin-update-permission') }}" method="post">
+                @csrf
+                <input type="hidden" name="permission_id" id="updatePermissionID" value="">
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="select1">Permission Name</label>
+                    <div class="col-md-9">
+                    <input class="form-control" id="updatePermissionName" name="name">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-primary" type="submit"> Update</button>
+            </div>
+            </div>
+            </form>
+        </div>
     </div>
-
-
-
 
 
 </body>
 
 
+@endsection
+
+@section('after-scripts')
+<script>
+    const updatePermission = (role) => {
+        $('#updatePermissionID').val(role.dataset.id);
+        $('#updatePermissionName').val(role.dataset.name);
+    }
+</script>
 @endsection

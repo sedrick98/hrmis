@@ -13,4 +13,8 @@ class Role extends Model
     public function permissions() {
         return $this->hasMany(RolePermission::class);
     }
+
+    public function getPermissionRecord($permission_id) {
+        return Permission::find($permission_id);
+    }
 }
