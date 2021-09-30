@@ -16,7 +16,7 @@
 
 
     <div class="card" style="margin:20px; margin-top:0px">
-        <div class="card-header"><i class="fa fa-align-justify"></i> Simple Table</div>
+        <div class="card-header"><i class="fa fa-align-justify"><strong>IPCR LIST</strong></div>
         <div class="card-body">
             <table class="table table-responsive-sm">
                 <thead>

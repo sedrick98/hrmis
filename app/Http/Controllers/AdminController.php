@@ -77,6 +77,14 @@ class AdminController extends Controller
         ]);
     }
 
+    public function ipcrView(){
+        return view('admin.ipcrview');
+    }
+
+    public function ipcrCreate(){
+        return view('admin.ipcr');
+    }
+
     public function updateRole(Request $request) {
         $role = Role::find($request->role_id);
         $role->name = $request->name;
