@@ -31,71 +31,13 @@ class User extends Authenticatable
         return $this->hasOne(RoleUser::class);
     }
 
-    public function role_name($id) {
-        error_log('id checking: '. $id);
-        $user = Role::find($id);
-
-        if ($user) {
-            return Role::find($id)->name;
-        }
-
-        return '';
-    }
-
-    public function division() {
-        return $this->hasOne('App\divisions', 'id', 'division_id');
-    }
-
-    public function hasRole($nameOrId) {
-        
-        foreach ($this->roles as $role) {
-            //See if role has all permissions
-            if ($role->all) {
-                return true;
-            }
-
-            //First check to see if it's an ID
-            if (is_numeric($nameOrId)) {
-                if ($role->id == $nameOrId) {
-                    return true;
-                }
-            }
-            //Otherwise check by name
-            if ($role->name == $nameOrId) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function hasPermission($nameOrId) {
-        foreach ($this->roles as $r) {
-            //See if role has all permissions
-            if ($r->all) {
-                return true;
-            }
-
-            // Validate against the Permission table
-            foreach ($r->permissions as $perm) {
-
-                // First check to see if it's an ID
-                if (is_numeric($nameOrId)) {
-                    if ($perm->id == $nameOrId) {
-                        return true;
-                    }
-                }
-
-                // Otherwise check by name
-                if ($perm->name == $nameOrId) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public function roleName() {
+        $role_id = $this->role->role_id;
+        return Role::find($role_id)->name;
     }
 
     public function roles() {
-        return $this->hasMany(UserRole::class);
+        return $this->hasMany(RoleUser::class);
     }
 
 }

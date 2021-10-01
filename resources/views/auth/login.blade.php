@@ -54,22 +54,7 @@
               </div>
             </div>
             <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
-              <div class="card-body text-center">
-                <div>
-                  <h2>Sign up</h2>
-                  <p>Welcome Introduction.....</p>
-                  {{--  <div class="row">
-                  @if (Route::has('password.request'))
-                    <a href="{{ route('register') }}" class="btn btn-primary active mt-3">{{ __('Register') }}</a>
-                  @endif--}}
-                  <br>
-                  <br>
-                  <br>
-                  <div class="col-8 text-right">
-                    <a href="{{ route('register') }}" class="btn btn-primary active">{{ __('Register') }}</a>
-                </div>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
