@@ -7,42 +7,19 @@
 
 @section('content')
 
-<style>
-    table,
-    td,
-    th {
-        text-align: center;
-        padding: 5px;
-    }
-
-    #cvv {
-        width: 70px;
-        margin: auto
-    }
-
-    #cv {
-        width: 165px;
-        margin: auto
-    }
-    #btn{
-        width:300px;
-        display: block;
-        margin: auto;
-    }
-</style>
-
 
 <body>
 
 
     @include('includes/sidebar')
 
-
-    <div class="card" style="margin:15px">
+    <div class="card" style="margin:20px;">
         <div class="card-header">
             <h3>INDIVIDUAL PERFORMANCE COMMITMENT AND REVIEW (IPCR) FORM</h3>
         </div>
         <div class="card-body">
+
+
             <div class="jumbotron jumbotron-fluid" style="padding:20px; background-color:lightblue; border-radius: 10px">
                 <div class="container">
 
@@ -62,8 +39,8 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="cvv">Middle Initial</label>
-                                <input class="form-control" type="text" placeholder="please enter middle initial only">
+                                <label for="cvv">Middle Name</label>
+                                <input class="form-control" type="text" placeholder="enter middle name">
                             </div>
                         </div>
                     </div>
@@ -72,531 +49,107 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="ccnumber">Division</label>
-                                <input class="form-control" id="ccnumber" type="text" placeholder="enter division name" style="width:400px">
+                                <select class="form-control" id="select1" name="select1" style="width:400px">
+                                    <option value="0">Please select</option>
+                                    <option value="1">Option #1</option>
+                                    <option value="2">Option #2</option>
+                                    <option value="3">Option #3</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
-            <div>
-                <h3>A. OPERATIONS</h3>
-                <hr>
-            </div>
-
-
             <div class="jumbotron jumbotron-fluid" style="padding:20px; background-color:lightblue; border-radius: 10px">
                 <div class="container">
-
-                    <div><strong>I. DIFFUSION AND TRANSFER OF KNOWLEDGE AND TECHNOLOGIES;
-                            AND OTHER RELATED PROJECTS AND ACTIVITIES</strong>
+                    <div><strong>SIGNATORIES</strong>
                         <hr>
                     </div>
 
-
-                    <table style="border-collapse: collapse">
-
+                    <table>
                         <tr>
-
-                            <td>
-                                <label for="ccmonth"><br>OUTPUT</label>
-                                <input class="form-control" id="cv" type="text">
+                            <td style="padding-right: 30px">
+                                <label for="ccnumber">Immediate Supervisor</label>
+                                <select class="form-control" id="select1" name="select1" style="width:450px">
+                                    <option value="0">Please select</option>
+                                    <option value="1">Option #1</option>
+                                    <option value="2">Option #2</option>
+                                    <option value="3">Option #3</option>
+                                </select>
                             </td>
                             <td>
-
-                                <label for="ccmonth"><br>SUCCESS INDICATORS</label>
-                                <input class="form-control" id="cv" type="text">
-
+                                <label for="ccnumber">Regional Director</label>
+                                <select class="form-control" id="select1" name="select1" style="width:450px">
+                                    <option value="0">Please select</option>
+                                    <option value="1">Option #1</option>
+                                    <option value="2">Option #2</option>
+                                    <option value="3">Option #3</option>
+                                </select>
                             </td>
-                            <td>
-
-                                <label for="ccmonth">ACTUAL ACCOMPLISHMENTS</label>
-                                <input class="form-control" id="cv" type="text">
-
-                            </td>
-
-                            <td>
-                                <label for="ccmonth"><br>QUALITY</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-                            <td>
-                                <label for="ccmonth"><br>EFFICIENCY</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-                            <td>
-                                <label for="ccmonth"><br>TIMELINESS</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-
-                            <td>
-                                <label for="ccmonth"><br>REMARKS</label>
-                                <input class="form-control" id="cv" type="text">
-                            </td>
-
                         </tr>
-
 
                     </table>
                     <br>
-                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="width:200px; margin-right:-10px; float: right">
-                        <button class="btn btn-block btn-info active" type="button" aria-pressed="true">ADD RECORD</button>
-                    </div>
-                    <br><br><br>
 
-                    <div class="card-body" style="background-color:white; border-radius:10px; padding:auto">
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="width:300px; float:right">
+                        <button class="btn btn-block btn-success" type="button">
+                            <h5>NEXT</h5>
+                        </button>
+                    </div><br><br>
 
-                        <table class="table table-responsive-sm table-bordered table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th>OUTPUT</th>
-                                    <th>SUCCESS INDICATOR</th>
-                                    <th>ACTUAL ACCOMPLISHMENT</th>
-                                    <th>QUALITY</th>
-                                    <th>EFFICIENCY</th>
-                                    <th>TIMELINESS</th>
-                                    <th>AVERAGE</th>
-                                    <th>REMARKS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>sample</td>
-                                </tr>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>sample</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
-
-
-
-
-
-
-            <div class="jumbotron jumbotron-fluid" style="padding:20px; background-color:lightblue; border-radius: 10px">
-                <div class="container">
-
-                    <div><strong>II. ENHANCEMENT OF SCIENCE AND TECHNOLOGY PROJECTS/ACTIVITIES</strong>
-                        <hr>
-                    </div>
-
-
-                    <table style="border-collapse: collapse">
-
-                        <tr>
-
-                            <td>
-                                <label for="ccmonth"><br>OUTPUT</label>
-                                <input class="form-control" id="cv" type="text">
-                            </td>
-                            <td>
-
-                                <label for="ccmonth"><br>SUCCESS INDICATORS</label>
-                                <input class="form-control" id="cv" type="text">
-
-                            </td>
-                            <td>
-
-                                <label for="ccmonth">ACTUAL ACCOMPLISHMENTS</label>
-                                <input class="form-control" id="cv" type="text">
-
-                            </td>
-
-                            <td>
-                                <label for="ccmonth"><br>QUALITY</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-                            <td>
-                                <label for="ccmonth"><br>EFFICIENCY</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-                            <td>
-                                <label for="ccmonth"><br>TIMELINESS</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-
-                            <td>
-                                <label for="ccmonth"><br>REMARKS</label>
-                                <input class="form-control" id="cv" type="text">
-                            </td>
-
-                        </tr>
-
-
-                    </table>
-                    <br>
-                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="width:200px; margin-right:-10px; float: right">
-                        <button class="btn btn-block btn-info active" type="button" aria-pressed="true">ADD RECORD</button>
-                    </div>
-                    <br><br><br>
-
-                    <div class="card-body" style="background-color:white; border-radius:10px; padding:auto">
-
-                        <table class="table table-responsive-sm table-bordered table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th>OUTPUT</th>
-                                    <th>SUCCESS INDICATOR</th>
-                                    <th>ACTUAL ACCOMPLISHMENT</th>
-                                    <th>QUALITY</th>
-                                    <th>EFFICIENCY</th>
-                                    <th>TIMELINESS</th>
-                                    <th>AVERAGE</th>
-                                    <th>REMARKS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>sample</td>
-                                </tr>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>sample</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="width:200px; float:right">
+                <button class="btn btn-block btn-info" type="button" data-toggle="modal" data-target="#adminView"><strong>ADMIN</strong></button>
             </div>
 
+        </div>
+    </div>
 
-            <div>
-                <h3>B. GENERAL ADMINISTRATIVE SERVICES</h3>
-                <hr>
+
+
+
+    <div class="modal fade" style="float: left; margin:50px; margin-left:350px; width:50%;" id="adminView" role="dialog" aria-hidden="true">
+        <div class="card-header">
+            <h5>ADD NEW</h5>
+            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="float:right; width:100px; margin-top:-30px">
+                <button class="btn btn-block btn-danger" type="button">Close</button>
+            </div>
+            
+        </div>
+        <div class="card-body" style="background-color:whitesmoke">
+
+            <div class="form-group">
+                <label for="nf-email">Division Name</label>
+                <input class="form-control" id="rolename" name="name"><br>
+                <button class="btn btn-sm btn-primary" type="submit" style="float:right"> ADD</button>
             </div>
 
-            <div class="jumbotron jumbotron-fluid" style="padding:20px; background-color:lightblue; border-radius: 10px">
-                <div class="container">
-                    <table style="border-collapse: collapse">
-
-                        <tr>
-
-                            <td>
-                                <label for="ccmonth"><br>OUTPUT</label>
-                                <input class="form-control" id="cv" type="text">
-                            </td>
-                            <td>
-
-                                <label for="ccmonth"><br>SUCCESS INDICATORS</label>
-                                <input class="form-control" id="cv" type="text">
-
-                            </td>
-                            <td>
-
-                                <label for="ccmonth">ACTUAL ACCOMPLISHMENTS</label>
-                                <input class="form-control" id="cv" type="text">
-
-                            </td>
-
-                            <td>
-                                <label for="ccmonth"><br>QUALITY</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-                            <td>
-                                <label for="ccmonth"><br>EFFICIENCY</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-                            <td>
-                                <label for="ccmonth"><br>TIMELINESS</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-
-                            <td>
-                                <label for="ccmonth"><br>REMARKS</label>
-                                <input class="form-control" id="cv" type="text">
-                            </td>
-
-                        </tr>
-
-
-                    </table>
-                    <br>
-                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="width:200px; margin-right:-10px; float: right">
-                        <button class="btn btn-block btn-info active" type="button" aria-pressed="true">ADD RECORD</button>
-                    </div>
-                    <br><br><br>
-
-                    <div class="card-body" style="background-color:white; border-radius:10px; padding:auto">
-
-                        <table class="table table-responsive-sm table-bordered table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th>OUTPUT</th>
-                                    <th>SUCCESS INDICATOR</th>
-                                    <th>ACTUAL ACCOMPLISHMENT</th>
-                                    <th>QUALITY</th>
-                                    <th>EFFICIENCY</th>
-                                    <th>TIMELINESS</th>
-                                    <th>AVERAGE</th>
-                                    <th>REMARKS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>sample</td>
-                                </tr>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>sample</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="nf-email">Immediate Supervisor</label>
+                <input class="form-control" id="rolename" name="name"><br>
+                <button class="btn btn-sm btn-primary" type="submit" style="float:right"> ADD</button>
             </div>
 
-
-            <div>
-                <h3>C. SUPPORT TO OPERATIONS</h3>
-                <hr>
+            <div class="form-group">
+                <label for="nf-email">Regional Director</label>
+                <input class="form-control" id="rolename" name="name"><br>
+                <button class="btn btn-sm btn-primary" type="submit" style="float:right"> ADD</button>
             </div>
 
-            <div class="jumbotron jumbotron-fluid" style="padding:20px; background-color:lightblue; border-radius: 10px">
-                <div class="container">
-                    <table style="border-collapse: collapse">
-
-                        <tr>
-
-                            <td>
-                                <label for="ccmonth"><br>OUTPUT</label>
-                                <input class="form-control" id="cv" type="text">
-                            </td>
-                            <td>
-
-                                <label for="ccmonth"><br>SUCCESS INDICATORS</label>
-                                <input class="form-control" id="cv" type="text">
-
-                            </td>
-                            <td>
-
-                                <label for="ccmonth">ACTUAL ACCOMPLISHMENTS</label>
-                                <input class="form-control" id="cv" type="text">
-
-                            </td>
-
-                            <td>
-                                <label for="ccmonth"><br>QUALITY</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-                            <td>
-                                <label for="ccmonth"><br>EFFICIENCY</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-                            <td>
-                                <label for="ccmonth"><br>TIMELINESS</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-
-                            <td>
-                                <label for="ccmonth"><br>REMARKS</label>
-                                <input class="form-control" id="cv" type="text">
-                            </td>
-
-                        </tr>
+        </div>
+        <div class="card-footer">
+        </div>
+    </div>
 
 
-                    </table>
-                    <br>
-                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="width:200px; margin-right:-10px; float: right">
-                        <button class="btn btn-block btn-info active" type="button" aria-pressed="true">ADD RECORD</button>
-                    </div>
-                    <br><br><br>
-
-                    <div class="card-body" style="background-color:white; border-radius:10px; padding:auto">
-
-                        <table class="table table-responsive-sm table-bordered table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th>OUTPUT</th>
-                                    <th>SUCCESS INDICATOR</th>
-                                    <th>ACTUAL ACCOMPLISHMENT</th>
-                                    <th>QUALITY</th>
-                                    <th>EFFICIENCY</th>
-                                    <th>TIMELINESS</th>
-                                    <th>AVERAGE</th>
-                                    <th>REMARKS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>sample</td>
-                                </tr>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>sample</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
 
-            <div>
-                <h3>D. INNOVATION</h3>
-                <hr>
-            </div>
-
-            <div class="jumbotron jumbotron-fluid" style="padding:20px; background-color:lightblue; border-radius: 10px">
-                <div class="container">
-                    <table style="border-collapse: collapse">
-
-                        <tr>
-
-                            <td>
-                                <label for="ccmonth"><br>OUTPUT</label>
-                                <input class="form-control" id="cv" type="text">
-                            </td>
-                            <td>
-
-                                <label for="ccmonth"><br>SUCCESS INDICATORS</label>
-                                <input class="form-control" id="cv" type="text">
-
-                            </td>
-                            <td>
-
-                                <label for="ccmonth">ACTUAL ACCOMPLISHMENTS</label>
-                                <input class="form-control" id="cv" type="text">
-
-                            </td>
-
-                            <td>
-                                <label for="ccmonth"><br>QUALITY</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-                            <td>
-                                <label for="ccmonth"><br>EFFICIENCY</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-                            <td>
-                                <label for="ccmonth"><br>TIMELINESS</label>
-                                <input class="form-control" id="cvv" type="text">
-                            </td>
-
-                            <td>
-                                <label for="ccmonth"><br>REMARKS</label>
-                                <input class="form-control" id="cv" type="text">
-                            </td>
-
-                        </tr>
 
 
-                    </table>
-                    <br>
-                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="width:200px; margin-right:-10px; float: right">
-                        <button class="btn btn-block btn-info active" type="button" aria-pressed="true">ADD RECORD</button>
-                    </div>
-                    <br><br><br>
-
-                    <div class="card-body" style="background-color:white; border-radius:10px; padding:auto">
-
-                        <table class="table table-responsive-sm table-bordered table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th>OUTPUT</th>
-                                    <th>SUCCESS INDICATOR</th>
-                                    <th>ACTUAL ACCOMPLISHMENT</th>
-                                    <th>QUALITY</th>
-                                    <th>EFFICIENCY</th>
-                                    <th>TIMELINESS</th>
-                                    <th>AVERAGE</th>
-                                    <th>REMARKS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>sample</td>
-                                </tr>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>sample</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                <button class="btn btn-block btn-outline-success active" id="btn" type="button" aria-pressed="true"><h5>SAVE FILE</h5></button>
-            </div><br>
-
-            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                <button class="btn btn-block btn-outline-danger active" id="btn" type="button" aria-pressed="true"><h5>CANCEL</h5></button>
-            </div>
 
 
-</body>
 
 
-@endsection
+    @endsection
