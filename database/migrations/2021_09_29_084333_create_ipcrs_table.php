@@ -18,7 +18,9 @@ class CreateIpcrsTable extends Migration
             $table->string('title');
             $table->integer('employee')->unsigned();
             $table->foreign('employee')->references('emp_id')->on('employees');
+            $table->string('status');
             $table->timestamps();
+            
         });
     }
 
