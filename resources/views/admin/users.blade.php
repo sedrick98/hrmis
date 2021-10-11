@@ -7,7 +7,6 @@
 
 @section('content')
 
-
 <body>
 
     @include('includes/sidebar')
@@ -44,7 +43,7 @@
                                     <td>{{ $user->middle_name }}</td>
                                     <td>{{ $user->last_name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td><span class="badge badge-success">{{ strtoupper($user->role_name($user->role->role_id)) }}</span></td>   
+                                    <td><span class="badge badge-success">{{ strtoupper($user->roleName()) }}</span></td>   
                                 </tr>
                             @endforeach
                         </tbody>

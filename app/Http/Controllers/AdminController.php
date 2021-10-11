@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Division;
 use App\Models\Permission;
 use App\Models\RolePermission;
 
 class AdminController extends Controller
 {
-    public function dashboard() {
+    public function dashboard()
+    {
         return view('admin.dashboard');
     }
 
-    public function users() {
+    public function users()
+    {
         $roles = array();
 
         foreach (Role::all() as $record) {
@@ -32,7 +35,9 @@ class AdminController extends Controller
 
         $roles_dict = Role::all();
 
-        return view('admin.users', [
+        return view(
+            'admin.users',
+            [
                 'users' => User::all(),
                 'roles' => $roles,
                 'roles_dict' => $roles_dict
@@ -40,20 +45,23 @@ class AdminController extends Controller
         );
     }
 
-    public function addUser() {
-        return view('admin.addUser',[
+    public function addUser()
+    {
+        return view('admin.addUser', [
             'roles' => Role::all()
         ]);
     }
 
-    public function roles() {
+    public function roles()
+    {
         return view('admin.roles', [
             'roles' => Role::all(),
             'permissions' => Permission::all()
         ]);
     }
 
-    public function addRole(Request $request) {
+    public function addRole(Request $request)
+    {
         $role = Role::create([
             'name' => $request->name
         ]);
@@ -68,24 +76,18 @@ class AdminController extends Controller
         }
 
         return redirect()->route('admin-roles')
-                ->with('success_role_added', 'New Role Added');
+            ->with('success_role_added', 'New Role Added');
     }
 
-    public function permissions() {
+    public function permissions()
+    {
         return view('admin.permissions', [
             'permissions' => Permission::all()
         ]);
     }
 
-    public function ipcrView(){
-        return view('admin.ipcrview');
-    }
-
-    public function ipcrCreate(){
-        return view('admin.ipcr');
-    }
-
-    public function updateRole(Request $request) {
+    public function updateRole(Request $request)
+    {
         $role = Role::find($request->role_id);
         $role->name = $request->name;
         $role->save();
@@ -105,7 +107,8 @@ class AdminController extends Controller
         return redirect()->route('admin-roles');
     }
 
-    public function addPermission(Request $request) {
+    public function addPermission(Request $request)
+    {
         $name = $request->name;
 
         Permission::create([
@@ -113,11 +116,12 @@ class AdminController extends Controller
         ]);
 
         return redirect()
-                ->route('admin-permissions')
-                ->with('create_success', 'Permission Added');
+            ->route('admin-permissions')
+            ->with('create_success', 'Permission Added');
     }
 
-    public function updatePermission(Request $request) {
+    public function updatePermission(Request $request)
+    {
         error_log($request);
         $permission_id = $request->permission_id;
         $permission = Permission::find($permission_id);
@@ -125,7 +129,40 @@ class AdminController extends Controller
         $permission->save();
 
         return redirect()
-                ->route('admin-permissions')
-                ->with('update_success', 'Permission Name Updated');
+            ->route('admin-permissions')
+            ->with('update_success', 'Permission Name Updated');
+    }
+
+    public function ipcrView()
+    {
+        return view('admin.ipcrview');
+    }
+
+    public function ipcrCreate()
+    {
+        return view('admin.ipcr');
+    }
+
+    public function ipcrForm()
+    {
+        return view('admin.ipcrform');
+    }
+
+    public function addDiv(Request $req)
+    {
+        $division = new Division;
+        $division->name = $req->divname;
+
+        $division->save();
+
+        //return redirect()->route('ipcr-create');
+        //return back()->with('success','Item created successfully!');
+
+    }
+
+    public function index()
+    {
+        $data = Division::all();
+        return view('admin.ipcr',['data'=>$data]);
     }
 }
