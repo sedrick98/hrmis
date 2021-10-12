@@ -59,11 +59,10 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="ccnumber">Division</label>
-                                <select class="form-control" id="select1" name="select1" style="width:400px">
-                                    <option value="0">Please select</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
+                                <select class="form-control" style="width:400px">
+                                    @foreach($divisions as $div)
+                                        <option value="{{$div->div_id}}">{{$div->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
