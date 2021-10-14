@@ -12,7 +12,7 @@
             <i class="c-sidebar-nav-icon cil-beach-access"></i>Leave Requests</a>
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('leave-create') }}"><span class="c-sidebar-nav-icon"></span>Create</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>My requests</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('leave-all') }}"><span class="c-sidebar-nav-icon"></span>My requests</a></li>
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>Pending</a></li>
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>Approved</a></li>
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>Rejected</a></li>
@@ -24,10 +24,9 @@
             <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon cil-file"></i>IPCR</a>
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>All</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('ipcr-submitted') }}"><span class="c-sidebar-nav-icon"></span>Submitted</a></li>
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('ipcr-create') }}"><span class="c-sidebar-nav-icon"></span>Create</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin-form') }}"><span class="c-sidebar-nav-icon"></span>For Approvals</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin-division') }}"><span class="c-sidebar-nav-icon"></span>Division</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('ipcr-form') }}"><span class="c-sidebar-nav-icon"></span>For Approvals</a></li>
             </ul>
         </li>
 

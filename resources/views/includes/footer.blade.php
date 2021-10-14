@@ -1,4 +1,4 @@
-<footer class="c-footer">
+<footer class="c-footer" style="bottom:0px">
     <div>
         Copyright &copy; {{ date('Y') }}
         <a href="https://coreui.io">  DOSTrack</a>, All rights reserved

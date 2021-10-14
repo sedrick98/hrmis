@@ -20,17 +20,17 @@
         @include('includes.footer')
     </div>
 </div>
-    
-    {{-- <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
-    <!--[if IE]><!-->
-    <script src="vendors/@coreui/icons/js/svgxuse.min.js"></script>
-    <!--<![endif]-->
-    
-    <script src="vendors/@coreui/chartjs/js/coreui-chartjs.bundle.js"></script>
-    <script src="vendors/@coreui/utils/js/coreui-utils.js"></script> --}}
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     
     </body>
 </html>
+
+@yield('before-scripts')
+
 <script src="{{mix('js/app.js')}}"></script>
 <script>
     var APP_URL = "{{ url('/') }}";

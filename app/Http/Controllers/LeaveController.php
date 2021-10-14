@@ -8,6 +8,12 @@ use App\Models\LeaveRequest;
 
 class LeaveController extends Controller
 {
+    public function all() {
+        return view('leave.all', [
+            'pending_leave' => LeaveRequest::all()
+        ]);
+    }
+
     public function create(Request $request) {
         if ($request->isMethod('get')) {
             return view('leave.create');
