@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\SignatoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +32,6 @@ Route::get('admin/users', [AdminController::class, 'users'])->name('admin-users'
 Route::get('admin/users/add', [AdminController::class, 'addUser'])->name('admin-add-user');
 Route::get('admin/roles', [AdminController::class, 'roles'])->name('admin-roles');
 Route::get('admin/permissions', [AdminController::class, 'permissions'])->name('admin-permissions');
-Route::get('admin/ipcr', [AdminController::class, 'ipcrView'])->name('admin-ipcr');
-Route::get('admin/create', [AdminController::class, 'ipcrCreate'])->name('ipcr-create');
-Route::get('admin/form', [AdminController::class, 'ipcrForm'])->name('admin-form');
-
 
 // ADMIN - POST
 Route::post('/register', [UserController::class, 'register'])->name('register');
@@ -41,3 +39,37 @@ Route::post('/add-role', [AdminController::class, 'addRole'])->name('admin-add-r
 Route::post('/update-role', [AdminController::class, 'updateRole'])->name('admin-update-role');
 Route::post('/add-permission', [AdminController::class, 'addPermission'])->name('admin-add-permission');
 Route::post('/update-permission', [AdminController::class, 'updatePermission'])->name('admin-update-permission');
+
+// SIGNATORIES - GET
+Route::get('signatory/divisions', [SignatoryController::class, 'divisions'])->name('signatory-divisions');
+Route::get('signatory/divisions/sections', [SignatoryController::class, 'sections'])->name('signatory-sections');
+Route::get('signatory/divisions/assignments', [SignatoryController::class, 'assignments'])->name('signatory-assignments');
+
+// SIGNATORIES - POST
+Route::post('signatory/divisions', [SignatoryController::class, 'divisions'])->name('signatory-divisions');
+Route::post('signatory/divisions/sections', [SignatoryController::class, 'sections'])->name('signatory-sections');
+Route::post('signatory/divisions/assignments', [SignatoryController::class, 'assignments'])->name('signatory-assignments');
+
+// IPCR - GET
+Route::get('ipcr/submitted', [IPCRController::class, 'ipcrSubmitted'])->name('ipcr-submitted');
+Route::get('ipcr/create', [IPCRController::class, 'ipcrForm'])->name('ipcr-create');
+//Route::get('ipcr/form', [IPCRController::class, 'ipcrForm'])->name('ipcr-form');
+
+//IPCR - POST
+Route::post('ipcr/create', [IPCRController::class, 'saveIPCR'])->name('ipcr-save');
+
+// LEAVE REQUEST - GET
+Route::get('leave/create', [LeaveController::class, 'create'])->name('leave-create');
+Route::get('leave/all', [LeaveController::class, 'all'])->name('leave-all');
+Route::get('leave/view/{leave_request}', [LeaveController::class, 'view'])->name('leave-view');
+
+// LEAVE REQUEST FOR APPROVAL - GET
+Route::get('leave/approvals/all', [LeaveController::class, 'allApprovals'])->name('leave-approval');
+Route::get('leave/print/{leave_request}', [LeaveController::class, 'printLeaveRequest'])->name('leave-print');
+
+// LEAVE REQUEST FOR APPROVAL - POST
+Route::post('leave/approvals/{approval}', [LeaveController::class, 'approvalUpdate'])->name('leave-approval-update');
+Route::post('leave/approvals/reject/{approval}', [LeaveController::class, 'rejectApproval'])->name('leave-reject-approval');
+
+// LEAVE REQUEST - POST
+Route::post('leave/create', [LeaveController::class, 'create'])->name('leave-create');
