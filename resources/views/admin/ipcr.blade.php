@@ -13,7 +13,7 @@
 
     @include('includes/sidebar')
 
-    
+
     @if ($message = Session::get('success'))
     <div class="altert-success-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert">
@@ -61,7 +61,7 @@
                                 <label for="ccnumber">Division</label>
                                 <select class="form-control" style="width:400px">
                                     @foreach($divisions as $div)
-                                        <option value="{{$div->div_id}}">{{$div->name}}</option>
+                                    <option value="{{$div->div_id}}">{{$div->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -109,48 +109,9 @@
 
                 </div>
             </div>
-            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0" style="width:200px; float:right">
-                <button class="btn btn-block btn-info" type="button" data-toggle="modal" data-target="#adminView"><strong>ADMIN</strong></button>
-            </div>
 
         </div>
     </div>
-
-
-
-
-    <form action="{{ route('admin-add-div') }}" method="POST">
-        @csrf
-
-        <div class="modal fade" id="adminView" tabindex="-1" role="dialog" aria-labelledby="smallModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5>ADD NEW DIVISION</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-
-
-
-                    <div class="modal-body" id="smallBody">
-                        <div>
-                            <!-- the result to be displayed apply here -->
-                            <label for="nf-email">Division Name</label>
-                            <input class="form-control" name="divname"><br>
-                            <button class="btn btn-sm btn-primary" type="submit" style="float:right"> ADD</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </form>
-
-
 
 
 
