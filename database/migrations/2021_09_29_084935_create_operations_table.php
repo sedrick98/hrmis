@@ -16,6 +16,7 @@ class CreateOperationsTable extends Migration
         Schema::create('operations', function (Blueprint $table) {
             $table->integer('ipcr')->unsigned();
             $table->foreign('ipcr')->references('ipcr_id')->on('ipcrs');
+            $table->string('type');
             $table->string('output');
             $table->string('success_indicator');
             $table->string('actual_accomplishment');

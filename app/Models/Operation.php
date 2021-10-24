@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Operation extends Model
 {
-    use HasFactory;
+    protected $guarded = [];
+    protected $fillable = ['ipcr','output','success_indicator','actual_accomplishment'];
 }

@@ -18,9 +18,8 @@ class CreateEmployeesTable extends Migration
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
-            $table->integer('division')->unsigned();
-            $table->foreign('division')->references('div_id')->on('divisions');
-            $table->string('role');
+            $table->string('division');
+            //$table->string('role');
         });
     }
 
