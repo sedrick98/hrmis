@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDivisionsTable extends Migration
+class CreateDivisionSectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateDivisionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('divisions', function (Blueprint $table) {
+        Schema::create('division_sections', function (Blueprint $table) {
             $table->id();
+            $table->integer('division_id');
             $table->string('name');
             $table->string('abbr');
-            $table->enum('active', [0, 1]);
+            $table->string('office_site');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateDivisionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('divisions');
+        Schema::dropIfExists('division_sections');
     }
 }

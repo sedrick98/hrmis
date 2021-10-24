@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->hasOne(RoleUser::class);
     }
 
+    public function signatory() {
+        return $this->hasOne(Signatory::class);
+    }
+
     public function roleName() {
         $role_id = $this->role->role_id;
         return Role::find($role_id)->name;
@@ -39,5 +43,13 @@ class User extends Authenticatable
     public function roles() {
         return $this->hasMany(RoleUser::class);
     }
+
+    // public function divisionName() {
+    //     if ($this->signatory()->count() > 0) {
+    //         return Division::find($this->signatory->division_section_id)->name;
+    //     } else {
+    //         return '';
+    //     }
+    // }
 
 }
