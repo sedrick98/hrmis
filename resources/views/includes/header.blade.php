@@ -1,5 +1,6 @@
 <header class="c-header c-header-light c-header-fixed c-header-with-subheader shadow-sm">
     <div class="c-header-nav ml-auto">
+        {{ Auth::user()->username }}
     </div>
     <ul class="c-header-nav ml-left mr-4">
         <li class="c-header-nav-item dropdown">

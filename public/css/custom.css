@@ -1,0 +1,38 @@
+.bootstrap-tagsinput {
+    padding: 10px 10px !important;
+}
+
+span.tag.label.label-info {
+    color: black;
+    padding: 5px 10px;
+    background-color: #e7e7e7;
+    border-radius: 5px;
+}
+
+.leave-status h4 {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.status-pending-icon {
+    color: var(--warning);
+    font-size: 40px;
+    margin-right: 10px;
+}
+
+.status-rejected-icon {
+    color: var(--danger);
+    font-size: 40px;
+    margin-right: 10px;
+}
+
+.status-success-icon {
+    color: var(--success);
+    font-size: 40px;
+    margin-right: 10px;
+}
+
+.de-elevate-card {
+    border: 1px solid silver;
+    background-color: #eaedef;
+}

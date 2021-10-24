@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Division;
 use App\Models\Permission;
 use App\Models\RolePermission;
+use PharIo\Manifest\CopyrightInformation;
 
 class AdminController extends Controller
 {
@@ -113,7 +114,7 @@ class AdminController extends Controller
 
         Permission::create([
             'name' => $name
-        ]);
+        ]); 
 
         return redirect()
             ->route('admin-permissions')
@@ -133,36 +134,10 @@ class AdminController extends Controller
             ->with('update_success', 'Permission Name Updated');
     }
 
-    public function ipcrView()
-    {
-        return view('admin.ipcrview');
-    }
+    
+   
 
-    public function ipcrCreate()
-    {
-        return view('admin.ipcr');
-    }
 
-    public function ipcrForm()
-    {
-        return view('admin.ipcrform');
-    }
 
-    public function addDiv(Request $req)
-    {
-        $division = new Division;
-        $division->name = $req->divname;
 
-        $division->save();
-
-        //return redirect()->route('ipcr-create');
-        //return back()->with('success','Item created successfully!');
-
-    }
-
-    public function index()
-    {
-        $data = Division::all();
-        return view('admin.ipcr',['data'=>$data]);
-    }
 }
