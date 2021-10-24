@@ -22,7 +22,7 @@
             </div>
             <div class="card-body">
 
-                <div class="card" style="">
+                <div class="card">
 
                     <table class="table table-responsive-sm table-striped">
                         <thead>
@@ -61,7 +61,7 @@
             <div class="card-header">
                 <h3>ROLES</h3>
             </div>
-            <div class="card-body" style="height:250px">
+            <div class="card-body">
 
                 <div class="card" >
 
