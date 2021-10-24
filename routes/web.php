@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\SignatoryController;
+use App\Http\Controllers\IPCRController;
 
 /*
 |--------------------------------------------------------------------------
