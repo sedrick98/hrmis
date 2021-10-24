@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <body>
 
     @include('includes/sidebar')
@@ -140,13 +139,13 @@
                                 <input class="form-control" id="exampleFormControlInput1" name="other_leave_addl_reason">
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="other_leave_addl_reason_type" id="exampleRadios1" value="Monetization of Leave Credits">
+                                <input class="form-check-input" type="checkbox" name="other_leave_addl_reason_type" id="exampleRadios1" value="Monetization of Leave Credits">
                                 <label class="form-check-label" for="">
                                     Monetization of Leave Credits
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="other_leave_addl_reason_type" id="exampleRadios2" value="Terminal Leave">
+                                <input class="form-check-input" type="checkbox" name="other_leave_addl_reason_type" id="exampleRadios2" value="Terminal Leave">
                                 <label class="form-check-label" for="">
                                     Terminal Leave
                                 </label>
@@ -161,16 +160,13 @@
                 <div class="card p-3 shadow-sm">
                     <h3>Number of working days applied for</h3>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Dates</label>
-                        <input class="form-control" name="dates" id="dateRangePicker">
-                        <br>
                         <div class="form-group" id="countrySpecification">
-                            <label for="exampleFormControlInput1">Number of Working Days:</label>
-                            <input class="form-control" id="exampleFormControlInput1" name="number_of_days">
+                            <label for="exampleFormControlInput1">Select Leave Dates</label>
+                            <input class="form-control" id="datePick" type="text" autocomplete="off">
                         </div>
-
-                        <input type="hidden" id="start_date" name="start_date">
-                        <input type="hidden" id="end_date" name="end_date">
+                        <h4>Days Selected: <span id="numberOfDays" style="color:green"></span></h4>
+                        <input type="hidden" name="number_of_days">
+                        <input type="hidden" name="leave_dates">
                     </div>
                 </div>
             </div>
@@ -207,33 +203,16 @@
 
 </body>
 
-@endsection
-
-@section('before-scripts')
-<script>
-    $('input[name="dates"]').daterangepicker({
-        "locale": {
-            "format": "YYYY-MM-DD",
-        }
-    });
-
-    $('input[name="dates"]').change(function() {
-        let dates = $(this).val();
-        [startDate, endDate] = dates.split(' - ');
-        $('#start_date').val(startDate);
-        $('#end_date').val(endDate);
-        console.log(startDate, endDate);
-    });
-</script>
-@endsection('before-scripts')
-
-@section('after-scripts')
 <script>
     const hideAddtlFields = () => {
         $('#vacationAddtlFields, #sickAddtlFields').hide();
     }
 
-    $(document).ready(() => {
+    jQuery(document).ready(function () {
+        $('#datePick').multiDatesPicker({
+            dateFormat: 'yy-mm-dd',
+            separator: ' | '
+        });
         $('.addLeaveDetails').hide();
 
         $('#vacationTypeOptions').change(function() {
@@ -244,31 +223,14 @@
             }
         });
 
-        // hideAddtlFields();
-        // $('#countrySpecification').hide();
-
-        // $('#vacationTypeOptions').change(function() {
-        //     let selected = $(this).val();
-
-        //     if (selected === 'Vacation') {
-        //         hideAddtlFields();
-        //         $('#vacationAddtlFields').show();
-        //     } else if (selected === 'Sick') {
-        //         hideAddtlFields();
-        //         $('#sickAddtlFields').show();
-        //     } else {
-        //         hideAddtlFields();
-        //     }
-        // });
-
-        // $('input[name="is_local"]').change(function() {
-        //     console.log($(this).val());
-        //     if ($(this).val() == 0) {
-        //         $('#countrySpecification').show();
-        //     } else {
-        //         $('#countrySpecification').hide();
-        //     }
-        // });
+        $('#datePick').blur(function() {
+            $('#numberOfDays').html($(this).multiDatesPicker('getDates').length);
+            $('input[name="number_of_days"').val($(this).multiDatesPicker('getDates').length);
+            $('input[name="leave_dates"').val($(this).multiDatesPicker('getDates'));
+        });
+        
     });
 </script>
-@endsection('after-scripts')
+
+@endsection
+

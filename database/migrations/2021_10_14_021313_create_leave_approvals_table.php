@@ -17,8 +17,8 @@ class CreateLeaveApprovalsTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->int('leave_request_id');
-            $table->int('approving_user_id')->nullable();
+            $table->integer('leave_request_id');
+            $table->integer('approving_user_id')->nullable();
 
             $table->string('status');
             $table->string('approval_reason');

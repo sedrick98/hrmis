@@ -33,10 +33,23 @@ class CreateLeaveRequestTable extends Migration
             $table->string('other_leave_addl_reason')->nullable();
             $table->string('other_leave_addl_reason_type')->nullable();
 
-            $table->date('start_date');
-            $table->date('end_date');
             $table->integer('number_of_days');
             $table->string('commutation');
+
+            $table->enum('status', [
+                'pending', 
+                'approved', 
+                'rejected', 
+                'done'
+            ])->default('pending');
+            
+            $table->enum('current_action_role', [
+                'hr',
+                'ard - fasd',
+                'ard - division head',
+                'rd',
+                'completed'
+            ])->default('hr');
 
             $table->timestamps();
         });
