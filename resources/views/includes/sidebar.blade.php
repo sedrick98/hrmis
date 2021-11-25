@@ -48,7 +48,7 @@
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('ipcr-submitted') }}"><span class="c-sidebar-nav-icon"></span>Submitted</a></li>
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('ipcr-create') }}"><span class="c-sidebar-nav-icon"></span>Create</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span>For Approvals</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('ipcr-approval') }}"><span class="c-sidebar-nav-icon"></span>For Approval</a></li>
             </ul>
         </li>
         @endif
