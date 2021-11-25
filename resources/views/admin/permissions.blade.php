@@ -30,20 +30,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($permissions as $permission)
+                            @foreach ($permissions as $permission)
                             <tr>
                                 <td>{{ strtoupper($permission->name) }}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-primary"
-                                        data-name="{{ strtoupper($permission['name']) }}"
-                                        data-id="{{ $permission->id }}"
-                                        type="edit" onclick="updatePermission(this)"
-                                        data-toggle="modal" data-target="#exampleModal"
-                                        >Edit
+                                    <button class="btn btn-sm btn-primary" data-name="{{ strtoupper($permission['name']) }}" data-id="{{ $permission->id }}" type="edit" onclick="updatePermission(this)" data-toggle="modal" data-target="#exampleModal">Edit
                                     </button>
                                 </td>
                             </tr>
-                        @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -53,22 +48,22 @@
 
 
     <form action="{{ route('admin-add-permission') }}" method="post">
-    <div class="card" style="float: left; margin-left:5%; width:50%">
-        <div class="card-header"><strong>ADD NEW PERMISSION @if (session('create_success')) <span style="margin-left: 70px; color: green;"> {{ session('create_success') }}</span>@endif</strong></div>
-        <div class="card-body">
-            @csrf
-            <div class="form-group">
-                <label for="nf-email">Permission Name</label>
-                <input class="form-control" id="rolename" name="name">
+        <div class="card" style="float: left; margin-left:5%; width:50%">
+            <div class="card-header"><strong>ADD NEW PERMISSION @if (session('create_success')) <span style="margin-left: 70px; color: green;"> {{ session('create_success') }}</span>@endif</strong></div>
+            <div class="card-body">
+                @csrf
+                <div class="form-group">
+                    <label for="nf-email">Permission Name</label>
+                    <input class="form-control" id="rolename" name="name">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
             </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
-        </div>
-    </div>
     </form>
 
-    
+
     <!-- <div class="card" style="float: left; margin-left:5%; width:50%">
         <div class="card-header"><strong>UPDATE PERMISSION</strong></div>
         <div class="card-body">
@@ -105,27 +100,27 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Permission</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            
-            <div class="modal-body">
-            <form action="{{ route('admin-update-permission') }}" method="post">
-                @csrf
-                <input type="hidden" name="permission_id" id="updatePermissionID" value="">
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="select1">Permission Name</label>
-                    <div class="col-md-9">
-                    <input class="form-control" id="updatePermissionName" name="name">
-                    </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Permission</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-sm btn-primary" type="submit"> Update</button>
-            </div>
+
+                <div class="modal-body">
+                    <form action="{{ route('admin-update-permission') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="permission_id" id="updatePermissionID" value="">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="select1">Permission Name</label>
+                            <div class="col-md-9">
+                                <input class="form-control" id="updatePermissionName" name="name">
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-primary" type="submit"> Update</button>
+                </div>
             </div>
             </form>
         </div>

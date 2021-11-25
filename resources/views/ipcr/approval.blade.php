@@ -16,7 +16,7 @@
 
     <div class="card" style="margin:20px; margin-top:0px;">
         <div class="card-header">
-            <h3>IPCR - Submitted</h3>
+            <h3>IPCR - For Approval</h3>
         </div>
         <div class="card-body">
             <table class="table table-responsive-sm table-striped">
@@ -30,7 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($submitted as $info)
+                @foreach($submitted as $info)
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
@@ -41,14 +41,11 @@
                             <div class="row">
                                 <a class="btn btn-block btn-success active" 
                                 style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
-                                href="{{ url('edit/'.$info->id) }}"
-                                >View
+                                href="{{ url('rate/'.$info->id) }}"
+                                >Rate
                                 </a>
-                                <a class="btn btn-block btn-info active" 
-                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
-                                href="{ url('edit/'.$info->id) }}{"
-                                >Edit
-                                </a>
+
+                                
                             </div>
                         </td>
                     </tr>
@@ -92,10 +89,12 @@
                         <td>
                             <div class="row">
                                 <a class="btn btn-block btn-success active" 
-                                style="width:150px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
-                                href="{{ url('view/'.$info->id) }}"
-                                >EXPORT TO PDF
+                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
+                                href="{{ url('rate/'.$info->id) }}"
+                                >View
                                 </a>
+
+                                
                             </div>
                         </td>
                     </tr>
