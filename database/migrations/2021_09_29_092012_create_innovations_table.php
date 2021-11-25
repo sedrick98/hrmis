@@ -14,16 +14,16 @@ class CreateInnovationsTable extends Migration
     public function up()
     {
         Schema::create('innovations', function (Blueprint $table) {
-            $table->integer('ipcr')->unsigned();
-            $table->foreign('ipcr')->references('ipcr_id')->on('ipcrs');
-            $table->string('output');
-            $table->string('success_indicator');
-            $table->string('actual_accomplishment');
-            $table->integer('quality')->unsigned();
-            $table->integer('efficiency')->unsigned();
-            $table->integer('timeliness')->unsigned();
-            $table->integer('average')->unsigned();
-            $table->string('remarks');
+            $table->integer('id')->unsigned();
+            $table->foreign('id')->references('id')->on('ipcrs');
+            $table->string('i_output');
+            $table->string('i_success_indicator');
+            $table->string('i_actual_accomplishment');
+            $table->integer('i_quality')->unsigned();
+            $table->integer('i_efficiency')->unsigned();
+            $table->integer('i_timeliness')->unsigned();
+            $table->integer('i_average')->unsigned();
+            $table->string('i_remarks');
             $table->timestamps();
         });
     }

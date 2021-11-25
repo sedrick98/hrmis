@@ -14,16 +14,16 @@ class CreateSupporttoOperationsTable extends Migration
     public function up()
     {
         Schema::create('supportto_operations', function (Blueprint $table) {
-            $table->integer('ipcr')->unsigned();
-            $table->foreign('ipcr')->references('ipcr_id')->on('ipcrs');
-            $table->string('output');
-            $table->string('success_indicator');
-            $table->string('actual_accomplishment');
-            $table->integer('quality')->unsigned();
-            $table->integer('efficiency')->unsigned();
-            $table->integer('timeliness')->unsigned();
-            $table->integer('average')->unsigned();
-            $table->string('remarks');
+            $table->integer('id')->unsigned();
+            $table->foreign('id')->references('id')->on('ipcrs');
+            $table->string('s_output');
+            $table->string('s_success_indicator');
+            $table->string('s_actual_accomplishment');
+            $table->integer('s_quality')->unsigned();
+            $table->integer('s_efficiency')->unsigned();
+            $table->integer('s_timeliness')->unsigned();
+            $table->integer('s_average')->unsigned();
+            $table->string('s_remarks');
             $table->timestamps();
         });
     }

@@ -14,16 +14,16 @@ class CreateGenAdminServicesTable extends Migration
     public function up()
     {
         Schema::create('gen_admin_services', function (Blueprint $table) {
-            $table->integer('ipcr')->unsigned();
-            $table->foreign('ipcr')->references('ipcr_id')->on('ipcrs');
-            $table->string('output');
-            $table->string('success_indicator');
-            $table->string('actual_accomplishment');
-            $table->integer('quality')->unsigned();
-            $table->integer('efficiency')->unsigned();
-            $table->integer('timeliness')->unsigned();
-            $table->integer('average')->unsigned();
-            $table->string('remarks');
+            $table->integer('id')->unsigned();
+            $table->foreign('id')->references('id')->on('ipcrs');
+            $table->string('g_output');
+            $table->string('g_success_indicator');
+            $table->string('g_actual_accomplishment');
+            $table->integer('g_quality')->unsigned();
+            $table->integer('g_efficiency')->unsigned();
+            $table->integer('g_timeliness')->unsigned();
+            $table->integer('g_average')->unsigned();
+            $table->string('g_remarks');
             $table->timestamps();
         });
     }

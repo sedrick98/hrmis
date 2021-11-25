@@ -14,17 +14,17 @@ class CreateOperationsTable extends Migration
     public function up()
     {
         Schema::create('operations', function (Blueprint $table) {
-            $table->integer('ipcr')->unsigned();
-            $table->foreign('ipcr')->references('ipcr_id')->on('ipcrs');
-            $table->string('type');
-            $table->string('output');
-            $table->string('success_indicator');
-            $table->string('actual_accomplishment');
-            $table->integer('quality')->unsigned();
-            $table->integer('efficiency')->unsigned();
-            $table->integer('timeliness')->unsigned();
-            $table->integer('average')->unsigned();
-            $table->string('remarks');
+            $table->integer('id')->unsigned();
+            $table->foreign('id')->references('id')->on('ipcrs');
+            $table->string('o_type');
+            $table->string('o_output');
+            $table->string('o_success_indicator');
+            $table->string('o_actual_accomplishment');
+            $table->integer('o_quality')->unsigned();
+            $table->integer('o_efficiency')->unsigned();
+            $table->integer('o_timeliness')->unsigned();
+            $table->integer('o_average')->unsigned();
+            $table->string('o_remarks');
             $table->timestamps();
         });
     }
