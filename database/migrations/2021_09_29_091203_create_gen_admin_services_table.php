@@ -14,8 +14,9 @@ class CreateGenAdminServicesTable extends Migration
     public function up()
     {
         Schema::create('gen_admin_services', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
-            $table->foreign('id')->references('id')->on('ipcrs');
+            $table->increments('g_id');
+            $table->integer('ipcr')->unsigned();
+            $table->foreign('ipcr')->references('id')->on('ipcrs');
             $table->string('g_output');
             $table->string('g_success_indicator');
             $table->string('g_actual_accomplishment');

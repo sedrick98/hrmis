@@ -14,8 +14,9 @@ class CreateSupporttoOperationsTable extends Migration
     public function up()
     {
         Schema::create('supportto_operations', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
-            $table->foreign('id')->references('id')->on('ipcrs');
+            $table->increments('s_id');
+            $table->integer('ipcr')->unsigned();
+            $table->foreign('ipcr')->references('id')->on('ipcrs');
             $table->string('s_output');
             $table->string('s_success_indicator');
             $table->string('s_actual_accomplishment');

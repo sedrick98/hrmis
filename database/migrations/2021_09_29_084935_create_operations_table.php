@@ -14,8 +14,9 @@ class CreateOperationsTable extends Migration
     public function up()
     {
         Schema::create('operations', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
-            $table->foreign('id')->references('id')->on('ipcrs');
+            $table->increments('o_id');
+            $table->integer('ipcr')->unsigned();
+            $table->foreign('ipcr')->references('id')->on('ipcrs');
             $table->string('o_type');
             $table->string('o_output');
             $table->string('o_success_indicator');

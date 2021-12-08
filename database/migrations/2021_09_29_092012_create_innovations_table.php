@@ -14,8 +14,9 @@ class CreateInnovationsTable extends Migration
     public function up()
     {
         Schema::create('innovations', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
-            $table->foreign('id')->references('id')->on('ipcrs');
+            $table->increments('i_id');
+            $table->integer('ipcr')->unsigned();
+            $table->foreign('ipcr')->references('id')->on('ipcrs');
             $table->string('i_output');
             $table->string('i_success_indicator');
             $table->string('i_actual_accomplishment');
