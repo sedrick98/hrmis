@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class GenAdminService extends Model
 {
-    use HasFactory;
+    protected $guarded = [];
+    protected $fillable = ['g_id', 'g_output', 'g_success_indicator', 'g_actual_accomplishment', 'g_remarks'];
 
     public function ipcr()
     {

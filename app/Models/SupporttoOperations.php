@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SupporttoOperations extends Model
 {
-    use HasFactory;
+    protected $guarded = [];
+    protected $fillable = ['s_id', 's_output', 's_success_indicator', 's_actual_accomplishment', 's_remarks'];
 
     public function ipcr()
     {

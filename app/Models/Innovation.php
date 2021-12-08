@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Innovation extends Model
 {
-    use HasFactory;
+    protected $guarded = [];
+    protected $fillable = ['i_id', 'i_output', 'i_success_indicator', 'i_actual_accomplishment', 'i_remarks'];
 
     public function ipcr()
     {

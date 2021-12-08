@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class Operation extends Model
 {
     protected $guarded = [];
-    protected $fillable = ['ipcr', 'output', 'success_indicator', 'actual_accomplishment'];
+    protected $fillable = ['o_id', 'o_output', 'o_success_indicator', 'o_actual_accomplishment', 'o_remarks'];
 
     public function ipcr()
     {
         return $this->belongsTo(IPCR::class);
     }
+    
 }
