@@ -43,7 +43,7 @@
 
     @include('includes/sidebar')
 
-    <form action="" method="post" autocomplete="false">
+    <form action="{{ route('ipcr-rate') }}" method="post" autocomplete="false">
         @csrf
 
         @if (Session::has('success'))
@@ -155,14 +155,17 @@
                                     @foreach($operation as $operations)
                                     @if($operations->o_type=='a')
                                     <tr>
-                                        <td id="entry" style="text-align:left">{{$operations->o_output}}</td>
+                                        <td id="entry" style="text-align:left;">
+                                            <input type="hidden" name="a_id[]" value="{{$operations->o_id}}">
+                                            {{$operations->o_output}}
+                                        </td>
                                         <td id="entry" style="text-align:left">{{$operations->o_success_indicator}}</td>
                                         <td id="entry" style="text-align:left">{{$operations->o_actual_accomplishment}}</td>
-                                        <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
-                                        <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
-                                        <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
+                                        <td id="entry"><input type="number" name="i_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+                                        <td id="entry"><input type="number" name="i_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+                                        <td id="entry"><input type="number" name="i_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
                                         <td id="entry">
-                                            <textarea class="form-control" id="textarea-input" rows="2" required></textarea>
+                                            <textarea class="form-control" name="i_remarks[]" id="textarea-input" rows="2"></textarea>
                                         </td>
                                     </tr>
                                     @endif
@@ -208,14 +211,17 @@
                                     @foreach($operation as $operations)
                                     @if($operations->o_type=='b')
                                     <tr>
-                                        <td id="entry" style="text-align:left">{{$operations->o_output}}</td>
+                                        <td id="entry" style="text-align:left;">
+                                            <input type="hidden" name="b_id[]" value="{{$operations->o_id}}">
+                                            {{$operations->o_output}}
+                                        </td>
                                         <td id="entry" style="text-align:left">{{$operations->o_success_indicator}}</td>
                                         <td id="entry" style="text-align:left">{{$operations->o_actual_accomplishment}}</td>
-                                        <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
-                                        <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
-                                        <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
+                                        <td id="entry"><input type="number" name="ii_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+                                        <td id="entry"><input type="number" name="ii_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+                                        <td id="entry"><input type="number" name="ii_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
                                         <td id="entry">
-                                            <textarea class="form-control" id="textarea-input" rows="2" required></textarea>
+                                            <textarea class="form-control" name="ii_remarks[]" id="textarea-input" rows="2"></textarea>
                                         </td>
                                     </tr>
                                     @endif
@@ -261,14 +267,17 @@
 
                                         @foreach($gen as $gens)
                                         <tr>
-                                            <td id="entry" style="text-align:left">{{$gens->g_output}}</td>
+                                            <td id="entry" style="text-align:left;">
+                                                <input type="hidden" name="g_id[]" value="{{$gens->g_id}}">
+                                                {{$gens->g_output}}
+                                            </td>
                                             <td id="entry" style="text-align:left">{{$gens->g_success_indicator}}</td>
                                             <td id="entry" style="text-align:left">{{$gens->g_actual_accomplishment}}</td>
-                                            <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
-                                            <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
-                                            <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
+                                            <td id="entry"><input type="number" name="g_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+                                            <td id="entry"><input type="number" name="g_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+                                            <td id="entry"><input type="number" name="g_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
                                             <td id="entry">
-                                                <textarea class="form-control" id="textarea-input" rows="2" required></textarea>
+                                                <textarea class="form-control" name="g_remarks[]" id="textarea-input" rows="2"></textarea>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -317,14 +326,17 @@
 
                                         @foreach($support as $supports)
                                         <tr>
-                                            <td id="entry" style="text-align:left">{{$supports->s_output}}</td>
+                                            <td id="entry" style="text-align:left;">
+                                                <input type="hidden" name="s_id[]" value="{{$supports->s_id}}">
+                                                {{$supports->s_output}}
+                                            </td>
                                             <td id="entry" style="text-align:left">{{$supports->s_success_indicator}}</td>
                                             <td id="entry" style="text-align:left">{{$supports->s_actual_accomplishment}}</td>
-                                            <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
-                                            <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
-                                            <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
+                                            <td id="entry"><input type="number" name="s_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+                                            <td id="entry"><input type="number" name="s_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+                                            <td id="entry"><input type="number" name="s_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
                                             <td id="entry">
-                                                <textarea class="form-control" id="textarea-input" rows="2" required></textarea>
+                                                <textarea class="form-control" name="s_remarks[]" id="textarea-input" rows="2"></textarea>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -375,14 +387,17 @@
 
                                         @foreach($innovation as $innovations)
                                         <tr>
-                                            <td id="entry" style="text-align:left">{{$innovations->i_output}}</td>
+                                            <td id="entry" style="text-align:left;">
+                                                <input type="hidden" name="i_id[]" value="{{$innovations->i_id}}">
+                                                {{$innovations->i_output}}
+                                            </td>
                                             <td id="entry" style="text-align:left">{{$innovations->i_success_indicator}}</td>
                                             <td id="entry" style="text-align:left">{{$innovations->i_actual_accomplishment}}</td>
-                                            <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
-                                            <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
-                                            <td id="entry"><input type="number" min="1" max="5" style="width:32px; height: 40px"></td>
+                                            <td id="entry"><input type="number" name="nn_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+                                            <td id="entry"><input type="number" name="nn_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+                                            <td id="entry"><input type="number" name="nn_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
                                             <td id="entry">
-                                                <textarea class="form-control" id="textarea-input" rows="2" required></textarea>
+                                                <textarea class="form-control" name="nn_remarks[]" id="textarea-input" rows="2"></textarea>
                                             </td>
                                         </tr>
                                         @endforeach

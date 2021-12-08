@@ -6,13 +6,20 @@
 @endsection
 
 @section('content')
-
+ 
 
 <html>
 
 
 
 <body>
+
+    @if (Session::has('success'))
+    <div class="alert alert-block" style="border-color:#2E8B57; background-color:#98FB98; margin:20px; margin-top:0px; box-shadow: 5px 10px 8px #888888;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>{{ Session::get('success') }}</strong>
+    </div>
+    @endif
 
     <div class="card" style="margin:20px; margin-top:0px;">
         <div class="card-header">
@@ -30,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($submitted as $info)
+                    @foreach($submitted as $info)
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
@@ -39,13 +46,10 @@
 
                         <td>
                             <div class="row">
-                                <a class="btn btn-block btn-success active" 
-                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
-                                href="{{ url('rate/'.$info->id) }}"
-                                >Rate
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('rate/'.$info->id) }}">Rate
                                 </a>
 
-                                
+
                             </div>
                         </td>
                     </tr>
@@ -79,7 +83,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($submitted as $info)
+                    @foreach($submitted as $info)
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
@@ -90,11 +94,11 @@
                             <div class="row">
                                 <a class="btn btn-block btn-success active" 
                                 style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
-                                href="{{ url('rate/'.$info->id) }}"
-                                >View
+                                href="{{ url('review/'.$info->id) }}">
+                                Review
                                 </a>
 
-                                
+
                             </div>
                         </td>
                     </tr>

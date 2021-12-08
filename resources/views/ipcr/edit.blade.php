@@ -53,7 +53,7 @@
         </div>
         @endif
 
-        
+
         <!-- <input type="hidden" name="id" value="{{$info->employee}}"> -->
 
         <div class="card" style="margin:15px; margin-top:0px">
@@ -66,19 +66,19 @@
                         <div class="row">
                             <div class="form-group col-sm-4">
                                 <label for="ccmonth">First Name</label>
-                                <input class="form-control" type="text" name="first_name" value="{{$form->first()->first_name}}" required>
+                                <input class="form-control" type="text" name="first_name" value="{{$form->first()->first_name}}" readonly="readonly">
                                 </select>
                             </div>
                             <div class="form-group col-sm-4">
                                 <label for="ccyear">Last Name</label>
-                                <input class="form-control" type="text" name="last_name" value="{{$form->first()->last_name}}" required>
+                                <input class="form-control" type="text" name="last_name" value="{{$form->first()->last_name}}" readonly="readonly">
 
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="cvv">Middle Initial</label>
-                                    <input class="form-control" type="text" name="middle_name" value="{{$form->first()->middle_name}}" required>
+                                    <input class="form-control" type="text" name="middle_name" value="{{$form->first()->middle_name}}" readonly="readonly">
                                 </div>
                             </div>
                         </div>
@@ -86,13 +86,13 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="ccnumber">Division</label>
-                                    <input class="form-control" name="division" type="text" value="{{$form->first()->division}}" style="width:400px" required>
+                                    <input class="form-control" name="division" type="text" value="{{$form->first()->division}}" style="width:400px" readonly="readonly">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
 
                 <div>
                     <h3>A. OPERATIONS</h3>
@@ -106,10 +106,10 @@
                             <hr>
                         </div>
                         <div class="card-body" style="background-color:#F5F5F5; border-radius:10px; padding:auto">
-                            <table style="border-collapse: collapse">
+                            <table style="border-collapse: collapse; margin-left:40px;">
                                 <thead>
                                     <tr>
-                                        <th>OUTPUT</th>
+                                        <th colspan="2">OUTPUT</th>
                                         <th>SUCCESS INDICATOR</th>
                                         <th>ACTUAL ACCOMPLISHMENTS</th>
                                     </tr>
@@ -117,9 +117,12 @@
                                 <tbody id="ops">
                                     @foreach($operation as $operations)
                                     @if($operations->o_type=='a')
+
                                     <tr>
+                                        <td>
+                                            <input type="hidden" name="a_id[]" value="{{$operations->o_id}}">
+                                        </td>
                                         <td style="padding-right:20px">
-                                        <input type="hidden" name="id[]" value="{{$operations->o_ipcr}}">
                                             <textarea class="form-control" name="i_output[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_output}}</textarea>
                                         </td>
                                         <td style="padding-right:20px">
@@ -128,11 +131,7 @@
                                         <td style="padding-right:20px">
                                             <textarea class="form-control" name="i_accomplish[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_actual_accomplishment}}</textarea>
                                         </td>
-                                        <td>
-                                            <div>
-                                                <button type="button" class="btn btn-primary" id="add_btn" style="padding:0px; width:30px"><i class="c-icon cil-plus"></i></button>
-                                            </div>
-                                        </td>
+
                                     </tr>
                                     @endif
                                     @endforeach
@@ -150,10 +149,10 @@
                             </div>
                         </div>
                         <div class="card-body" style="background-color:#F5F5F5;  border-radius:10px; padding:auto; margin-left:10px;margin-right:10px;">
-                            <table style="border-collapse: collapse">
+                            <table style="border-collapse: collapse; margin-left:40px;">
                                 <thead>
                                     <tr>
-                                        <th>OUTPUT</th>
+                                        <th colspan="2">OUTPUT</th>
                                         <th>SUCCESS INDICATOR</th>
                                         <th>ACTUAL ACCOMPLISHMENTS</th>
                                     </tr>
@@ -162,20 +161,19 @@
                                     @foreach($operation as $operations)
                                     @if($operations->o_type=='b')
                                     <tr>
-                                        <td style="padding-right:20px">
-                                            <textarea class="form-control" id="textarea-input" name="ii_output[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_output}}</textarea>
-                                        </td>
-                                        <td style="padding-right:20px">
-                                            <textarea class="form-control" id="textarea-input" name="ii_indicator[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_success_indicator}}</textarea>
-                                        </td>
-                                        <td style="padding-right:20px">
-                                            <textarea class="form-control" id="textarea-input" name="ii_accomplish[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_actual_accomplishment}}</textarea>
-                                        </td>
                                         <td>
-                                            <div>
-                                                <button type="button" class="btn btn-primary" id="add_ii" style="padding:0px; width:30px"><i class="c-icon cil-plus"></i></button>
-                                            </div>
+                                            <input type="hidden" name="b_id[]" value="{{$operations->o_id}}">
                                         </td>
+                                        <td style="padding-right:20px">
+                                            <textarea class="form-control" id="textarea-input" name="ii_output[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_output}}</textarea>
+                                        </td>
+                                        <td style="padding-right:20px">
+                                            <textarea class="form-control" id="textarea-input" name="ii_indicator[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_success_indicator}}</textarea>
+                                        </td>
+                                        <td style="padding-right:20px">
+                                            <textarea class="form-control" id="textarea-input" name="ii_accomplish[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_actual_accomplishment}}</textarea>
+                                        </td>
+
                                     </tr>
                                     @endif
                                     @endforeach
@@ -194,10 +192,10 @@
                     <div>
                         <div class="container">
                             <div class="card-body" style="background-color:#F5F5F5; border-radius:10px; padding:auto">
-                                <table style="border-collapse: collapse">
+                                <table style="border-collapse: collapse; margin-left:40px;">
                                     <thead>
                                         <tr>
-                                            <th>OUTPUT</th>
+                                            <th colspan="2">OUTPUT</th>
                                             <th>SUCCESS INDICATOR</th>
                                             <th>ACTUAL ACCOMPLISHMENTS</th>
                                         </tr>
@@ -205,20 +203,19 @@
                                     <tbody id="bb">
                                         @foreach($gen as $gens)
                                         <tr>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="bb_output[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_output}}</textarea>
-                                            </td>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="bb_indicator[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_success_indicator}}</textarea>
-                                            </td>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="bb_accomplish[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_actual_accomplishment}}</textarea>
-                                            </td>
                                             <td>
-                                                <div>
-                                                    <button type="button" class="btn btn-primary" id="add_bb" style="padding:0px; width:30px"><i class="c-icon cil-plus"></i></button>
-                                                </div>
+                                                <input type="hidden" name="g_id[]" value="{{$gens->g_id}}">
                                             </td>
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="bb_output[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_output}}</textarea>
+                                            </td>
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="bb_indicator[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_success_indicator}}</textarea>
+                                            </td>
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="bb_accomplish[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_actual_accomplishment}}</textarea>
+                                            </td>
+
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -237,10 +234,10 @@
                     <div>
                         <div class="container">
                             <div class="card-body" style="background-color:#F5F5F5; border-radius:10px; padding:auto">
-                                <table style="border-collapse: collapse">
+                                <table style="border-collapse: collapse; margin-left:40px;">
                                     <thead>
                                         <tr>
-                                            <th>OUTPUT</th>
+                                            <th colspan="2">OUTPUT</th>
                                             <th>SUCCESS INDICATOR</th>
                                             <th>ACTUAL ACCOMPLISHMENTS</th>
                                         </tr>
@@ -248,20 +245,19 @@
                                     <tbody id="ss">
                                         @foreach($support as $supports)
                                         <tr>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="ss_output[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_output}}</textarea>
-                                            </td>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="ss_indicator[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_success_indicator}}</textarea>
-                                            </td>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="ss_accomplish[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_actual_accomplishment}}</textarea>
-                                            </td>
                                             <td>
-                                                <div>
-                                                    <button type="button" class="btn btn-primary" id="add_ss" style="padding:0px; width:30px"><i class="c-icon cil-plus"></i></button>
-                                                </div>
+                                                <input type="hidden" name="s_id[]" value="{{$supports->s_id}}">
                                             </td>
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="ss_output[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_output}}</textarea>
+                                            </td>
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="ss_indicator[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_success_indicator}}</textarea>
+                                            </td>
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="ss_accomplish[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_actual_accomplishment}}</textarea>
+                                            </td>
+
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -280,10 +276,10 @@
                     <div>
                         <div class="container">
                             <div class="card-body" style="background-color:#F5F5F5; border-radius:10px; padding:auto">
-                                <table style="border-collapse: collapse">
+                                <table style="border-collapse: collapse; margin-left:40px;">
                                     <thead>
                                         <tr>
-                                            <th>OUTPUT</th>
+                                            <th colspan="2">OUTPUT</th>
                                             <th>SUCCESS INDICATOR</th>
                                             <th>ACTUAL ACCOMPLISHMENTS</th>
                                         </tr>
@@ -291,20 +287,19 @@
                                     <tbody id="nn">
                                         @foreach($innovation as $innovations)
                                         <tr>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="nn_output[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_output}}</textarea>
-                                            </td>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="nn_indicator[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_success_indicator}}</textarea>
-                                            </td>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="nn_accomplish[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_actual_accomplishment}}</textarea>
-                                            </td>
                                             <td>
-                                                <div style=>
-                                                    <button type="button" class="btn btn-primary" id="add_nn" style="padding:0px; width:30px"><i class="c-icon cil-plus"></i></button>
-                                                </div>
+                                                <input type="hidden" name="i_id[]" value="{{$innovations->i_id}}">
                                             </td>
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="nn_output[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_output}}</textarea>
+                                            </td>
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="nn_indicator[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_success_indicator}}</textarea>
+                                            </td>
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="nn_accomplish[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_actual_accomplishment}}</textarea>
+                                            </td>
+
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -369,108 +364,5 @@
 
 </html>
 
-
-@endsection
-
-
-@section('after-scripts')
-<script>
-    var i = 0;
-    $("#add_btn").click(function() {
-        ++i;
-        $("#ops").append('<tr><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="i_output[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="i_indicator[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="i_accomplish[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td><button type="button" class="btn btn-danger" id="remove_btn" style="padding:0px; width:30px"><i class="c-icon cil-x"></i></button></td></tr>')
-    });
-
-    $("#add_ii").click(function() {
-        ++i;
-        $("#ii").append('<tr><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="ii_output[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="ii_indicator[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="ii_accomplish[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td><button type="button" class="btn btn-danger" id="remove_btn" style="padding:0px; width:30px"><i class="c-icon cil-x"></i></button></td></tr>')
-    });
-
-    $(document).on('click', '#remove_btn', function() {
-        $(this).closest('tr').remove();
-    });
-</script>
-
-<script>
-    $("#add_bb").click(function() {
-        ++i;
-        $("#bb").append('<tr><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="bb_output[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="bb_indicator[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="bb_accomplish[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td><button type="button" class="btn btn-danger" id="remove_btn" style="padding:0px; width:30px"><i class="c-icon cil-x"></i></button></td></tr>')
-
-    });
-
-    $(document).on('click', '#remove_btn', function() {
-        $(this).closest('tr').remove();
-    });
-
-    $("#add_bb").click(function() {
-        var count = document.getElementById('bb').rows.length;
-        if (count == 10) {
-            document.getElementById('add_bb').disabled = true;
-        } else {
-            document.getElementById('add_bb').disabled = false;
-        }
-    });
-
-    $(document).on('click', '#remove_btn', function() {
-        var count = document.getElementById('bb').rows.length;
-        if (count != 5) {
-            document.getElementById('add_bb').disabled = false;
-        }
-    });
-</script>
-
-<script>
-    $("#add_ss").click(function() {
-        ++i;
-        $("#ss").append('<tr><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="ss_output[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="ss_indicator[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="ss_accomplish[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td><button type="button" class="btn btn-danger" id="remove_btn" style="padding:0px; width:30px"><i class="c-icon cil-x"></i></button></td></tr>')
-    });
-
-    $(document).on('click', '#remove_btn', function() {
-        $(this).closest('tr').remove();
-    });
-
-    $("#add_ss").click(function() {
-        var count = document.getElementById('ss').rows.length;
-        if (count == 10) {
-            document.getElementById('add_ss').disabled = true;
-        } else {
-            document.getElementById('add_ss').disabled = false;
-        }
-    });
-
-    $(document).on('click', '#remove_btn', function() {
-        var count = document.getElementById('ss').rows.length;
-        if (count != 5) {
-            document.getElementById('add_ss').disabled = false;
-        }
-    });
-</script>
-
-<script>
-    $("#add_nn").click(function() {
-        ++i;
-        $("#nn").append('<tr><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="nn_output[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="nn_indicator[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td style="padding-right:20px"><textarea class="form-control" id="textarea-input" name="nn_accomplish[' + i + ']" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required></textarea></td><td><button type="button" class="btn btn-danger" id="remove_btn" style="padding:0px; width:30px"><i class="c-icon cil-x"></i></button></td></tr>')
-    });
-
-    $(document).on('click', '#remove_btn', function() {
-        $(this).closest('tr').remove();
-    });
-
-    $("#add_nn").click(function() {
-        var count = document.getElementById('nn').rows.length;
-        if (count == 10) {
-            document.getElementById('add_nn').disabled = true;
-        } else {
-            document.getElementById('add_nn').disabled = false;
-        }
-    });
-
-    $(document).on('click', '#remove_btn', function() {
-        var count = document.getElementById('nn').rows.length;
-        if (count != 5) {
-            document.getElementById('add_nn').disabled = false;
-        }
-    });
-</script>
 
 @endsection

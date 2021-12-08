@@ -59,24 +59,24 @@
                 <h3>INDIVIDUAL PERFORMANCE COMMITMENT AND REVIEW (IPCR) FORM</h3>
             </div>
             <div class="card-body">
-                <div class="jumbotron jumbotron-fluid" style="padding:20px; background-color:lightblue; border-radius: 10px; box-shadow: 5px 10px 8px #888888;">
+                <div class="jumbotron jumbotron-fluid" style="padding:20px; background-color:#E6E6FA; border-radius: 10px; box-shadow: 5px 10px 8px #888888;">
                     <div class="container">
                         <div class="row">
                             <div class="form-group col-sm-4">
                                 <label for="ccmonth">First Name</label>
-                                <input class="form-control" type="text" name="first_name" placeholder="enter first name" required>
+                                <input class="form-control" type="text" name="first_name" value="{{strtoupper(Auth::user()->first_name)}}" readonly="readonly">
                                 </select>
                             </div>
                             <div class="form-group col-sm-4">
                                 <label for="ccyear">Last Name</label>
-                                <input class="form-control" type="text" name="last_name" placeholder="enter last name" required>
+                                <input class="form-control" type="text" name="last_name"  value="{{strtoupper(Auth::user()->last_name)}}" readonly="readonly">
 
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="cvv">Middle Initial</label>
-                                    <input class="form-control" type="text" name="middle_name" placeholder="enter middle name" required>
+                                    <input class="form-control" type="text" name="middle_name"  value="{{strtoupper(Auth::user()->middle_name)}}" readonly="readonly">
                                 </div>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="ccnumber">Division</label>
-                                    <input class="form-control" name="division" type="text" placeholder="enter division name" style="width:400px" required>
+                                    <input class="form-control" name="division" type="text" value="{{strtoupper(Auth::user()->division)}}" readonly="readonly" style="width:400px" required>
                                 </div>
                             </div>
                         </div>
