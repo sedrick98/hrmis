@@ -45,6 +45,16 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="street">Division</label>
+                        <select class="custom-select custom-select-lg mb-3" name="division">
+                            <option selected>Select Division</option>
+                            @foreach ($div as $divs)
+                                <option value="{{ $divs->abbr }}">{{ strtoupper($divs->abbr) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <button type="submit" class="btn btn-primary mb-2">Submit</button>
                     <button type="reset" class="btn btn-primary mb-2">Reset</button>
                 </div>

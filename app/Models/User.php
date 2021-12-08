@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'middle_name', 'username', 'email', 'password',
+        'first_name', 'last_name', 'middle_name', 'username', 'email', 'division', 'password',
     ];
 
     /**
@@ -29,6 +29,10 @@ class User extends Authenticatable
 
     public function role() {
         return $this->hasOne(RoleUser::class);
+    }
+
+    public function division(){
+        return $this->hasOne(Division::class);
     }
 
     public function signatory() {

@@ -32,6 +32,7 @@
                                 <th>Middle Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
+                                <th>Division</th>
                                 <th>Role</th>
                             </tr>
                         </thead>
@@ -43,6 +44,7 @@
                                     <td>{{ $user->middle_name }}</td>
                                     <td>{{ $user->last_name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->division }}</td>
                                     <td><span class="badge badge-success">{{ strtoupper($user->roleName()) }}</span></td>   
                                 </tr>
                             @endforeach
