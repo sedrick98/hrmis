@@ -48,9 +48,7 @@ class AdminController extends Controller
 
     public function addUser()
     {
-        return view('admin.addUser', [
-            'roles' => Role::all()
-        ]);
+        return view('admin.addUser', ['roles' => Role::all()], ['div' => Division::all()]);
     }
 
     public function roles()
@@ -114,7 +112,7 @@ class AdminController extends Controller
 
         Permission::create([
             'name' => $name
-        ]); 
+        ]);
 
         return redirect()
             ->route('admin-permissions')
@@ -133,11 +131,4 @@ class AdminController extends Controller
             ->route('admin-permissions')
             ->with('update_success', 'Permission Name Updated');
     }
-
-    
-   
-
-
-
-
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Division;
 use App\Models\RoleUser;
 
 class UserController extends Controller
@@ -19,7 +20,7 @@ class UserController extends Controller
         // POST
         if ($request->isMethod('post')) {
             $credentials = $request->validate([
-                'email' => ['required', 'email'],
+                'username' => ['required'],
                 'password' => ['required'],
             ]);
 
@@ -29,7 +30,7 @@ class UserController extends Controller
             }
     
             return back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
+                'username' => 'The provided credentials do not match our records.',
             ]);
     
         }
@@ -44,14 +45,17 @@ class UserController extends Controller
         // POST
         if ($request->isMethod('post')) {
             $role_selected = $request['role'];
+            $div=$request['division'];
 
             $form_data = $request->all();
+            
 
             $user = User::create([
                 'username' => $form_data['username'],
                 'first_name' => $form_data['first_name'],
                 'middle_name' => $form_data['middle_name'],
                 'last_name' => $form_data['last_name'],
+                'division' => $div,
                 'email' => $form_data['email'],
                 'password' => Hash::make($form_data['password']),
             ]);
