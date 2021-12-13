@@ -6,6 +6,7 @@
 
         @if (strtolower(Auth::user()->roleName()) == 'hr'
         || strtolower(Auth::user()->roleName()) == 'ard - fasd'
+        || strtolower(Auth::user()->roleName()) == 'ard - section head'
         || strtolower(Auth::user()->roleName()) == 'ard - division head'
         || strtolower(Auth::user()->roleName()) == 'rd')
         <!-- Leave Request - For approval -->
@@ -46,12 +47,27 @@
             <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="c-sidebar-nav-icon cil-file"></i>IPCR</a>
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('ipcr-submitted') }}"><span class="c-sidebar-nav-icon"></span>Submitted</a></li>
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('ipcr-create') }}"><span class="c-sidebar-nav-icon"></span>Create</a></li>
+                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('ipcr-submitted') }}"><span class="c-sidebar-nav-icon"></span>Submitted</a></li>
+            </ul>
+        </li>
+        @endif
+
+        @if (strtolower(Auth::user()->roleName()) == 'hr'
+        || strtolower(Auth::user()->roleName()) == 'ard - fasd'
+        || strtolower(Auth::user()->roleName()) == 'ard - section head'
+        || strtolower(Auth::user()->roleName()) == 'ard - division head'
+        || strtolower(Auth::user()->roleName()) == 'rd')
+        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+            <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                <i class="c-sidebar-nav-icon cil-file"></i>IPCR Approvals</a>
+            <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('ipcr-approval') }}"><span class="c-sidebar-nav-icon"></span>For Approval</a></li>
             </ul>
         </li>
         @endif
+
+        
 
         @if (strtolower(Auth::user()->roleName()) == 'admin')
         <!-- Accounts -->
