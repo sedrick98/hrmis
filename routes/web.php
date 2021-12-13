@@ -54,10 +54,20 @@ Route::post('signatory/divisions/assignments', [SignatoryController::class, 'ass
 // IPCR - GET
 Route::get('ipcr/submitted', [IPCRController::class, 'ipcrSubmitted'])->name('ipcr-submitted');
 Route::get('ipcr/create', [IPCRController::class, 'ipcrForm'])->name('ipcr-create');
-//Route::get('ipcr/form', [IPCRController::class, 'ipcrForm'])->name('ipcr-form');
+Route::get('ipcr/Approval', [IPCRController::class, 'ipcrApproval'])->name('ipcr-approval');
+Route::get('edit/{ipcr_id}', [IPCRController::class, 'displayData']);
+Route::get('rate/{ipcr_id}', [IPCRController::class, 'rateData']);
+Route::get('display/{ipcr_id}', [IPCRController::class, 'viewData']);
+//Route::get('/view/pdf', [IPCRController::class, 'createPDF'])->name('ipcr-pdf');
+Route::get('review/{ipcr_id}', [IPCRController::class, 'reviewData']);
+Route::get('view/{ipcr_id}', [IPCRController::class, 'displayPDF']);
+Route::get('delete/{ipcr_id}', [IPCRController::class, 'deleteIPCR']);  
 
 //IPCR - POST
 Route::post('ipcr/create', [IPCRController::class, 'saveIPCR'])->name('ipcr-save');
+Route::post('ipcr/update', [IPCRController::class, 'updateIPCR'])->name('ipcr-update');
+Route::post('ipcr/rate', [IPCRController::class, 'rateIPCR'])->name('ipcr-rate');
+Route::post('ipcr/approve', [IPCRController::class, 'approveIPCR'])->name('ipcr-approve');
 
 // LEAVE REQUEST - GET
 Route::get('leave/create', [LeaveController::class, 'create'])->name('leave-create');
