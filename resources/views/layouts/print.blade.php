@@ -24,7 +24,6 @@
         <main class="c-main">
             @yield('content')
         </main>
-        @include('includes.footer')
     </div>
 </div>
 
