@@ -32,27 +32,68 @@
                         <th>Title</th>
                         <th>Employee</th>
                         <th>Division</th>
+                        <th>Date Created</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($submitted as $info)
+                    @if($info->status == 'pending' && strtolower(Auth::user()->roleName()) == 'ard - section head')
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
                         <td>{{ strtoupper($info->division) }}</td>
+                        <td>{{ $info->created_at->format('m-d-Y') }}</td>
                         <td><span class="badge badge-warning">{{ strtoupper($info->status) }}</span></td>
 
                         <td>
                             <div class="row">
-                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('rate/'.$info->id) }}">Rate
+                                <a class="btn btn-block btn-success active" 
+                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
+                                href="{{ url('rate/'.$info->id) }}">
+                                Rate
                                 </a>
-
-
                             </div>
                         </td>
                     </tr>
+                    @elseif($info->status == 'approved:ard - section head' && strtolower(Auth::user()->roleName()) == 'ard - division head')
+                    <tr>
+                        <td>{{ strtoupper($info->title) }}</td>
+                        <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
+                        <td>{{ strtoupper($info->division) }}</td>
+                        <td>{{ $info->created_at->format('m-d-Y') }}</td>
+                        <td><span class="badge badge-success">{{ strtoupper($info->status) }}</span></td>
+
+                        <td>
+                            <div class="row">
+                            <a class="btn btn-block btn-success active" 
+                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
+                                href="{{ url('review/'.$info->id) }}">
+                                Review
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    @elseif($info->status == 'approved:ard - division head' && strtolower(Auth::user()->roleName()) == 'rd')
+                    <tr>
+                        <td>{{ strtoupper($info->title) }}</td>
+                        <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
+                        <td>{{ strtoupper($info->division) }}</td>
+                        <td>{{ $info->created_at->format('m-d-Y') }}</td>
+                        <td><span class="badge badge-success">{{ strtoupper($info->status) }}</span></td>
+
+                        <td>
+                            <div class="row">
+                            <a class="btn btn-block btn-success active" 
+                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
+                                href="{{ url('review/'.$info->id) }}">
+                                Review
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
@@ -69,7 +110,7 @@
 
     <div class="card" style="margin:20px;">
         <div class="card-header">
-            <h3>IPCR - Approved</h3>
+            <h3>IPCR - Rated</h3>
         </div>
         <div class="card-body">
             <table class="table table-responsive-sm table-striped">
@@ -78,30 +119,32 @@
                         <th>Title</th>
                         <th>Employee</th>
                         <th>Division</th>
+                        <th>Date Created</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($submitted as $info)
+                    @if($info->status != 'pending')
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
                         <td>{{ strtoupper($info->division) }}</td>
-                        <td><span class="badge badge-warning">{{ strtoupper($info->status) }}</span></td>
+                        <td>{{ $info->created_at->format('m-d-Y') }}</td>
+                        <td><span class="badge badge-success">{{ strtoupper($info->status) }}</span></td>
 
                         <td>
                             <div class="row">
                                 <a class="btn btn-block btn-success active" 
                                 style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
                                 href="{{ url('review/'.$info->id) }}">
-                                Review
+                                View
                                 </a>
-
-
                             </div>
                         </td>
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>

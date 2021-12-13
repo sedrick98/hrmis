@@ -69,14 +69,14 @@
                             </div>
                             <div class="form-group col-sm-4">
                                 <label for="ccyear">Last Name</label>
-                                <input class="form-control" type="text" name="last_name"  value="{{strtoupper(Auth::user()->last_name)}}" readonly="readonly">
+                                <input class="form-control" type="text" name="last_name" value="{{strtoupper(Auth::user()->last_name)}}" readonly="readonly">
 
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="cvv">Middle Initial</label>
-                                    <input class="form-control" type="text" name="middle_name"  value="{{strtoupper(Auth::user()->middle_name)}}" readonly="readonly">
+                                    <input class="form-control" type="text" name="middle_name" value="{{strtoupper(Auth::user()->middle_name)}}" readonly="readonly">
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,34 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-2">
+                                <label for="ccmonth">Duration - From</label>
+                                <input class="form-control" type="text" name="d_1" placeholder="month - from" required style="width:150px">
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-2">
+                            <label for="ccmonth">Duration - To</label>
+                                <input class="form-control" type="text" name="d_2" placeholder="month - to" required style="width:150px">
+
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                <label for="ccmonth">Year</label>
+                                    <input class="form-control" type="text" name="year" placeholder="year" required style="width:150px">
+                                </div>
+                            </div>
+                        </div>
+
+
+
                     </div>
+
+
+
+
                 </div>
 
 
@@ -307,12 +334,11 @@
                         <h5>CANCEL</h5>
                     </button>
                 </div><br>
-
             </div>
         </div>
 
     </form>
-    
+
 
     <!--Cancel Modal-->
     <div class="modal modal-danger" id="cancelModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top:100px">

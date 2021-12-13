@@ -43,15 +43,9 @@
 
     @include('includes/sidebar')
 
-    <form action="{{ route('ipcr-update') }}" method="post" autocomplete="false">
+    <form action="" autocomplete="false">
         @csrf
 
-        @if (Session::has('success'))
-        <div class="alert alert-block" style="border-color:#2E8B57; background-color:#98FB98; margin:20px; margin-top:0px; box-shadow: 5px 10px 8px #888888;">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>{{ Session::get('success') }}</strong>
-        </div>
-        @endif
 
 
         <!-- <input type="hidden" name="id" value="{{$info->employee}}"> -->
@@ -66,19 +60,19 @@
                         <div class="row">
                             <div class="form-group col-sm-4">
                                 <label for="ccmonth">First Name</label>
-                                <input class="form-control" type="text" name="first_name" value="{{$form->first()->first_name}}" readonly="readonly">
+                                <input class="form-control" type="text" name="first_name" value="{{$form->first()->first_name}}" required>
                                 </select>
                             </div>
                             <div class="form-group col-sm-4">
                                 <label for="ccyear">Last Name</label>
-                                <input class="form-control" type="text" name="last_name" value="{{$form->first()->last_name}}" readonly="readonly">
+                                <input class="form-control" type="text" name="last_name" value="{{$form->first()->last_name}}" required>
 
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="cvv">Middle Initial</label>
-                                    <input class="form-control" type="text" name="middle_name" value="{{$form->first()->middle_name}}" readonly="readonly">
+                                    <input class="form-control" type="text" name="middle_name" value="{{$form->first()->middle_name}}" required>
                                 </div>
                             </div>
                         </div>
@@ -86,14 +80,14 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="ccnumber">Division</label>
-                                    <input class="form-control" name="division" type="text" value="{{$form->first()->division}}" style="width:400px" readonly="readonly">
+                                    <input class="form-control" name="division" type="text" value="{{$form->first()->division}}" style="width:400px" required>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="form-group col-sm-2">
                                 <label for="ccmonth">Duration - From</label>
-                                <input type="hidden" name="ipcr_id" value="{{$info->id}}" style="width:150px">
                                 <input class="form-control" type="text" name="d_1" value="{{$info->duration_1}}" style="width:150px">
                                 </select>
                             </div>
@@ -110,6 +104,9 @@
                                 </div>
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
 
@@ -129,7 +126,7 @@
                             <table style="border-collapse: collapse; margin-left:40px;">
                                 <thead>
                                     <tr>
-                                        <th colspan="2">OUTPUT</th>
+                                        <th>OUTPUT</th>
                                         <th>SUCCESS INDICATOR</th>
                                         <th>ACTUAL ACCOMPLISHMENTS</th>
                                     </tr>
@@ -137,12 +134,9 @@
                                 <tbody id="ops">
                                     @foreach($operation as $operations)
                                     @if($operations->o_type=='a')
-
                                     <tr>
-                                        <td>
-                                            <input type="hidden" name="a_id[]" value="{{$operations->o_id}}">
-                                        </td>
                                         <td style="padding-right:20px">
+                                            <input type="hidden" name="id[]" value="{{$operations->o_ipcr}}">
                                             <textarea class="form-control" name="i_output[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_output}}</textarea>
                                         </td>
                                         <td style="padding-right:20px">
@@ -172,7 +166,7 @@
                             <table style="border-collapse: collapse; margin-left:40px;">
                                 <thead>
                                     <tr>
-                                        <th colspan="2">OUTPUT</th>
+                                        <th>OUTPUT</th>
                                         <th>SUCCESS INDICATOR</th>
                                         <th>ACTUAL ACCOMPLISHMENTS</th>
                                     </tr>
@@ -181,17 +175,14 @@
                                     @foreach($operation as $operations)
                                     @if($operations->o_type=='b')
                                     <tr>
-                                        <td>
-                                            <input type="hidden" name="b_id[]" value="{{$operations->o_id}}">
+                                        <td style="padding-right:20px">
+                                            <textarea class="form-control" id="textarea-input" name="ii_output[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_output}}</textarea>
                                         </td>
                                         <td style="padding-right:20px">
-                                            <textarea class="form-control" id="textarea-input" name="ii_output[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_output}}</textarea>
+                                            <textarea class="form-control" id="textarea-input" name="ii_indicator[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_success_indicator}}</textarea>
                                         </td>
                                         <td style="padding-right:20px">
-                                            <textarea class="form-control" id="textarea-input" name="ii_indicator[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_success_indicator}}</textarea>
-                                        </td>
-                                        <td style="padding-right:20px">
-                                            <textarea class="form-control" id="textarea-input" name="ii_accomplish[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_actual_accomplishment}}</textarea>
+                                            <textarea class="form-control" id="textarea-input" name="ii_accomplish[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$operations->o_actual_accomplishment}}</textarea>
                                         </td>
 
                                     </tr>
@@ -215,7 +206,7 @@
                                 <table style="border-collapse: collapse; margin-left:40px;">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">OUTPUT</th>
+                                            <th>OUTPUT</th>
                                             <th>SUCCESS INDICATOR</th>
                                             <th>ACTUAL ACCOMPLISHMENTS</th>
                                         </tr>
@@ -223,17 +214,14 @@
                                     <tbody id="bb">
                                         @foreach($gen as $gens)
                                         <tr>
-                                            <td>
-                                                <input type="hidden" name="g_id[]" value="{{$gens->g_id}}">
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="bb_output[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_output}}</textarea>
                                             </td>
                                             <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="bb_output[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_output}}</textarea>
+                                                <textarea class="form-control" id="textarea-input" name="bb_indicator[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_success_indicator}}</textarea>
                                             </td>
                                             <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="bb_indicator[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_success_indicator}}</textarea>
-                                            </td>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="bb_accomplish[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_actual_accomplishment}}</textarea>
+                                                <textarea class="form-control" id="textarea-input" name="bb_accomplish[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$gens->g_actual_accomplishment}}</textarea>
                                             </td>
 
                                         </tr>
@@ -257,7 +245,7 @@
                                 <table style="border-collapse: collapse; margin-left:40px;">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">OUTPUT</th>
+                                            <th>OUTPUT</th>
                                             <th>SUCCESS INDICATOR</th>
                                             <th>ACTUAL ACCOMPLISHMENTS</th>
                                         </tr>
@@ -265,17 +253,14 @@
                                     <tbody id="ss">
                                         @foreach($support as $supports)
                                         <tr>
-                                            <td>
-                                                <input type="hidden" name="s_id[]" value="{{$supports->s_id}}">
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="ss_output[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_output}}</textarea>
                                             </td>
                                             <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="ss_output[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_output}}</textarea>
+                                                <textarea class="form-control" id="textarea-input" name="ss_indicator[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_success_indicator}}</textarea>
                                             </td>
                                             <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="ss_indicator[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_success_indicator}}</textarea>
-                                            </td>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="ss_accomplish[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_actual_accomplishment}}</textarea>
+                                                <textarea class="form-control" id="textarea-input" name="ss_accomplish[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$supports->s_actual_accomplishment}}</textarea>
                                             </td>
 
                                         </tr>
@@ -299,7 +284,7 @@
                                 <table style="border-collapse: collapse; margin-left:40px;">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">OUTPUT</th>
+                                            <th>OUTPUT</th>
                                             <th>SUCCESS INDICATOR</th>
                                             <th>ACTUAL ACCOMPLISHMENTS</th>
                                         </tr>
@@ -307,17 +292,14 @@
                                     <tbody id="nn">
                                         @foreach($innovation as $innovations)
                                         <tr>
-                                            <td>
-                                                <input type="hidden" name="i_id[]" value="{{$innovations->i_id}}">
+                                            <td style="padding-right:20px">
+                                                <textarea class="form-control" id="textarea-input" name="nn_output[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_output}}</textarea>
                                             </td>
                                             <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="nn_output[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_output}}</textarea>
+                                                <textarea class="form-control" id="textarea-input" name="nn_indicator[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_success_indicator}}</textarea>
                                             </td>
                                             <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="nn_indicator[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_success_indicator}}</textarea>
-                                            </td>
-                                            <td style="padding-right:20px">
-                                                <textarea class="form-control" id="textarea-input" name="nn_accomplish[]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_actual_accomplishment}}</textarea>
+                                                <textarea class="form-control" id="textarea-input" name="nn_accomplish[0]" rows="9" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:250px" required>{{$innovations->i_actual_accomplishment}}</textarea>
                                             </td>
 
                                         </tr>
@@ -330,49 +312,13 @@
                 </div>
 
 
-                <div class="row">
-                    <button class="btn btn-outline-success active" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
-                        <h5>UPDATE</h5>
-                    </button>
-
-                    <button class="btn btn-outline-danger active" id="btn" type="button" aria-pressed="true" style="margin-left:10px" data-toggle="modal" data-target="#cancelModal">
-                        <h5>CANCEL</h5>
-                    </button>
-                </div><br>
-
             </div>
         </div>
 
     </form>
 
 
-    <!--Cancel Modal-->
-    <div class="modal modal-danger" id="cancelModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top:100px">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
 
-                <div class="modal-header" style="height:10px;">
-                    <p style="margin:-10px">Cancel</p>
-                </div>
-                <form action="{{ route('ipcr-submitted') }}" method="get">
-                    @csrf
-                    <div class="modal-body">
-
-                        <div style="height:90px;"><br>
-                            <h3>DISCARD CHANGES?</h3>
-                        </div>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <button class="btn btn-sm btn-success" type="button" data-dismiss="modal" style="width:70px; font-size: 16px;">NO</button>
-                        <button class="btn btn-sm btn-warning" type="submit" style="width:70px; font-size: 16px;">YES</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
 
 
 

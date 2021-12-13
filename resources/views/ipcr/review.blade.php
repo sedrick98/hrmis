@@ -43,7 +43,7 @@
 
     @include('includes/sidebar')
 
-    <form action="{{ route('ipcr-rate') }}" method="post" autocomplete="false">
+    <form action="{{ route('ipcr-approve') }}" method="post" autocomplete="false">
         @csrf
 
         @if (Session::has('success'))
@@ -98,7 +98,6 @@
                                     </tr>
                                 </table>
                             </div>
-
                         </div>
                         <div class="form-group col-sm-4" style="margin-left:15px;">
                             <table>
@@ -149,34 +148,32 @@
                                         <th id="entry" rowspan="2"><strong>OUTPUTS</strong></th>
                                         <th id="entry" rowspan="2"><strong>SUCCESS INDICATORS</strong> (Targets + Measures)</th>
                                         <th id="entry" rowspan="2"><strong>ACTUAL ACCOMPLISHMENTS</strong></th>
-                                        <th id="entry" colspan="3"><strong>RATING</strong></th>
+                                        <th id="entry" colspan="4"><strong>RATING</strong></th>
                                         <th id="entry" rowspan="2"><strong>REMARKS</strong></th>
                                     </tr>
                                     <tr>
                                         <td id="entry"><strong>Q</strong></td>
                                         <td id="entry"><strong>E</strong></td>
                                         <td id="entry"><strong>T</strong></td>
+                                        <td id="entry"><strong>A</strong></td>
                                     </tr>
                                 </thead>
 
                                 <!--fetching data for operations/a-->
                                 <tbody>
-
                                     @foreach($operation as $operations)
                                     @if($operations->o_type=='a')
                                     <tr>
                                         <td id="entry" style="text-align:left;">
-                                            <input type="hidden" name="a_id[]" value="{{$operations->o_id}}">
                                             {{$operations->o_output}}
                                         </td>
                                         <td id="entry" style="text-align:left">{{$operations->o_success_indicator}}</td>
                                         <td id="entry" style="text-align:left">{{$operations->o_actual_accomplishment}}</td>
-                                        <td id="entry"><input type="number" name="i_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                        <td id="entry"><input type="number" name="i_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                        <td id="entry"><input type="number" name="i_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                        <td id="entry">
-                                            <textarea class="form-control" name="i_remarks[]" id="textarea-input" rows="2"></textarea>
-                                        </td>
+                                        <td id="entry">{{$operations->o_quality}}</td>
+                                        <td id="entry">{{$operations->o_efficiency}}</td>
+                                        <td id="entry">{{$operations->o_timeliness}}</td>
+                                        <td id="entry">{{$operations->o_average}}</td>
+                                        <td id="entry">{{$operations->o_remarks}}</td>
                                     </tr>
                                     @endif
                                     @endforeach
@@ -205,13 +202,14 @@
                                         <th id="entry" rowspan="2"><strong>OUTPUTS</strong></th>
                                         <th id="entry" rowspan="2"><strong>SUCCESS INDICATORS</strong> (Targets + Measures)</th>
                                         <th id="entry" rowspan="2"><strong>ACTUAL ACCOMPLISHMENTS</strong></th>
-                                        <th id="entry" colspan="3"><strong>RATING</strong></th>
+                                        <th id="entry" colspan="4"><strong>RATING</strong></th>
                                         <th id="entry" rowspan="2"><strong>REMARKS</strong></th>
                                     </tr>
                                     <tr>
                                         <td id="entry"><strong>Q</strong></td>
                                         <td id="entry"><strong>E</strong></td>
                                         <td id="entry"><strong>T</strong></td>
+                                        <td id="entry"><strong>A</strong></td>
                                     </tr>
                                 </thead>
 
@@ -222,17 +220,15 @@
                                     @if($operations->o_type=='b')
                                     <tr>
                                         <td id="entry" style="text-align:left;">
-                                            <input type="hidden" name="b_id[]" value="{{$operations->o_id}}">
                                             {{$operations->o_output}}
                                         </td>
                                         <td id="entry" style="text-align:left">{{$operations->o_success_indicator}}</td>
                                         <td id="entry" style="text-align:left">{{$operations->o_actual_accomplishment}}</td>
-                                        <td id="entry"><input type="number" name="ii_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                        <td id="entry"><input type="number" name="ii_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                        <td id="entry"><input type="number" name="ii_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                        <td id="entry">
-                                            <textarea class="form-control" name="ii_remarks[]" id="textarea-input" rows="2"></textarea>
-                                        </td>
+                                        <td id="entry">{{$operations->o_quality}}</td>
+                                        <td id="entry">{{$operations->o_efficiency}}</td>
+                                        <td id="entry">{{$operations->o_timeliness}}</td>
+                                        <td id="entry">{{$operations->o_average}}</td>
+                                        <td id="entry">{{$operations->o_remarks}}</td>
                                     </tr>
                                     @endif
                                     @endforeach
@@ -262,13 +258,14 @@
                                             <th id="entry" rowspan="2"><strong>OUTPUTS</strong></th>
                                             <th id="entry" rowspan="2"><strong>SUCCESS INDICATORS</strong> (Targets + Measures)</th>
                                             <th id="entry" rowspan="2"><strong>ACTUAL ACCOMPLISHMENTS</strong></th>
-                                            <th id="entry" colspan="3"><strong>RATING</strong></th>
+                                            <th id="entry" colspan="4"><strong>RATING</strong></th>
                                             <th id="entry" rowspan="2"><strong>REMARKS</strong></th>
                                         </tr>
                                         <tr>
                                             <td id="entry"><strong>Q</strong></td>
                                             <td id="entry"><strong>E</strong></td>
                                             <td id="entry"><strong>T</strong></td>
+                                            <td id="entry"><strong>A</strong></td>
                                         </tr>
                                     </thead>
 
@@ -278,17 +275,15 @@
                                         @foreach($gen as $gens)
                                         <tr>
                                             <td id="entry" style="text-align:left;">
-                                                <input type="hidden" name="g_id[]" value="{{$gens->g_id}}">
                                                 {{$gens->g_output}}
                                             </td>
                                             <td id="entry" style="text-align:left">{{$gens->g_success_indicator}}</td>
                                             <td id="entry" style="text-align:left">{{$gens->g_actual_accomplishment}}</td>
-                                            <td id="entry"><input type="number" name="g_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="g_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="g_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry">
-                                                <textarea class="form-control" name="g_remarks[]" id="textarea-input" rows="2"></textarea>
-                                            </td>
+                                            <td id="entry">{{$gens->g_quality}}</td>
+                                            <td id="entry">{{$gens->g_efficiency}}</td>
+                                            <td id="entry">{{$gens->g_timeliness}}</td>
+                                            <td id="entry">{{$gens->g_average}}</td>
+                                            <td id="entry">{{$gens->g_remarks}}</td>
                                         </tr>
                                         @endforeach
 
@@ -321,13 +316,14 @@
                                             <th id="entry" rowspan="2"><strong>OUTPUTS</strong></th>
                                             <th id="entry" rowspan="2"><strong>SUCCESS INDICATORS</strong> (Targets + Measures)</th>
                                             <th id="entry" rowspan="2"><strong>ACTUAL ACCOMPLISHMENTS</strong></th>
-                                            <th id="entry" colspan="3"><strong>RATING</strong></th>
+                                            <th id="entry" colspan="4"><strong>RATING</strong></th>
                                             <th id="entry" rowspan="2"><strong>REMARKS</strong></th>
                                         </tr>
                                         <tr>
                                             <td id="entry"><strong>Q</strong></td>
                                             <td id="entry"><strong>E</strong></td>
                                             <td id="entry"><strong>T</strong></td>
+                                            <td id="entry"><strong>A</strong></td>
                                         </tr>
                                     </thead>
 
@@ -337,17 +333,15 @@
                                         @foreach($support as $supports)
                                         <tr>
                                             <td id="entry" style="text-align:left;">
-                                                <input type="hidden" name="s_id[]" value="{{$supports->s_id}}">
                                                 {{$supports->s_output}}
                                             </td>
                                             <td id="entry" style="text-align:left">{{$supports->s_success_indicator}}</td>
                                             <td id="entry" style="text-align:left">{{$supports->s_actual_accomplishment}}</td>
-                                            <td id="entry"><input type="number" name="s_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="s_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="s_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry">
-                                                <textarea class="form-control" name="s_remarks[]" id="textarea-input" rows="2"></textarea>
-                                            </td>
+                                            <td id="entry">{{$supports->s_quality}}</td>
+                                            <td id="entry">{{$supports->s_efficiency}}</td>
+                                            <td id="entry">{{$supports->s_timeliness}}</td>
+                                            <td id="entry">{{$supports->s_average}}</td>
+                                            <td id="entry">{{$supports->s_remarks}}</td>
                                         </tr>
                                         @endforeach
 
@@ -382,13 +376,14 @@
                                             <th id="entry" rowspan="2"><strong>OUTPUTS</strong></th>
                                             <th id="entry" rowspan="2"><strong>SUCCESS INDICATORS</strong> (Targets + Measures)</th>
                                             <th id="entry" rowspan="2"><strong>ACTUAL ACCOMPLISHMENTS</strong></th>
-                                            <th id="entry" colspan="3"><strong>RATING</strong></th>
+                                            <th id="entry" colspan="4"><strong>RATING</strong></th>
                                             <th id="entry" rowspan="2"><strong>REMARKS</strong></th>
                                         </tr>
                                         <tr>
                                             <td id="entry"><strong>Q</strong></td>
                                             <td id="entry"><strong>E</strong></td>
                                             <td id="entry"><strong>T</strong></td>
+                                            <td id="entry"><strong>A</strong></td>
                                         </tr>
                                     </thead>
 
@@ -398,17 +393,15 @@
                                         @foreach($innovation as $innovations)
                                         <tr>
                                             <td id="entry" style="text-align:left;">
-                                                <input type="hidden" name="i_id[]" value="{{$innovations->i_id}}">
                                                 {{$innovations->i_output}}
                                             </td>
                                             <td id="entry" style="text-align:left">{{$innovations->i_success_indicator}}</td>
                                             <td id="entry" style="text-align:left">{{$innovations->i_actual_accomplishment}}</td>
-                                            <td id="entry"><input type="number" name="nn_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="nn_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="nn_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry">
-                                                <textarea class="form-control" name="nn_remarks[]" id="textarea-input" rows="2"></textarea>
-                                            </td>
+                                            <td id="entry">{{$innovations->i_quality}}</td>
+                                            <td id="entry">{{$innovations->i_efficiency}}</td>
+                                            <td id="entry">{{$innovations->i_timeliness}}</td>
+                                            <td id="entry">{{$innovations->i_average}}</td>
+                                            <td id="entry">{{$innovations->i_remarks}}</td>
                                         </tr>
                                         @endforeach
 
@@ -425,20 +418,32 @@
                     </div><br>
                 </div>
 
+
+
+
+
                 <hr>
                 <div class="jumbotron jumbotron-fluid" style="padding:20px; box-shadow: 5px 10px 8px #888888; background-color:lightblue; border-radius: 10px">
                     <div>
                         <strong>Comments and Recommendations for Developmental Purposes</strong>
                         <hr>
                         <div class="container">
-                            @if(strtolower(Auth::user()->roleName()) == 'ard - section head')
+                            @if(strtolower(Auth::user()->roleName()) == 'ard - section head' 
+                            || strtolower(Auth::user()->roleName()) == 'employee' )
                             <div class="card-body" style="background-color:#F5F5F5; border-radius:10px; padding:auto; text-align: center;">
-                                <textarea class="form-control" id="textarea-input" name="comment" rows="18" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:100%" placeholder="leave a comment"></textarea>
+                                <textarea class="form-control" 
+                                id="textarea-input" name="comment" rows="18" 
+                                style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:100%" 
+                                readonly = "readonly">{{$info->comment}}</textarea>
                             </div>
                             @endif
-                            @if(strtolower(Auth::user()->roleName()) == 'rd')
+                            @if(strtolower(Auth::user()->roleName()) == 'rd'
+                            || strtolower(Auth::user()->roleName()) == 'ard - division head')
                             <div class="card-body" style="background-color:#F5F5F5; border-radius:10px; padding:auto; text-align: center;">
-                                <textarea class="form-control" id="textarea-input" name="comment" rows="18" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:100%">{{$info->comment}}</textarea>
+                                <textarea class="form-control" 
+                                id="textarea-input" name="comment" rows="18" 
+                                style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:100%" 
+                                >{{$info->comment}}</textarea>
                             </div>
                             @endif
                         </div>
@@ -446,15 +451,19 @@
                 </div>
 
 
+
+                @if(strtolower(Auth::user()->roleName()) == 'rd'
+                || strtolower(Auth::user()->roleName()) == 'ard - division head')
                 <div class="row">
                     <button class="btn btn-outline-success active" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
-                        <h5>SAVE</h5>
+                        <h5>APPROVE</h5>
                     </button>
 
                     <button class="btn btn-outline-danger active" id="btn" type="button" aria-pressed="true" style="margin-left:10px" data-toggle="modal" data-target="#cancelModal">
                         <h5>CANCEL</h5>
                     </button>
                 </div><br>
+                @endif
 
             </div>
         </div>

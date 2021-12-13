@@ -50,9 +50,9 @@
             <br>
             <p style="text-align:center"><strong>INDIVIDUAL PERFORMANCE COMMITMENT AND REVIEW (IPCR)</strong></p>
             <div>
-                <p>I, <u><strong>REXOR GLENN C. SINGCO</strong></u>, of <u><strong>Finance and Administrative Services </strong></u> (Division) of the Department of Science and Technology Regional Office XI, commit to deliver and agree to be rated
-                    on the attainment of the following targets in accordance with the indicated measures for the period of <u><strong>July to December, 2018</strong></u>.
-                <p style="margin-top:-20px; margin-left:540px;">(month) (month) (year)</p>
+                <p>I, <u><strong>{{strtoupper($form->first()->first_name)}} {{strtoupper($form->first()->middle_name)}} {{strtoupper($form->first()->last_name)}}</strong></u>, of <u><strong>{{strtoupper($division->first()->name)}} </strong></u> (Division) of the Department of Science and Technology Regional Office XI, commit to deliver and agree to be rated
+                    on the attainment of the following targets in accordance with the indicated measures for the period of <u><strong>{{strtoupper($form->first()->duration_1)}} to {{strtoupper($form->first()->duration_2)}}, {{$form->first()->year}}</strong></u>.
+                <p style="margin-top:-20px; margin-left:410px;">(month) (month) (year)</p>
                 </p>
             </div>
 
@@ -60,8 +60,8 @@
             <div>
                 <table style="float:right; margin-right:100px; margin-top:25px">
                     <tr>
-                        <td style="padding-right:10px"><u><strong>REXOR GLENN C. SINGCO</strong></u></td>
-                        <td><u><strong>January 10, 2019</strong></u></td>
+                        <td style="padding-right:10px"><u><strong>{{strtoupper($form->first()->first_name)}} {{strtoupper($form->first()->last_name)}}</strong></u></td>
+                        <td><u><strong>{{$form->first()->created_at->format('F d, Y')}}</strong></u></td>
                     </tr>
                     <tr>
                         <td style="text-align:center">Employee</td>
@@ -80,8 +80,8 @@
                         <th id="rev" style="width:130px"></th>
                     </tr>
                     <tr>
-                        <td id="rev" style="text-align:center"><br><br><strong>EDUARDO P. TESORERO</strong></td>
-                        <td id="rev" style="text-align:center"><br><br><strong>Date Here</strong></td>
+                        <td id="rev" style="text-align:center"><br><br><strong>{{strtoupper($sec->first()->first_name)}} {{strtoupper($sec->first()->last_name)}}</strong></td>
+                        <td id="rev" style="text-align:center"><br><br><strong>{{$form->first()->date_1}}</strong></td>
                     </tr>
                     <tr>
                         <td id="rev" style="text-align:center">Immediate Supervisor</td>
@@ -96,8 +96,8 @@
                         <th id="rev" style="width:130px"></th>
                     </tr>
                     <tr>
-                        <td id="rev" style="text-align:center"><br><br><strong>DR. ANTHONY C. SALES, CESO III</strong></td>
-                        <td id="rev" style="text-align:center"><br><br><strong>Date Here</strong></td>
+                        <td id="rev" style="text-align:center"><br><br><strong>{{strtoupper($rhead->first()->first_name)}} {{strtoupper($rhead->first()->last_name)}}</strong></td>
+                        <td id="rev" style="text-align:center"><br><br><strong>{{$form->first()->updated_at->format('m-d-Y')}}</strong></td>
                     </tr>
                     <tr>
                         <td id="rev" style="text-align:center">Regional Director</td>
@@ -140,66 +140,100 @@
                     <td id="entry" colspan="8" style="text-align:center"><strong><i>I. DIFFUSION AND TRANSFER OF KNOWLEDGE AND TECHNOLOGIES; AND OTHER RELATED PROJECTS AND ACTIVITIES</i></strong></td>
                 </tr>
                 <tr>
-                    <td id="entry">sample</td>
-                    <td id="entry">sample</td>
-                    <td id="entry">sample</td>
-                    <td id="entry">1</td>
-                    <td id="entry">2</td>
-                    <td id="entry">3</td>
-                    <td id="entry">4</td>
-                    <td id="entry">sample</td>
+                    @foreach($operation as $operations)
+                    @if($operations->o_type=='a')
+                <tr>
+                    <td id="entry" style="text-align:left;">
+                        {{$operations->o_output}}
+                    </td>
+                    <td id="entry" style="text-align:left">{{$operations->o_success_indicator}}</td>
+                    <td id="entry" style="text-align:left">{{$operations->o_actual_accomplishment}}</td>
+                    <td id="entry">{{$operations->o_quality}}</td>
+                    <td id="entry">{{$operations->o_efficiency}}</td>
+                    <td id="entry">{{$operations->o_timeliness}}</td>
+                    <td id="entry">{{$operations->o_average}}</td>
+                    <td id="entry">{{$operations->o_remarks}}</td>
+                </tr>
+                @endif
+                @endforeach
                 </tr>
                 <tr>
                     <td id="entry" colspan="8" style="text-align:center"><strong><i>II. ENHANCEMENT OF SCIENCE AND TECHNOLOGY PROJECTS/ACTIVITIES</i></strong></td>
                 </tr>
                 <tr>
-                    <td id="entry">sample</td>
-                    <td id="entry">sample</td>
-                    <td id="entry">sample</td>
-                    <td id="entry">1</td>
-                    <td id="entry">2</td>
-                    <td id="entry">3</td>
-                    <td id="entry">4</td>
-                    <td id="entry">sample</td>
+                    @foreach($operation as $operations)
+                    @if($operations->o_type=='b')
+                <tr>
+                    <td id="entry" style="text-align:left;">
+                        {{$operations->o_output}}
+                    </td>
+                    <td id="entry" style="text-align:left">{{$operations->o_success_indicator}}</td>
+                    <td id="entry" style="text-align:left">{{$operations->o_actual_accomplishment}}</td>
+                    <td id="entry">{{$operations->o_quality}}</td>
+                    <td id="entry">{{$operations->o_efficiency}}</td>
+                    <td id="entry">{{$operations->o_timeliness}}</td>
+                    <td id="entry">{{$operations->o_average}}</td>
+                    <td id="entry">{{$operations->o_remarks}}</td>
+                </tr>
+                @endif
+                @endforeach
                 </tr>
                 <tr>
                     <td id="entry" colspan="8" style="background-color:#A9A9A9"><strong>B. GENERAL ADMINISTRATIVE SERVICES</strong></td>
                 </tr>
                 <tr>
-                    <td id="entry">sample</td>
-                    <td id="entry">sample</td>
-                    <td id="entry">sample</td>
-                    <td id="entry">1</td>
-                    <td id="entry">2</td>
-                    <td id="entry">3</td>
-                    <td id="entry">4</td>
-                    <td id="entry">sample</td>
+                    @foreach($gen as $gens)
+                <tr>
+                    <td id="entry" style="text-align:left;">
+                        {{$gens->g_output}}
+                    </td>
+                    <td id="entry" style="text-align:left">{{$gens->g_success_indicator}}</td>
+                    <td id="entry" style="text-align:left">{{$gens->g_actual_accomplishment}}</td>
+                    <td id="entry">{{$gens->g_quality}}</td>
+                    <td id="entry">{{$gens->g_efficiency}}</td>
+                    <td id="entry">{{$gens->g_timeliness}}</td>
+                    <td id="entry">{{$gens->g_average}}</td>
+                    <td id="entry">{{$gens->g_remarks}}</td>
+                </tr>
+                @endforeach
                 </tr>
                 <tr>
                     <td id="entry" colspan="8" style="background-color:#A9A9A9"><strong>C. SUPPORT TO OPERATIONS</strong></td>
                 </tr>
                 <tr>
-                    <td id="entry">sample</td>
-                    <td id="entry">sample</td>
-                    <td id="entry">sample</td>
-                    <td id="entry">1</td>
-                    <td id="entry">2</td>
-                    <td id="entry">3</td>
-                    <td id="entry">4</td>
-                    <td id="entry">sample</td>
+                    @foreach($support as $supports)
+                <tr>
+                    <td id="entry" style="text-align:left;">
+                        {{$supports->s_output}}
+                    </td>
+                    <td id="entry" style="text-align:left">{{$supports->s_success_indicator}}</td>
+                    <td id="entry" style="text-align:left">{{$supports->s_actual_accomplishment}}</td>
+                    <td id="entry">{{$supports->s_quality}}</td>
+                    <td id="entry">{{$supports->s_efficiency}}</td>
+                    <td id="entry">{{$supports->s_timeliness}}</td>
+                    <td id="entry">{{$supports->s_average}}</td>
+                    <td id="entry">{{$supports->s_remarks}}</td>
+                </tr>
+                @endforeach
                 </tr>
                 <tr>
                     <td id="entry" colspan="8" style="background-color:#A9A9A9"><strong>INNOVATION</strong></td>
                 </tr>
                 <tr>
-                    <td id="entry">sample</td>
-                    <td id="entry">sample</td>
-                    <td id="entry">sample</td>
-                    <td id="entry">1</td>
-                    <td id="entry">2</td>
-                    <td id="entry">3</td>
-                    <td id="entry">4</td>
-                    <td id="entry">sample</td>
+                    @foreach($innovation as $innovations)
+                <tr>
+                    <td id="entry" style="text-align:left;">
+                        {{$innovations->i_output}}
+                    </td>
+                    <td id="entry" style="text-align:left">{{$innovations->i_success_indicator}}</td>
+                    <td id="entry" style="text-align:left">{{$innovations->i_actual_accomplishment}}</td>
+                    <td id="entry">{{$innovations->i_quality}}</td>
+                    <td id="entry">{{$innovations->i_efficiency}}</td>
+                    <td id="entry">{{$innovations->i_timeliness}}</td>
+                    <td id="entry">{{$innovations->i_average}}</td>
+                    <td id="entry">{{$innovations->i_remarks}}</td>
+                </tr>
+                @endforeach
                 </tr>
 
 
@@ -232,45 +266,48 @@
                 </tr>
                 <tr>
                     <td id="entry">A. Operations</td>
-                    <td id="entry" style="text-align:center">0</td>
-                    <td id="entry" style="text-align:center">0</td>
+                    <td id="entry" style="text-align:center">{{$oc}}</td>
+                    <td id="entry" style="text-align:center">{{$oave}}</td>
                     <td id="entry" style="text-align:center">0%</td>
-                    <td id="entry" style="text-align:center">0</td>
+                    <td id="entry" style="text-align:center">{{$of}}</td>
                 </tr>
                 <tr>
                     <td id="entry">B. General Administrative Services</td>
-                    <td id="entry" style="text-align:center">0</td>
-                    <td id="entry" style="text-align:center">0</td>
+                    <td id="entry" style="text-align:center">{{$gc}}</td>
+                    <td id="entry" style="text-align:center">{{$gave}}</td>
                     <td id="entry" style="text-align:center">60%</td>
-                    <td id="entry" style="text-align:center">0</td>
+                    <td id="entry" style="text-align:center">{{$gf}}</td>
                 </tr>
                 <tr>
                     <td id="entry">C. Support to Operations</td>
-                    <td id="entry" style="text-align:center">0</td>
-                    <td id="entry" style="text-align:center">0</td>
+                    <td id="entry" style="text-align:center">{{$sc}}</td>
+                    <td id="entry" style="text-align:center">{{$save}}</td>
                     <td id="entry" style="text-align:center">20%</td>
-                    <td id="entry" style="text-align:center">0</td>
+                    <td id="entry" style="text-align:center">{{$sf}}</td>
                 </tr>
                 <tr>
                     <td id="entry">Innovation</td>
-                    <td id="entry" style="text-align:center">0</td>
-                    <td id="entry" style="text-align:center">0</td>
+                    <td id="entry" style="text-align:center">{{$ic}}</td>
+                    <td id="entry" style="text-align:center">{{$iave}}</td>
                     <td id="entry" style="text-align:center">20%</td>
-                    <td id="entry" style="text-align:center">0</td>
+                    <td id="entry" style="text-align:center">{{$if}}</td>
                 </tr>
                 <tr>
                     <td id="entry" colspan="4" style="text-align:right; background-color:#A9A9A9"><b>Final Average Rating</b></td>
-                    <td id="entry">0.00</td>
+                    <td id="entry">{{$score}}</td>
                 </tr>
                 <tr>
                     <td id="entry" colspan="4" style="text-align:right"><b>Adjectival Rating</b></td>
-                    <td id="entry">0.00</td>
+                    <td id="entry">
+                    {{$arating}}
+                    </td>
                 </tr>
                 <tr>
                     <td id="entry" colspan="5"><b>Comments and Recommendations for Developmental Purposes</b></td>
                 </tr>
                 <tr>
-                    <td id="entry" colspan="5" style="height:100px"></td>
+                    <td id="entry" colspan="5" style="height:100px">
+                    {{$form->first()->comment}}</td>
                 </tr>
             </table>
 
@@ -281,17 +318,17 @@
                     <td id="entry" colspan="2"><b>Final Rating by:</b></td>
                 </tr>
                 <tr>
-                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br><b>REXOR GLENN C. SINGCO</b></td>
-                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>date here</td>
+                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br><b>{{strtoupper($form->first()->first_name)}} {{strtoupper($form->first()->last_name)}}</b></td>
+                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>{{$form->first()->created_at->format('m-d-Y')}}</td>
                     <td id="entry"> certify that I discussed my assessment of
                         performance with the employee.
                     </td>
-                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>date here</td>
-                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><b><br>DR. ANTHONY C. SALES, CESO III</b></td>
-                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>date here</td>
+                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>{{$form->first()->date_2}}</td>
+                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><b><br>{{strtoupper($rhead->first()->first_name)}} {{strtoupper($rhead->first()->last_name)}}</b></td>
+                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>{{$form->first()->updated_at->format('m-d-Y')}}</td>
                 </tr>
                 <tr>
-                    <td id="entry" style="text-align:center"><b><br>EDUARDO P. TESORERO</b></td>
+                    <td id="entry" style="text-align:center"><b><br>{{strtoupper($divhead->first()->first_name)}} {{strtoupper($divhead->first()->last_name)}}</b></td>
                 </tr>
                 <tr>
                     <td id="entry" style="text-align:center">Employee</td>
@@ -304,7 +341,7 @@
             </table>
 
             <div style="margin-top:-60px">
-            <img src="{{asset('images/logos/bottom-part.jpg')}}" alt="pqa Logo" style="height:30px; width:750px; display:block; margin:auto">
+                <img src="{{asset('images/logos/bottom-part.jpg')}}" alt="pqa Logo" style="height:30px; width:750px; display:block; margin:auto">
             </div>
             <br><br><br><br><br>
 

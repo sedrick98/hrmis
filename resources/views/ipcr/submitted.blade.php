@@ -32,16 +32,19 @@
                         <th>Title</th>
                         <th>Employee</th>
                         <th>Division</th>
+                        <th>Date Created</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($submitted as $info)
+                    @if($info->status == 'pending')
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
                         <td>{{ strtoupper($info->division) }}</td>
+                        <td>{{ $info->created_at->format('m-d-Y') }}</td>
                         <td><span class="badge badge-warning">{{ strtoupper($info->status) }}</span></td>
 
                         <td>
@@ -51,9 +54,16 @@
 
                                 <a class="btn btn-block btn-info active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('edit/'.$info->id) }}">Edit
                                 </a>
+                                <a class="btn btn-block btn-danger active" 
+                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
+                                href="{{ url('delete/'.$info->id) }}" 
+                                onclick="return myFunction();">
+                                    Delete
+                                </a>
                             </div>
                         </td>
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
@@ -79,28 +89,43 @@
                         <th>Title</th>
                         <th>Employee</th>
                         <th>Division</th>
+                        <th>Date Created</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($submitted as $info)
+                    @if($info->status != 'pending' && $info->status == 'approved:rd')
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
                         <td>{{ strtoupper($info->division) }}</td>
-                        <td><span class="badge badge-warning">{{ strtoupper($info->status) }}</span></td>
-
+                        <td>{{ $info->created_at->format('m-d-Y') }}</td>
+                        <td><span class="badge badge-success">{{ strtoupper($info->status) }}</span></td>
                         <td>
                             <div class="row">
-                                <a class="btn btn-block btn-success active" 
-                                style="width:150px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
-                                href="{{ url('view/'.$info->id) }}">
-                                EXPORT TO PDF
-                                </a>
+                                <div class="form-group col-sm-3">
+                                    <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('review/'.$info->id) }}">
+                                        View
+                                    </a>
+                                </div>
+
+                                @if($info->status == 'approved:rd')
+                                <div class="form-group col-sm-2">
+                                    <a class="btn btn-block btn-success active" style="width:150px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('view/'.$info->id) }}">
+                                        EXPORT TO PDF
+                                    </a>
+                                </div>
+                                @endif
+
                             </div>
+
                         </td>
+
+
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
@@ -120,5 +145,15 @@
 
 </html>
 
+
+@endsection
+
+@section('after-scripts')
+<script>
+    function myFunction() {
+        if (!confirm("permanently delete this file?"))
+            event.preventDefault();
+    }
+</script>
 
 @endsection
