@@ -32,7 +32,8 @@ class IPCRController extends Controller
         $user = Auth::user()->first_name;
         $submitted = ipcr::join('employees', 'employees.emp_id', '=', 'ipcrs.employee')
             ->where('employees.first_name', $user)
-            ->get(['ipcrs.id', 'ipcrs.title', 'ipcrs.created_at', 'employees.last_name', 'employees.first_name', 'employees.division', 'ipcrs.status']);
+            ->get(['ipcrs.id', 'ipcrs.title', 'ipcrs.created_at', 'employees.last_name', 
+            'employees.first_name', 'employees.division', 'ipcrs.status']);
 
         return view('ipcr.submitted', compact('submitted'));
     }
@@ -51,7 +52,8 @@ class IPCRController extends Controller
     {
         $user = Auth::user()->first_name;
         $submitted = ipcr::join('employees', 'employees.emp_id', '=', 'ipcrs.employee')
-            ->get(['ipcrs.id', 'ipcrs.title','ipcrs.created_at', 'employees.last_name', 'employees.first_name', 'employees.division', 'ipcrs.status']);
+            ->get(['ipcrs.id', 'ipcrs.title', 'ipcrs.created_at', 
+            'employees.last_name', 'employees.first_name', 'employees.division', 'ipcrs.status']);
 
         return view('ipcr.approval', compact('submitted'));
     }
@@ -82,7 +84,9 @@ class IPCRController extends Controller
         $save->save();
 
         //add operations - i
-        $ipcr_id = ipcr::where('employee', $employee_id)->value('id');
+        //$ipcr_id = ipcr::where('employee', $employee_id)->value('id');
+        $data = ipcr::latest('id')->first();
+        $ipcr_id = $data->id;
 
         foreach ($request->i_output as $key => $insert) {
             $ops = new Operation();
@@ -246,6 +250,10 @@ class IPCRController extends Controller
         $duration->duration_1 = $req->d_1;
         $duration->duration_2 = $req->d_2;
         $duration->year = $req->year;
+        $stat = ipcr::where('id', $req->ipcr_id)->value('status');
+        if ($stat == 'return' || $stat == 'return - edited') {
+            $duration->status = 'return - edited';
+        }
         $duration->update();
 
         foreach ($req->a_id as $item => $v) {
@@ -304,20 +312,24 @@ class IPCRController extends Controller
             ->with('success', 'Form successfully updated');
     }
 
+
+
+
     //----------------for saving rating on IPCR-------------------
     public function rateIPCR(Request $req)
     {
-        //get the user role
-        $id = RoleUser::where('user_id', Auth::user()->id)->value('role_id');
-        $role = Role::where('id', $id)->value('name');
-        $cdate = date('m-d-Y');
-
         //update the status
         $stat = ipcr::find($req->ipcr_id);
-        $stat->status = 'approved:' . $role;
-        $stat->a_1 = Auth::user()->id;
-        $stat->date_1 = $cdate;
-        $stat->comment = $req->comment;
+        $istat = ipcr::where('id', $req->ipcr_id)->value('status');
+        if ($istat == 'return' || $istat == 'return - edited') {
+            $stat->status = 'return - edited';
+        } else {
+            $stat->status = 'rated';
+        }
+
+        //$stat->a_1 = Auth::user()->id;
+        //$stat->date_1 = $cdate;
+        //$stat->comment = $req->comment;
         $stat->update();
 
         //save rate for operations-1
@@ -397,7 +409,7 @@ class IPCRController extends Controller
 
 
         return redirect()
-            ->route('ipcr-approval')
+            ->route('ipcr-submitted')
             ->with('success', 'Rating successfully saved');
     }
 
@@ -437,28 +449,56 @@ class IPCRController extends Controller
 
 
     //-------------------approve IPCR form---------------------
-    public function approveIPCR(Request $req){
+    public function approveIPCR(Request $req)
+    {
         //get the user role
         $id = RoleUser::where('user_id', Auth::user()->id)->value('role_id');
         $role = Role::where('id', $id)->value('name');
         $cdate = date('m-d-Y');
 
-        //update the status
-        $stat = ipcr::find($req->ipcr_id);
-        $stat->status = 'approved:' . $role;
-        if($role=='ard - division head'){
-            $stat->a_2 = Auth::user()->id;
-            $stat->date_2 = $cdate;
-        }
-        elseif($role=='rd'){
-            $stat->a_3 = Auth::user()->id;
-        }
-        $stat->comment = $req->comment;
-        $stat->update();
+        switch ($req->input('action')) {
+            case 'approve':
+                //update the status
+                $stat = ipcr::find($req->ipcr_id);
+                $stat->status = 'approved:' . $role;
+                if ($role == 'ard - section head') {
+                    $stat->a_1 = Auth::user()->id;
+                    $stat->date_1 = $cdate;
+                } elseif ($role == 'ard - division head') {
+                    $stat->a_2 = Auth::user()->id;
+                    $stat->date_2 = $cdate;
+                } elseif ($role == 'rd') {
+                    $stat->a_3 = Auth::user()->id;
+                }
+                $stat->comment = $req->comment;
+                $stat->update();
+                return redirect()
+                    ->route('ipcr-approval')
+                    ->with('success', 'Form successfully approved');
+                break;
 
-        return redirect()
-            ->route('ipcr-approval')
-            ->with('success', 'Form successfully approved');
+            case 'return':
+                $stat = ipcr::find($req->ipcr_id);
+                //$stat->status = 'approved:' . $role;
+                if ($role == 'ard - section head') {
+                    $stat->status = 'return';
+                    $stat->a_1 = Auth::user()->id;
+                    $stat->date_1 = $cdate;
+                } elseif ($role == 'ard - division head') {
+                    $stat->status = 'return:' . $role;
+                    $stat->a_2 = Auth::user()->id;
+                    $stat->date_2 = $cdate;
+                } elseif ($role == 'rd') {
+                    $stat->status = 'return:' . $role;
+                    $stat->a_3 = Auth::user()->id;
+                }
+                $stat->comment = $req->comment;
+                $stat->update();
+                return redirect()
+                    ->route('ipcr-approval')
+                    ->with('success', 'Form was returned');
+                break;
+        }
     }
 
 
@@ -470,13 +510,13 @@ class IPCRController extends Controller
 
         //get all approver's info
         $sec_id = IPCR::where('id', $id)->value('a_1');
-        $sec = User::where('id',$sec_id)->get();
+        $sec = User::where('id', $sec_id)->get();
 
         $div_id = IPCR::where('id', $id)->value('a_2');
-        $divhead = User::where('id',$div_id)->get();
+        $divhead = User::where('id', $div_id)->get();
 
         $rd = IPCR::where('id', $id)->value('a_3');
-        $rhead = User::where('id',$rd)->get();
+        $rhead = User::where('id', $rd)->get();
 
         $form = IPCR::join('employees', 'employees.emp_id', '=', 'ipcrs.employee')
             ->where('employees.emp_id', $emp_id)
@@ -519,76 +559,110 @@ class IPCRController extends Controller
         $gave = $gsum / $gc;
         $save = $ssum / $sc;
         $iave = $isum / $ic;
+        $oave = round($oave, 2);
+        $gave = round($gave, 2);
+        $save = round($save, 2);
+        $iave = round($iave, 2);
 
         //get the final rating
         $of = $oave * 0;
         $gf = $gave * 0.6;
         $sf = $save * 0.2;
         $if = $iave * 0.2;
+        $of = round($of, 2);
+        $gf = round($gf, 2);
+        $sf = round($sf, 2);
+        $if = round($if, 2);
         $score = $of + $gf + $sf + $if;
-        if($score == 1){
+        $score = round($score, 2);
+        if ($score == 1 || $score < 1.9) {
             $arating = '1 - Poor';
-        }elseif($score == 2){
+        } elseif ($score == 2 || $score < 2.9) {
             $arating = '2 - Unsatisfactory';
-        }elseif($score == 3){
+        } elseif ($score == 3 || $score < 3.9) {
             $arating = '3 - Satisfactory';
-        }elseif($score == 4){
+        } elseif ($score == 4  || $score < 4.9) {
             $arating = '4 - Very Satisfactory';
-        }elseif($score == 5){
+        } elseif ($score >= 5) {
             $arating = '5 - Outstanding';
         }
-        
-       
 
-        return view('ipcr.view', compact('info','arating','of','gf','sf','if','score','sec',
-        'divhead','rhead','oc','gc','sc','ic','oave','gave','save','iave', 'division',
-         'form', 'operation', 'gen', 'support', 'innovation'));
+
+
+        return view('ipcr.view', compact(
+            'info',
+            'arating',
+            'of',
+            'gf',
+            'sf',
+            'if',
+            'score',
+            'sec',
+            'divhead',
+            'rhead',
+            'oc',
+            'gc',
+            'sc',
+            'ic',
+            'oave',
+            'gave',
+            'save',
+            'iave',
+            'division',
+            'form',
+            'operation',
+            'gen',
+            'support',
+            'innovation'
+        ));
 
         //$pdf = PDF::loadView('myPDF', $data);
 
         //return $pdf->download('itsolutionstuff.pdf');
 
         //$details =['info','oc','gc','sc','ic','oave','gave','save','iave', 'division', 'form', 'operation', 'gen', 'support', 'innovation'];
-        view()->share('ipcr.view', compact('info','arating','of','gf','sf','if','score','sec',
-        'divhead','rhead','oc','gc','sc','ic','oave','gave','save','iave', 'division',
-         'form', 'operation', 'gen', 'support', 'innovation'));
+        //view()->share('ipcr.view', compact('info','arating','of','gf','sf','if','score','sec',
+        //'divhead','rhead','oc','gc','sc','ic','oave','gave','save','iave', 'division',
+        //'form', 'operation', 'gen', 'support', 'innovation'));
 
-         $data = [
-             'info'=>$info,
-             'arating'=>$arating,
-             'of'=>$of,
-             'gf'=>$gf,
-             'sf'=>$sf,
-             'if'=>$if,
-             'score'=>$score,
-             'sec'=>$sec,
-             'divhead' =>$divhead,
-             'rhead'=>$rhead,
-             'oc'=>$oc,
-             'gc'=>$gc,
-             'sc'=>$sc,
-             'ic'=>$ic,
-             'oave'=>$oave,
-             'gave'=>$gave,
-             'save'=>$save,
-             'iave'=>$iave,
-             'division'=>$division,
-             'form'=>$form,
-             'operation'=>$operation,
-             'gen'=>$gen,
-             'support'=>$support,
-             'innovation'=>$innovation];
+        $data = [
+            'info' => $info,
+            'arating' => $arating,
+            'of' => $of,
+            'gf' => $gf,
+            'sf' => $sf,
+            'if' => $if,
+            'score' => $score,
+            'sec' => $sec,
+            'divhead' => $divhead,
+            'rhead' => $rhead,
+            'oc' => $oc,
+            'gc' => $gc,
+            'sc' => $sc,
+            'ic' => $ic,
+            'oave' => $oave,
+            'gave' => $gave,
+            'save' => $save,
+            'iave' => $iave,
+            'division' => $division,
+            'form' => $form,
+            'operation' => $operation,
+            'gen' => $gen,
+            'support' => $support,
+            'innovation' => $innovation
+        ];
 
-         //$pdf = PDF::loadView('ipcr.view',$data);
-         //$pdf->setpaper('A4','portrait');
-         //$pdf->stream();
+        //$pdf = PDF::loadView('ipcr.view',$data);
+        //$pdf->setpaper('A4','portrait');
+        //$pdf->stream();
         //$pdf = app('dompdf.wrapper');   
         //$pdf->loadView('ipcr.view', compact('info','oc','gc','sc','ic','oave','gave','save','iave', 'division', 'form', 'operation', 'gen', 'support', 'innovation'));
         //return $pdf->stream('ipcr.pdf');
         //return $pdf->download('ipcr.pdf')->exit();
     }
 
-    public function deleteIPCR(Request $req, $id){
+    public function deleteIPCR(Request $req, $id)
+    {
         Operation::where('ipcr', $id)->delete();
 
         GenAdminService::where('ipcr', $id)->delete();
@@ -602,12 +676,9 @@ class IPCRController extends Controller
 
         Employee::where('emp_id', $id)->delete();
 
-        
+
         return redirect()
             ->route('ipcr-submitted')
             ->with('success', 'File has been deleted');
     }
-
-
-
 }
