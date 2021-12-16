@@ -131,4 +131,10 @@ class AdminController extends Controller
             ->route('admin-permissions')
             ->with('update_success', 'Permission Name Updated');
     }
+
+    
+
+
+
+
 }
