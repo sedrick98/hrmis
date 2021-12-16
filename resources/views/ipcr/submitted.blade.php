@@ -39,7 +39,9 @@
                 </thead>
                 <tbody>
                     @foreach($submitted as $info)
-                    @if($info->status == 'pending')
+                    @if($info->status != 'approved:rd' 
+                    && $info->status != 'return:ard - division head'
+                    && $info->status != 'return:rd')
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
@@ -49,17 +51,18 @@
 
                         <td>
                             <div class="row">
-                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('display/'.$info->id) }}">View
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('display/'.$info->id)}}">View
                                 </a>
 
                                 <a class="btn btn-block btn-info active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('edit/'.$info->id) }}">Edit
                                 </a>
-                                <a class="btn btn-block btn-danger active" 
-                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
-                                href="{{ url('delete/'.$info->id) }}" 
-                                onclick="return myFunction();">
+                                @if($info->status == 'pending'
+                                || $info->status == 'rated'
+                                || $info->status == 'return')
+                                <a class="btn btn-block btn-danger active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('delete/'.$info->id) }}" onclick="return myFunction();">
                                     Delete
                                 </a>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -78,9 +81,11 @@
         </div>
     </div><br>
 
+
+
     <div class="card" style="margin:20px;">
         <div class="card-header">
-            <h3>IPCR - Approved</h3>
+            <h3>IPCR - To Rate</h3>
         </div>
         <div class="card-body">
             <table class="table table-responsive-sm table-striped">
@@ -96,13 +101,81 @@
                 </thead>
                 <tbody>
                     @foreach($submitted as $info)
-                    @if($info->status != 'pending' && $info->status == 'approved:rd')
+                    @if($info->status != 'approved:rd' 
+                    && $info->status != 'return:ard - division head'
+                    && $info->status != 'return:rd')
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
                         <td>{{ strtoupper($info->division) }}</td>
                         <td>{{ $info->created_at->format('m-d-Y') }}</td>
-                        <td><span class="badge badge-success">{{ strtoupper($info->status) }}</span></td>
+                        <td><span class="badge badge-warning">{{ strtoupper($info->status) }}</span></td>
+
+                        <td>
+                            <div class="row">
+                                @if($info->status == 'pending')
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('rate/'.$info->id) }}">
+                                    Rate
+                                </a>
+                                @elseif($info->status != 'pending')
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('rate/'.$info->id) }}">
+                                    Edit
+                                </a>
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                    @endif
+                    @endforeach
+                </tbody>
+            </table>
+            <!--<ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>-->
+        </div>
+    </div><br>
+
+
+
+    <div class="card" style="margin:20px;">
+        <div class="card-header">
+            <h3>IPCR - Approvals</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-responsive-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Employee</th>
+                        <th>Division</th>
+                        <th>Date Created</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($submitted as $info)
+                    @if($info->status != 'pending'
+                    && $info->status != 'rated')
+                    <tr>
+                        <td>{{ strtoupper($info->title) }}</td>
+                        <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
+                        <td>{{ strtoupper($info->division) }}</td>
+                        <td>{{ $info->created_at->format('m-d-Y') }}</td>
+                        <td>
+                            @if($info->status == 'return' 
+                            || $info->status == 'return:ard - division head' 
+                            || $info->status == 'return:rd')
+                            <span class="badge badge-warning">{{ strtoupper($info->status) }}</span>
+                            @else
+                            <span class="badge badge-success">{{ strtoupper($info->status) }}</span>
+                            @endif
+                        </td>
                         <td>
                             <div class="row">
                                 <div class="form-group col-sm-3">
@@ -155,5 +228,4 @@
             event.preventDefault();
     }
 </script>
-
 @endsection

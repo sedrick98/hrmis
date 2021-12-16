@@ -61,7 +61,7 @@
                 <table style="float:right; margin-right:100px; margin-top:25px">
                     <tr>
                         <td style="padding-right:10px"><u><strong>{{strtoupper($form->first()->first_name)}} {{strtoupper($form->first()->last_name)}}</strong></u></td>
-                        <td><u><strong>{{$form->first()->created_at->format('F d, Y')}}</strong></u></td>
+                        <td><u><strong>{{$info->created_at->format('F d, Y')}}</strong></u></td>
                     </tr>
                     <tr>
                         <td style="text-align:center">Employee</td>
@@ -81,7 +81,7 @@
                     </tr>
                     <tr>
                         <td id="rev" style="text-align:center"><br><br><strong>{{strtoupper($sec->first()->first_name)}} {{strtoupper($sec->first()->last_name)}}</strong></td>
-                        <td id="rev" style="text-align:center"><br><br><strong>{{$form->first()->date_1}}</strong></td>
+                        <td id="rev" style="text-align:center"><br><br><strong>{{$info->date_1}}</strong></td>
                     </tr>
                     <tr>
                         <td id="rev" style="text-align:center">Immediate Supervisor</td>
@@ -97,7 +97,7 @@
                     </tr>
                     <tr>
                         <td id="rev" style="text-align:center"><br><br><strong>{{strtoupper($rhead->first()->first_name)}} {{strtoupper($rhead->first()->last_name)}}</strong></td>
-                        <td id="rev" style="text-align:center"><br><br><strong>{{$form->first()->updated_at->format('m-d-Y')}}</strong></td>
+                        <td id="rev" style="text-align:center"><br><br><strong>{{$info->updated_at->format('m-d-Y')}}</strong></td>
                     </tr>
                     <tr>
                         <td id="rev" style="text-align:center">Regional Director</td>
@@ -307,7 +307,7 @@
                 </tr>
                 <tr>
                     <td id="entry" colspan="5" style="height:100px">
-                    {{$form->first()->comment}}</td>
+                    {{$info->first()->comment}}</td>
                 </tr>
             </table>
 
@@ -319,13 +319,13 @@
                 </tr>
                 <tr>
                     <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br><b>{{strtoupper($form->first()->first_name)}} {{strtoupper($form->first()->last_name)}}</b></td>
-                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>{{$form->first()->created_at->format('m-d-Y')}}</td>
+                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>{{$info->created_at->format('m-d-Y')}}</td>
                     <td id="entry"> certify that I discussed my assessment of
                         performance with the employee.
                     </td>
-                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>{{$form->first()->date_2}}</td>
+                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>{{$info->date_2}}</td>
                     <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><b><br>{{strtoupper($rhead->first()->first_name)}} {{strtoupper($rhead->first()->last_name)}}</b></td>
-                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>{{$form->first()->updated_at->format('m-d-Y')}}</td>
+                    <td rowspan="2" id="entry" style="vertical-align:bottom; text-align:center"><br>{{$info->updated_at->format('m-d-Y')}}</td>
                 </tr>
                 <tr>
                     <td id="entry" style="text-align:center"><b><br>{{strtoupper($divhead->first()->first_name)}} {{strtoupper($divhead->first()->last_name)}}</b></td>

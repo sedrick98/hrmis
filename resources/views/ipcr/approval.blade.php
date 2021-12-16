@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
- 
+
 
 <html>
 
@@ -38,8 +38,12 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     @foreach($submitted as $info)
-                    @if($info->status == 'pending' && strtolower(Auth::user()->roleName()) == 'ard - section head')
+
+                    <!--access and displays if the user is the section head-->
+                    @if(strtolower(Auth::user()->roleName()) == 'ard - section head')
+                    @if($info->status == 'return:ard - division head')
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
@@ -49,51 +53,102 @@
 
                         <td>
                             <div class="row">
-                                <a class="btn btn-block btn-success active" 
-                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
-                                href="{{ url('rate/'.$info->id) }}">
-                                Rate
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('review/'.$info->id) }}">
+                                    Review
+                                </a>
                                 </a>
                             </div>
                         </td>
                     </tr>
-                    @elseif($info->status == 'approved:ard - section head' && strtolower(Auth::user()->roleName()) == 'ard - division head')
+                    @elseif($info->status == 'rated')
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
                         <td>{{ strtoupper($info->division) }}</td>
                         <td>{{ $info->created_at->format('m-d-Y') }}</td>
-                        <td><span class="badge badge-success">{{ strtoupper($info->status) }}</span></td>
+                        <td><span class="badge badge-warning">{{ strtoupper($info->status) }}</span></td>
 
                         <td>
                             <div class="row">
-                            <a class="btn btn-block btn-success active" 
-                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
-                                href="{{ url('review/'.$info->id) }}">
-                                Review
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('review/'.$info->id) }}">
+                                    Review
+                                </a>
                                 </a>
                             </div>
                         </td>
                     </tr>
-                    @elseif($info->status == 'approved:ard - division head' && strtolower(Auth::user()->roleName()) == 'rd')
+                    @elseif($info->status == 'return - edited')
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
                         <td>{{ strtoupper($info->division) }}</td>
                         <td>{{ $info->created_at->format('m-d-Y') }}</td>
-                        <td><span class="badge badge-success">{{ strtoupper($info->status) }}</span></td>
+                        <td><span class="badge badge-warning">{{ strtoupper($info->status) }}</span></td>
 
                         <td>
                             <div class="row">
-                            <a class="btn btn-block btn-success active" 
-                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
-                                href="{{ url('review/'.$info->id) }}">
-                                Review
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('review/'.$info->id) }}">
+                                    Review
+                                </a>
                                 </a>
                             </div>
                         </td>
                     </tr>
                     @endif
+                    
+
+                    <!--access and displays if the user is the division head-->
+                    @elseif(strtolower(Auth::user()->roleName()) == 'ard - division head'
+                    && $info->status == 'return:rd'
+                    || $info->status == 'approved:ard - section head')
+                    <tr>
+                        <td>{{ strtoupper($info->title) }}</td>
+                        <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
+                        <td>{{ strtoupper($info->division) }}</td>
+                        <td>{{ $info->created_at->format('m-d-Y') }}</td>
+                        <td>
+                            @if($info->status == 'return:rd')
+                            <span class="badge badge-warning">{{ strtoupper($info->status) }}</span>
+                            @else
+                            <span class="badge badge-success">{{ strtoupper($info->status) }}</span>
+                            @endif
+                        </td>
+
+                        <td>
+                            <div class="row">
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('review/'.$info->id) }}">
+                                    Review
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+
+
+                    <!--access and displays if the user is the regional head-->
+                    @elseif(strtolower(Auth::user()->roleName()) == 'rd'
+                    && $info->status == 'approved:ard - division head')
+                    <tr>
+                        <td>{{ strtoupper($info->title) }}</td>
+                        <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
+                        <td>{{ strtoupper($info->division) }}</td>
+                        <td>{{ $info->created_at->format('m-d-Y') }}</td>
+                        <td><span class="badge badge-success">{{ strtoupper($info->status) }}</span></td>
+
+                        <td>
+                            <div class="row">
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('review/'.$info->id) }}">
+                                    Review
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+
+
+
+                    @endif
+
                     @endforeach
                 </tbody>
             </table>
@@ -110,7 +165,7 @@
 
     <div class="card" style="margin:20px;">
         <div class="card-header">
-            <h3>IPCR - Rated</h3>
+            <h3>IPCR - Approved</h3>
         </div>
         <div class="card-body">
             <table class="table table-responsive-sm table-striped">
@@ -126,7 +181,13 @@
                 </thead>
                 <tbody>
                     @foreach($submitted as $info)
-                    @if($info->status != 'pending')
+                    @if(strtolower(Auth::user()->roleName()) == 'ard - section head'
+                    && $info->status != 'pending'
+                    && $info->status != 'rated'
+                    && $info->status != 'return'
+                    && $info->status != 'return - edited'
+                    && $info->status != 'return:ard - division head'
+                    && $info->status != 'return:rd')
                     <tr>
                         <td>{{ strtoupper($info->title) }}</td>
                         <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
@@ -136,10 +197,55 @@
 
                         <td>
                             <div class="row">
-                                <a class="btn btn-block btn-success active" 
-                                style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" 
-                                href="{{ url('review/'.$info->id) }}">
-                                View
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('review/'.$info->id) }}">
+                                    View
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    @elseif(strtolower(Auth::user()->roleName()) == 'ard - division head'
+                    && $info->status != 'approved:ard - section head'
+                    && $info->status != 'pending'
+                    && $info->status != 'rated'
+                    && $info->status != 'return'
+                    && $info->status != 'return - edited'
+                    && $info->status != 'return:ard - division head'
+                    && $info->status != 'return:rd')
+                    <tr>
+                        <td>{{ strtoupper($info->title) }}</td>
+                        <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
+                        <td>{{ strtoupper($info->division) }}</td>
+                        <td>{{ $info->created_at->format('m-d-Y') }}</td>
+                        <td><span class="badge badge-success">{{ strtoupper($info->status) }}</span></td>
+
+                        <td>
+                            <div class="row">
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('review/'.$info->id) }}">
+                                    View
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    @elseif(strtolower(Auth::user()->roleName()) == 'rd'
+                    && $info->status != 'approved:ard - division head'
+                    && $info->status != 'approved:ard - section head'
+                    && $info->status != 'pending'
+                    && $info->status != 'rated'
+                    && $info->status != 'return'
+                    && $info->status != 'return - edited'
+                    && $info->status != 'return:ard - division head'
+                    && $info->status != 'return:rd')
+                    <tr>
+                        <td>{{ strtoupper($info->title) }}</td>
+                        <td>{{ strtoupper($info->last_name) }}, {{ strtoupper($info->first_name) }}</td>
+                        <td>{{ strtoupper($info->division) }}</td>
+                        <td>{{ $info->created_at->format('m-d-Y') }}</td>
+                        <td><span class="badge badge-success">{{ strtoupper($info->status) }}</span></td>
+
+                        <td>
+                            <div class="row">
+                                <a class="btn btn-block btn-success active" style="width:60px; padding:2px; height:30px; margin-top:0px; margin-left:10px" href="{{ url('review/'.$info->id) }}">
+                                    View
                                 </a>
                             </div>
                         </td>

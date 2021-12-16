@@ -428,21 +428,19 @@
                         <strong>Comments and Recommendations for Developmental Purposes</strong>
                         <hr>
                         <div class="container">
-                            @if(strtolower(Auth::user()->roleName()) == 'ard - section head' 
-                            || strtolower(Auth::user()->roleName()) == 'employee' )
+                            @if(strtolower(Auth::user()->roleName()) == 'employee'
+                            && $info->status != 'approved:ard - division head')
                             <div class="card-body" style="background-color:#F5F5F5; border-radius:10px; padding:auto; text-align: center;">
-                                <textarea class="form-control" 
-                                id="textarea-input" name="comment" rows="18" 
-                                style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:100%" 
-                                readonly = "readonly">{{$info->comment}}</textarea>
+                                <textarea class="form-control" id="textarea-input" 
+                                name="comment" rows="18" 
+                                style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:100%"
+                                readonly="readonly">{{$info->comment}}</textarea>
                             </div>
-                            @endif
-                            @if(strtolower(Auth::user()->roleName()) == 'rd'
-                            || strtolower(Auth::user()->roleName()) == 'ard - division head')
+                            @else
                             <div class="card-body" style="background-color:#F5F5F5; border-radius:10px; padding:auto; text-align: center;">
-                                <textarea class="form-control" 
-                                id="textarea-input" name="comment" rows="18" 
-                                style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:100%" 
+                                <textarea class="form-control" id="textarea-input" 
+                                name="comment" rows="18" 
+                                style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:100%"
                                 >{{$info->comment}}</textarea>
                             </div>
                             @endif
@@ -452,15 +450,41 @@
 
 
 
-                @if(strtolower(Auth::user()->roleName()) == 'rd'
-                || strtolower(Auth::user()->roleName()) == 'ard - division head')
+                @if(strtolower(Auth::user()->roleName()) == 'ard - section head'
+                && $info->status != 'approved:ard - division head'
+                && $info->status != 'approved:rd')
                 <div class="row">
-                    <button class="btn btn-outline-success active" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
+                    <button class="btn btn-outline-success active" name="action" value="approve" onclick="return myFunction();" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
                         <h5>APPROVE</h5>
                     </button>
 
-                    <button class="btn btn-outline-danger active" id="btn" type="button" aria-pressed="true" style="margin-left:10px" data-toggle="modal" data-target="#cancelModal">
-                        <h5>CANCEL</h5>
+                    <button class="btn btn-outline-danger active" name="action" value="return" onclick="return reFunction();" id="btn" type="submit" aria-pressed="true" style="margin-left:10px">
+                        <h5>RETURN</h5>
+                    </button>
+                </div><br>
+                @endif
+
+                @if(strtolower(Auth::user()->roleName()) == 'ard - division head'
+                && $info->status != 'approved:rd')
+                <div class="row">
+                    <button class="btn btn-outline-success active" name="action" value="approve" onclick="return myFunction();" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
+                        <h5>APPROVE</h5>
+                    </button>
+
+                    <button class="btn btn-outline-danger active" name="action" value="return" onclick="return reFunction();" id="btn" type="submit" aria-pressed="true" style="margin-left:10px">
+                        <h5>RETURN</h5>
+                    </button>
+                </div><br>
+                @endif
+
+                @if(strtolower(Auth::user()->roleName()) == 'rd')
+                <div class="row">
+                    <button class="btn btn-outline-success active" name="action" value="approve" onclick="return myFunction();" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
+                        <h5>APPROVE</h5>
+                    </button>
+
+                    <button class="btn btn-outline-danger active" name="action" value="return" onclick="return reFunction();" id="btn" type="submit" aria-pressed="true" style="margin-left:10px">
+                        <h5>RETURN</h5>
                     </button>
                 </div><br>
                 @endif
@@ -471,37 +495,6 @@
     </form>
 
 
-    <!--Cancel Modal-->
-    <div class="modal modal-danger" id="cancelModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top:100px">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <div class="modal-header" style="height:10px;">
-                    <p style="margin:-10px">Cancel</p>
-                </div>
-                <form action="{{ route('ipcr-submitted') }}" method="get">
-                    @csrf
-                    <div class="modal-body">
-
-                        <div style="height:90px;"><br>
-                            <h3>EXIT FORM?</h3>
-                        </div>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <button class="btn btn-sm btn-success" type="button" data-dismiss="modal" style="width:70px; font-size: 16px;">NO</button>
-                        <button class="btn btn-sm btn-warning" type="submit" style="width:70px; font-size: 16px;">YES</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-
-
-
-
 </body>
 
 
@@ -510,4 +503,18 @@
 </html>
 
 
+@endsection
+
+@section('after-scripts')
+<script>
+    function myFunction() {
+        if (!confirm("Approve this form?"))
+            event.preventDefault();
+    }
+
+    function reFunction() {
+        if (!confirm("Return this form?"))
+            event.preventDefault();
+    }
+</script>
 @endsection

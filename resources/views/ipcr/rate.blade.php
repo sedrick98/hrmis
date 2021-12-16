@@ -100,7 +100,7 @@
                             </div>
 
                         </div>
-                        <div class="form-group col-sm-4" style="margin-left:15px;">
+                        <div class="form-group col-sm-5" style="margin-left:15px;">
                             <table>
                                 <tr>
                                     <td style="width:100px">Duration:</td>
@@ -171,11 +171,38 @@
                                         </td>
                                         <td id="entry" style="text-align:left">{{$operations->o_success_indicator}}</td>
                                         <td id="entry" style="text-align:left">{{$operations->o_actual_accomplishment}}</td>
-                                        <td id="entry"><input type="number" name="i_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                        <td id="entry"><input type="number" name="i_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                        <td id="entry"><input type="number" name="i_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
                                         <td id="entry">
+                                            @if($info->status=='pending')
+                                            <input type="number" name="i_q[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                            @elseif($info->status!='pending')
+                                            <input type="number" name="i_q[]" min="1" max="5" style="width:35px; height: 40px" value="{{$operations->o_quality}}" required>
+                                            @endif
+                                        </td>
+                                        <td id="entry">
+                                            @if($info->status=='pending')
+                                            <input type="number" name="i_e[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                            @elseif($info->status!='pending')
+                                            <input type="number" name="i_e[]" min="1" max="5" style="width:35px; height: 40px" value="{{$operations->o_efficiency}}" required>
+                                            @endif
+                                        </td>
+
+                                        <td id="entry">
+                                            @if($info->status=='pending')
+                                            <input type="number" name="i_t[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                            @elseif($info->status!='pending')
+                                            <input type="number" name="i_t[]" min="1" max="5" style="width:35px; height: 40px" value="{{$operations->o_timeliness}}" required>
+                                            @endif
+
+                                        </td>
+                                        <td id="entry">
+                                            @if($info->status=='pending')
                                             <textarea class="form-control" name="i_remarks[]" id="textarea-input" rows="2"></textarea>
+                                            @elseif($info->status!='pending')
+                                            <textarea class="form-control" name="i_remarks[]" id="textarea-input" rows="2">
+                                            {{$operations->o_remarks}}
+                                            </textarea>
+                                            @endif
+
                                         </td>
                                     </tr>
                                     @endif
@@ -227,11 +254,35 @@
                                         </td>
                                         <td id="entry" style="text-align:left">{{$operations->o_success_indicator}}</td>
                                         <td id="entry" style="text-align:left">{{$operations->o_actual_accomplishment}}</td>
-                                        <td id="entry"><input type="number" name="ii_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                        <td id="entry"><input type="number" name="ii_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                        <td id="entry"><input type="number" name="ii_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
                                         <td id="entry">
-                                            <textarea class="form-control" name="ii_remarks[]" id="textarea-input" rows="2"></textarea>
+                                            @if($info->status=='pending')
+                                            <input type="number" name="ii_q[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                            @elseif($info->status!='pending')
+                                            <input type="number" name="ii_q[]" min="1" max="5" style="width:35px; height: 40px" value="{{$operations->o_quality}}" required>
+                                            @endif
+                                        </td>
+                                        <td id="entry">
+                                            @if($info->status=='pending')
+                                            <input type="number" name="ii_e[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                            @elseif($info->status!='pending')
+                                            <input type="number" name="ii_e[]" min="1" max="5" style="width:35px; height: 40px" value="{{$operations->o_efficiency}}" required>
+                                            @endif
+                                        </td>
+                                        <td id="entry">
+                                            @if($info->status=='pending')
+                                            <input type="number" name="ii_t[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                            @elseif($info->status!='pending')
+                                            <input type="number" name="ii_t[]" min="1" max="5" style="width:35px; height: 40px" value="{{$operations->o_timeliness}}" required>
+                                            @endif
+                                        </td>
+                                        <td id="entry">
+                                            @if($info->status=='pending')
+                                            <textarea class="form-control" name="i_remarks[]" id="textarea-input" rows="2"></textarea>
+                                            @elseif($info->status!='pending')
+                                            <textarea class="form-control" name="i_remarks[]" id="textarea-input" rows="2">
+                                            {{$operations->o_remarks}}
+                                            </textarea>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endif
@@ -283,11 +334,36 @@
                                             </td>
                                             <td id="entry" style="text-align:left">{{$gens->g_success_indicator}}</td>
                                             <td id="entry" style="text-align:left">{{$gens->g_actual_accomplishment}}</td>
-                                            <td id="entry"><input type="number" name="g_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="g_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="g_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+
                                             <td id="entry">
+                                                @if($info->status=='pending')
+                                                <input type="number" name="g_q[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                                @elseif($info->status!='pending')
+                                                <input type="number" name="g_q[]" min="1" max="5" style="width:35px; height: 40px" value="{{$gens->g_quality}}" required>
+                                                @endif
+                                            </td>
+                                            <td id="entry">
+                                                @if($info->status=='pending')
+                                                <input type="number" name="g_e[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                                @elseif($info->status!='pending')
+                                                <input type="number" name="g_e[]" min="1" max="5" style="width:35px; height: 40px" value="{{$gens->g_efficiency}}" required>
+                                                @endif
+                                            </td>
+                                            <td id="entry">
+                                                @if($info->status=='pending')
+                                                <input type="number" name="g_t[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                                @elseif($info->status!='pending')
+                                                <input type="number" name="g_t[]" min="1" max="5" style="width:35px; height: 40px" value="{{$gens->g_timeliness}}" required>
+                                                @endif
+                                            </td>
+                                            <td id="entry">
+                                                @if($info->status=='pending')
                                                 <textarea class="form-control" name="g_remarks[]" id="textarea-input" rows="2"></textarea>
+                                                @elseif($info->status!='pending')
+                                                <textarea class="form-control" name="g_remarks[]" id="textarea-input" rows="2">
+                                                {{$gens->g_remarks}}
+                                                </textarea>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
@@ -342,11 +418,37 @@
                                             </td>
                                             <td id="entry" style="text-align:left">{{$supports->s_success_indicator}}</td>
                                             <td id="entry" style="text-align:left">{{$supports->s_actual_accomplishment}}</td>
-                                            <td id="entry"><input type="number" name="s_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="s_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="s_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+
+
                                             <td id="entry">
+                                                @if($info->status=='pending')
+                                                <input type="number" name="s_q[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                                @elseif($info->status!='pending')
+                                                <input type="number" name="s_q[]" min="1" max="5" style="width:35px; height: 40px" value="{{$supports->s_quality}}" required>
+                                                @endif
+                                            </td>
+                                            <td id="entry">
+                                                @if($info->status=='pending')
+                                                <input type="number" name="s_e[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                                @elseif($info->status!='pending')
+                                                <input type="number" name="s_e[]" min="1" max="5" style="width:35px; height: 40px" value="{{$supports->s_efficiency}}" required>
+                                                @endif
+                                            </td>
+                                            <td id="entry">
+                                                @if($info->status=='pending')
+                                                <input type="number" name="s_t[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                                @elseif($info->status!='pending')
+                                                <input type="number" name="s_t[]" min="1" max="5" style="width:35px; height: 40px" value="{{$supports->s_timeliness}}" required>
+                                                @endif
+                                            </td>
+                                            <td id="entry">
+                                                @if($info->status=='pending')
                                                 <textarea class="form-control" name="s_remarks[]" id="textarea-input" rows="2"></textarea>
+                                                @elseif($info->status!='pending')
+                                                <textarea class="form-control" name="s_remarks[]" id="textarea-input" rows="2">
+                                                {{$supports->s_remarks}}
+                                                </textarea>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
@@ -403,11 +505,37 @@
                                             </td>
                                             <td id="entry" style="text-align:left">{{$innovations->i_success_indicator}}</td>
                                             <td id="entry" style="text-align:left">{{$innovations->i_actual_accomplishment}}</td>
-                                            <td id="entry"><input type="number" name="nn_q[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="nn_e[]" min="1" max="5" style="width:35px; height: 40px" required></td>
-                                            <td id="entry"><input type="number" name="nn_t[]" min="1" max="5" style="width:35px; height: 40px" required></td>
+
+
                                             <td id="entry">
+                                                @if($info->status=='pending')
+                                                <input type="number" name="nn_q[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                                @elseif($info->status!='pending')
+                                                <input type="number" name="nn_q[]" min="1" max="5" style="width:35px; height: 40px" value="{{$innovations->i_quality}}" required>
+                                                @endif
+                                            </td>
+                                            <td id="entry">
+                                                @if($info->status=='pending')
+                                                <input type="number" name="nn_e[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                                @elseif($info->status!='pending')
+                                                <input type="number" name="nn_e[]" min="1" max="5" style="width:35px; height: 40px" value="{{$innovations->i_efficiency}}" required>
+                                                @endif
+                                            </td>
+                                            <td id="entry">
+                                                @if($info->status=='pending')
+                                                <input type="number" name="nn_t[]" min="1" max="5" style="width:35px; height: 40px" required>
+                                                @elseif($info->status!='pending')
+                                                <input type="number" name="nn_t[]" min="1" max="5" style="width:35px; height: 40px" value="{{$innovations->i_timeliness}}" required>
+                                                @endif
+                                            </td>
+                                            <td id="entry">
+                                                @if($info->status=='pending')
                                                 <textarea class="form-control" name="nn_remarks[]" id="textarea-input" rows="2"></textarea>
+                                                @elseif($info->status!='pending')
+                                                <textarea class="form-control" name="nn_remarks[]" id="textarea-input" rows="2">
+                                                {{$innovations->i_remarks}}
+                                                </textarea>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
@@ -426,30 +554,18 @@
                 </div>
 
                 <hr>
-                <div class="jumbotron jumbotron-fluid" style="padding:20px; box-shadow: 5px 10px 8px #888888; background-color:lightblue; border-radius: 10px">
-                    <div>
-                        <strong>Comments and Recommendations for Developmental Purposes</strong>
-                        <hr>
-                        <div class="container">
-                            @if(strtolower(Auth::user()->roleName()) == 'ard - section head')
-                            <div class="card-body" style="background-color:#F5F5F5; border-radius:10px; padding:auto; text-align: center;">
-                                <textarea class="form-control" id="textarea-input" name="comment" rows="18" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:100%" placeholder="leave a comment"></textarea>
-                            </div>
-                            @endif
-                            @if(strtolower(Auth::user()->roleName()) == 'rd')
-                            <div class="card-body" style="background-color:#F5F5F5; border-radius:10px; padding:auto; text-align: center;">
-                                <textarea class="form-control" id="textarea-input" name="comment" rows="18" style="margin-top: 0px; margin-bottom: 0px; height: 50px; width:100%">{{$info->comment}}</textarea>
-                            </div>
-                            @endif
-                        </div>
-                    </div><br>
-                </div>
 
 
                 <div class="row">
-                    <button class="btn btn-outline-success active" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
+                    @if($info->status=='pending')
+                    <button class="btn btn-outline-success active" onclick="return myFunction();" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
                         <h5>SAVE</h5>
                     </button>
+                    @elseif($info->status!='pending')
+                    <button class="btn btn-outline-success active" onclick="return upFunction();" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
+                        <h5>UPDATE</h5>
+                    </button>
+                    @endif
 
                     <button class="btn btn-outline-danger active" id="btn" type="button" aria-pressed="true" style="margin-left:10px" data-toggle="modal" data-target="#cancelModal">
                         <h5>CANCEL</h5>
@@ -501,4 +617,18 @@
 </html>
 
 
+@endsection
+
+@section('after-scripts')
+<script>
+    function myFunction() {
+        if (!confirm("Save form?"))
+            event.preventDefault();
+    }
+
+    function upFunction() {
+        if (!confirm("Update form?"))
+            event.preventDefault();
+    }
+</script>
 @endsection

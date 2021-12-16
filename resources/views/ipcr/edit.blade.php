@@ -331,7 +331,7 @@
 
 
                 <div class="row">
-                    <button class="btn btn-outline-success active" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
+                    <button class="btn btn-outline-success active" id="btn" onclick="return myFunction();" type="submit" aria-pressed="true" style="margin-right:10px">
                         <h5>UPDATE</h5>
                     </button>
 
@@ -385,4 +385,13 @@
 </html>
 
 
+@endsection
+
+@section('after-scripts')
+<script>
+    function myFunction() {
+        if (!confirm("Update this file?"))
+            event.preventDefault();
+    }
+</script>
 @endsection

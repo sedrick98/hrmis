@@ -326,7 +326,7 @@
 
 
                 <div class="row">
-                    <button class="btn btn-outline-success active" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
+                    <button class="btn btn-outline-success active" onclick="return myFunction();" id="btn" type="submit" aria-pressed="true" style="margin-right:10px">
                         <h5>SAVE</h5>
                     </button>
 
@@ -479,6 +479,13 @@
             document.getElementById('add_nn').disabled = false;
         }
     });
+</script>
+
+<script>
+    function myFunction() {
+        if (!confirm("Submit this file?"))
+            event.preventDefault();
+    }
 </script>
 
 @endsection
